@@ -6,6 +6,12 @@ var kickImg, clapImg, snapImg;
 var cx, cy, radius;
 var cycle = 8;
 
+var audios = [
+    new Tone.Player("../sounds/kick.wav").toMaster(),
+    new Tone.Player("../sounds/clap.wav").toMaster(),
+    new Tone.Player("../sounds/snap.wav").toMaster()
+]
+
 var controlCenterX, controlCenterY;
 
 //var beat;
@@ -177,18 +183,21 @@ function mousePressed() {
 }
 
 function handleControls() {
-  if(mouseX >= controlCenterX-40 && mouseX <= controlCenterX+40 && mouseY >= controlCenterY-40 && mouseY <= controlCenterY+40){
+  if (mouseX >= controlCenterX-40 && mouseX <= controlCenterX+40 && mouseY >= controlCenterY-40 && mouseY <= controlCenterY+40){
     play = !play;
-    if(play) {
+    if (play) {
+
+        for (var i = 0; i < 8; i++) {
+            let _i = i
+            Tone.Transport.schedule(function(t) {
+                console.log("Playing 8th note number", _i)
+                idx = soundString[_i] - 1
+                if (idx >= 0 && idx <= 2) audios[idx].start(t)
+            }, i+"*8n")
+        }
+
       Tone.Transport.start();
-      Tone.Transport.schedule(playAudio(0), '0');
-      Tone.Transport.schedule(playAudio(1), '0:0:2');
-      Tone.Transport.schedule(playAudio(2), '0:1');
-      Tone.Transport.schedule(playAudio(3), '0:1:2');
-      Tone.Transport.schedule(playAudio(4), '0:2');
-      Tone.Transport.schedule(playAudio(5), '0:2:2');
-      Tone.Transport.schedule(playAudio(6), '0:3');
-      Tone.Transport.schedule(playAudio(7), '0:3:2');
+
     } else {
       Tone.Transport.stop();
     }
