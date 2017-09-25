@@ -173,14 +173,14 @@ function handleControls() {
     play = !play;
     if(play) {
       Tone.Transport.start();
-      Tone.Transport.schedule(playAudio0, '0');
-      Tone.Transport.schedule(playAudio1, '0:0:2');
-      Tone.Transport.schedule(playAudio2, '0:1');
-      Tone.Transport.schedule(playAudio3, '0:1:2');
-      Tone.Transport.schedule(playAudio4, '0:2');
-      Tone.Transport.schedule(playAudio5, '0:2:2');
-      Tone.Transport.schedule(playAudio6, '0:3');
-      Tone.Transport.schedule(playAudio7, '0:3:2');
+      Tone.Transport.schedule(playAudio(0), '0');
+      Tone.Transport.schedule(playAudio(1), '0:0:2');
+      Tone.Transport.schedule(playAudio(2), '0:1');
+      Tone.Transport.schedule(playAudio(3), '0:1:2');
+      Tone.Transport.schedule(playAudio(4), '0:2');
+      Tone.Transport.schedule(playAudio(5), '0:2:2');
+      Tone.Transport.schedule(playAudio(6), '0:3');
+      Tone.Transport.schedule(playAudio(7), '0:3:2');
     } else {
       Tone.Transport.stop();
     }
