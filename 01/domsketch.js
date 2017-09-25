@@ -1,6 +1,6 @@
 var buttons =[];
 var points = [];
-var bgCol = 235;
+var bgCol = 241;
 var h1;
 var kickImg, clapImg, snapImg;
 var cx, cy, radius;
@@ -11,6 +11,8 @@ var audios = [
     new Tone.Player("../sounds/clap.wav").toMaster(),
     new Tone.Player("../sounds/snap.wav").toMaster()
 ]
+
+var bpmList = [44, 52, 60, 80, 100, 120];
 
 var controlCenterX, controlCenterY;
 
@@ -38,35 +40,36 @@ function setup() {
   console.log("images loaded");
 
   background(255, bgCol, bgCol);
-  buttons[0] = createButton('44');
+  buttons[0] = createButton(bpmList[0]);
   buttons[0].mousePressed(function() {
     changeBG(235);
-    Tone.Transport.bpm.value = 44;
+    Tone.Transport.bpm.value = bpmList[0];
   });
-  buttons[1] = createButton('52');
+
+  buttons[1] = createButton(bpmList[1]);
   buttons[1].mousePressed(function() {
-    changeBG(239);
-    Tone.Transport.bpm.value = 52;
+    changeBG(238);
+    Tone.Transport.bpm.value = bpmList[1];
   });
-  buttons[2] = createButton('60');
+  buttons[2] = createButton(bpmList[2]);
   buttons[2].mousePressed(function() {
-    changeBG(243);
-    Tone.Transport.bpm.value = 60;
+    changeBG(241);
+    Tone.Transport.bpm.value = bpmList[2];
   });
-  buttons[3] = createButton('80');
+  buttons[3] = createButton(bpmList[3]);
   buttons[3].mousePressed(function() {
-    changeBG(247);
-    Tone.Transport.bpm.value = 80;
+    changeBG(244);
+    Tone.Transport.bpm.value = bpmList[3];
   });
-  buttons[4] = createButton('100');
+  buttons[4] = createButton(bpmList[4]);
   buttons[4].mousePressed(function() {
-    changeBG(251);
-    Tone.Transport.bpm.value = 100;
+    changeBG(247);
+    Tone.Transport.bpm.value = bpmList[4];
   });
-  buttons[5] = createButton('120');
+  buttons[5] = createButton(bpmList[5]);
   buttons[5].mousePressed(function() {
-    changeBG(255);
-    Tone.Transport.bpm.value = 120;
+    changeBG(250);
+    Tone.Transport.bpm.value = bpmList[5];
   });
 
   positionControls();
@@ -82,6 +85,8 @@ function setup() {
   Tone.Transport.bpm.value = 60;
   Tone.Transport.loopEnd = '1m';
   Tone.Transport.loop = true;
+
+  buttonBorders();
 
 }
 
@@ -105,6 +110,8 @@ function draw() {
 
   drawControls();
   displayLabel();
+
+  buttonBorders();
 
 }
 
@@ -171,6 +178,8 @@ function windowResized() {
   }
 
   displayLabel();
+
+  buttonBorders();
 }
 
 
@@ -211,5 +220,16 @@ function displayLabel() {
   image(clapImg, 50, windowHeight*0.4-40, 60, 60);
   image(snapImg, 50, windowHeight*0.5-30, 55, 55);
   rectMode(CORNER);
+
+  }
+
+  function buttonBorders() {
+    for (var i = 0; i < bpmList.length; i++) {
+      if(bpmList[i] == Tone.Transport.bpm.value) {
+          buttons[i].style("border", "2px solid gray");
+      } else {
+          buttons[i].style("border", "0px");
+      }
+    }
 
   }
