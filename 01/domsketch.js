@@ -2,7 +2,7 @@ var buttons =[];
 var points = [];
 var bgCol = 235;
 var h1;
-var imgDigi;
+var kickImg, clapImg, snapImg;
 var cx, cy, radius;
 var cycle = 8;
 
@@ -25,6 +25,11 @@ function setup() {
   audio1 = document.getElementById("audio1");
   audio2 = document.getElementById("audio2");
   audio3 = document.getElementById("audio3");
+
+  kickImg = loadImage("../images/kick2.png");
+  clapImg = loadImage("../images/clap2.png");
+  snapImg = loadImage("../images/snap2.png");
+  console.log("images loaded");
 
   background(255, bgCol, bgCol);
   buttons[0] = createButton('44');
@@ -93,6 +98,7 @@ function draw() {
   }
 
   drawControls();
+  displayLabel();
 
 }
 
@@ -157,6 +163,8 @@ function windowResized() {
   for(var i = 0; i < cycle; i++){
     points[i].update();
   }
+
+  displayLabel();
 }
 
 
@@ -186,3 +194,13 @@ function handleControls() {
     }
   }
 }
+
+function displayLabel() {
+
+  rectMode(CENTER);
+  image(kickImg, 50, windowHeight*0.3-15, 60, 30);
+  image(clapImg, 50, windowHeight*0.4-40, 60, 60);
+  image(snapImg, 50, windowHeight*0.5-30, 55, 55);
+  rectMode(CORNER);
+
+  }
