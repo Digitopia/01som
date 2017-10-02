@@ -209,7 +209,7 @@ function handleControls() {
     if (play) {
 
         for (var i = 0; i < 8; i++) {
-            let _i = i
+            let _i = i;
             Tone.Transport.schedule(function(t) {
                 console.log("Playing 8th note number", _i)
                 idx = soundString[_i] - 1
