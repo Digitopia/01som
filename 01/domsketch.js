@@ -24,6 +24,8 @@ var audio1, audio2, audio3;
 
 var soundString = [0, 0, 0, 0, 0, 0, 0, 0];
 
+var released = true;
+
 function setup() {
 
   canvas = createCanvas(windowWidth, windowHeight);
@@ -182,8 +184,18 @@ function windowResized() {
   buttonBorders();
 }
 
+function mouseReleased(){
+  released = true;
+  return false;
+}
 
 function mousePressed() {
+
+  if(!released){
+    return;
+  }
+  released = false;
+
   handleControls();
 
   for(var i = 0; i < cycle; i++){
