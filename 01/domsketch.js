@@ -28,6 +28,8 @@ var released = true;
 
 function setup() {
 
+  console.log("setup started");
+
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.position(0, 0);
   canvas.style('z-index', '-1');
@@ -89,6 +91,8 @@ function setup() {
   Tone.Transport.loop = true;
 
   buttonBorders();
+
+  console.log("setup ended");
 
 }
 
