@@ -230,13 +230,13 @@ function handleControls() {
                      if (idx >= 0 && idx <= 2) audios[idx].start(t)
                  }, i+"*8n")
              })()
-        }
 
       Tone.Transport.start();
 
     } else {
       Tone.Transport.stop();
     }
+  }
 }
 
 function displayLabel() {
