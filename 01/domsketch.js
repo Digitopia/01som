@@ -212,14 +212,24 @@ function handleControls() {
     play = !play;
     if (play) {
 
-        for (var i = 0; i < 8; i++) {
-            let _i = i;
-            console.log("Looping element", _i);
-            Tone.Transport.schedule(function(t) {
-                console.log("Playing 8th note number", _i);
-                idx = soundString[_i] - 1;
-                if (idx >= 0 && idx <= 2) audios[idx].start(t);
-            }, i+"*8n")
+          // NOTE: let version: cleaner but not supported iOS pre-10
+         // for (var i = 0; i < 8; i++) {
+         //     let _i = i
+         //     Tone.Transport.schedule(function(t) {
+         //         console.log("Playing 8th note number", _i)
+         //         idx = soundString[_i] - 1
+         //         if (idx >= 0 && idx <= 2) audios[idx].start(t)
+         //     }, i+"*8n")
+         // }
+
+         (function() {
+                 var _i = i
+                 Tone.Transport.schedule(function(t) {
+                     console.log("Playing 8th note number", _i)
+                     idx = soundString[_i] - 1
+                     if (idx >= 0 && idx <= 2) audios[idx].start(t)
+                 }, i+"*8n")
+             })()
         }
 
       Tone.Transport.start();
