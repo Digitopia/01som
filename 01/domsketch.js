@@ -237,7 +237,6 @@ function handleControls() {
     } else {
       Tone.Transport.stop();
     }
-  }
 }
 
 function displayLabel() {
