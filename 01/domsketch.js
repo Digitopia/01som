@@ -1,4 +1,5 @@
 var buttons =[];
+var playButton;
 var points = [];
 var bgCol = 241;
 var h1;
@@ -76,6 +77,13 @@ function setup() {
     Tone.Transport.bpm.value = bpmList[5];
   });
 
+  playButton = createButton("Play");
+  playButton.id("button1");
+  playButton.addClass('play');
+  playButton.mousePressed(function() {
+    handleControls();
+  });
+
   positionControls();
 
   formatButtons();
@@ -91,6 +99,8 @@ function setup() {
   Tone.Transport.loop = true;
 
   buttonBorders();
+
+  StartAudioContext(Tone.context, "#button1");
 
   console.log("setup ended");
 
@@ -151,16 +161,8 @@ function drawEllipse() {
 }
 
 function drawControls() {
-  noStroke();
-  fill(0);
-  ellipse (controlCenterX, controlCenterY, 50, 50);
-  fill(255);
-  if(!play) {
-    triangle(controlCenterX-10, controlCenterY-15, controlCenterX-10, controlCenterY+15, controlCenterX+15, controlCenterY);
-  } else {
-    rect(controlCenterX-10, controlCenterY-15, 7, 30);
-    rect(controlCenterX+3, controlCenterY-15, 7, 30);
-  }
+
+  playButton.position(controlCenterX-35, controlCenterY-55);
 }
 
 function positionControls() {
@@ -208,9 +210,16 @@ function mousePressed() {
 }
 
 function handleControls() {
-  if (mouseX >= controlCenterX-40 && mouseX <= controlCenterX+40 && mouseY >= controlCenterY-40 && mouseY <= controlCenterY+40){
-    play = !play;
-    if (play) {
+
+  if(!released){
+    return;
+  }
+
+  released = false;
+
+  play = !play;
+  
+  if (play) {
 
         // NOTE: let version: cleaner but not supported Safari iOS pre-10
         // for (var i = 0; i < 8; i++) {
@@ -222,22 +231,25 @@ function handleControls() {
         //     }, i+"*8n")
         // }
 
-        for (var i = 0; i < 8; i++) {
-            (function() {
-                var _i = i
-                Tone.Transport.schedule(function(t) {
-                    console.log("Playing 8th note number", _i)
-                    idx = soundString[_i] - 1
-                    if (idx >= 0 && idx <= 2) audios[idx].start(t)
-                }, i+"*8n")
-            })()
-        }
-
-      Tone.Transport.start();
-
-    } else {
-      Tone.Transport.stop();
+    for (var i = 0; i < 8; i++) {
+      (function() {
+        var _i = i
+        Tone.Transport.schedule(function(t) {
+          console.log("Playing 8th note number", _i)
+          idx = soundString[_i] - 1
+          if (idx >= 0 && idx <= 2) audios[idx].start(t)
+        }, i+"*8n")
+      })()
     }
+
+    Tone.Transport.start();
+    document.getElementById("button1").textContent="Stop";
+
+  } else {
+
+    Tone.Transport.stop();
+    document.getElementById("button1").textContent="Play";
+
   }
 }
 

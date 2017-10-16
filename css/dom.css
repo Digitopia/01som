@@ -39,6 +39,15 @@ button {
     font-size: 4vw;
 }
 
+.play {
+    background-color: rgb(60, 60, 60);
+    font-size: 2vw;
+    padding: 1.8vw;
+    padding-top: 2.5vw;
+    padding-bottom: 2.5vw;
+    border-radius: 50%;
+}
+
 img {
     text-align: bottom;
     height: 15%;
