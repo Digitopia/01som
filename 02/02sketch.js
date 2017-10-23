@@ -50,6 +50,9 @@ function preload() {
 }
 
 function setup() {
+	
+	console.log("setup started");
+
 	canvas = createCanvas(windowWidth,windowHeight);
 	controlCenterX = windowWidth*0.75;
 	controlCenterY = windowHeight*0.85;
