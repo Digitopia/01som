@@ -93,16 +93,6 @@ function draw() {
 
 }
 
-function formatButtons() {
-    for(i = 0; i<buttons.length; i++) {
-      var ratio = i/(buttons.length-1);
-      var offset = 80;
-      var size = width * 0.08;
-    buttons[i].position(width*ratio + offset - (size+2*offset)*ratio, height/4*3);
-    buttons[i].size(size, size);
-  }
-}
-
 function formatEllipse() {
 
   cx = windowWidth/2;
@@ -223,15 +213,4 @@ function displayLabel() {
   image(snapImg, 50, windowHeight*0.5-30, 55, 55);
   rectMode(CORNER);
 
-  }
-
-  function buttonBorders() {
-    for (var i = 0; i < bpmList.length; i++) {
-      if(bpmList[i] == Tone.Transport.bpm.value) {
-          buttons[i].style("border", "2px solid gray");
-      } else {
-          buttons[i].style("border", "0px");
-      }
-    }
-
-  }
+}
