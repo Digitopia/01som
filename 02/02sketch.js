@@ -28,9 +28,15 @@ var digi, kickImg, clapImg, snapImg, bma, braga;
 
 var controlCenterX, controlCenterY; //these are the controls for the play button
 
+function setup() {
 
-function preload() {
-	kick = loadSound('../sounds/kick.mp3');
+	console.log("setup started");
+
+	canvas = createCanvas(windowWidth,windowHeight);
+	canvas.position(0, 0);
+  	canvas.style('z-index', '-1');
+
+  	kick = loadSound('../sounds/kick.mp3');
 	clap = loadSound('../sounds/clap.mp3');
 	snap = loadSound('../sounds/snap.mp3');
 
@@ -41,19 +47,10 @@ function preload() {
 	la = loadSound('../sounds/la.mp3');
 	do2 = loadSound('../sounds/do2.mp3');
 
-	digi = loadImage("../images/digitopia.png");
-	kickImg = loadImage("../images/kick.png");
-	clapImg = loadImage("../images/clap.png");
-	snapImg = loadImage("../images/snap.png");
-	bma = loadImage("../images/BMA-1M.png");
-	braga = loadImage("../images/braga.png");
-}
+  	kickImg = loadImage("../images/kick2.png");
+ 	clapImg = loadImage("../images/clap2.png");
+ 	snapImg = loadImage("../images/snap2.png");
 
-function setup() {
-	
-	console.log("setup started");
-
-	canvas = createCanvas(windowWidth,windowHeight);
 	controlCenterX = windowWidth*0.75;
 	controlCenterY = windowHeight*0.85;
 	if(windowWidth >= windowHeight) {
@@ -331,33 +328,10 @@ function TempoSelec(value, order) {
 
 function displayLabel() {
 
-	//resize image according to page width and keeping the ratio
-	var newImageHeight = ((windowWidth/7)/3.744);
-	image(digi, 10, windowHeight- newImageHeight-5, newImageHeight*3.744, newImageHeight);
-	image(bma, 60 + newImageHeight*3.744, windowHeight - newImageHeight-5, newImageHeight*2.31, newImageHeight);
-	image(braga, 110 + newImageHeight*6.054, windowHeight - newImageHeight-5, newImageHeight*1.782+5, newImageHeight+5);
-
-	fill(30, 30, 255);
-	noStroke();
-	ellipse(20, windowHeight*0.4, 30, 30);
-	fill(30, 255, 30);
-	ellipse(20, windowHeight*0.5, 30, 30);
-	fill(255, 30, 30);
-	ellipse(20, windowHeight*0.6, 30, 30);
-
-	rectMode(CENTER);
-	image(kickImg, 50, windowHeight*0.4-15, 60, 30);
-	image(clapImg, 50, windowHeight*0.5-40, 60, 60);
-	image(snapImg, 50, windowHeight*0.6-30, 55, 55);
-	rectMode(CORNER);
-
-	textSize(16);
-	textAlign(CENTER);
-	noStroke(0);
-	fill(0);
-	text("Clica nos círculos pequenos para escolher o som.", windowWidth*0.75, windowHeight*0.92);
-	text("Clica nos números para escolher a velocidade.", windowWidth*0.75, windowHeight*0.94);
-	textSize(12);
-	text("Desenvolvido por Óscar Rodrigues - Digitópia Casa da Música.", windowWidth*0.75, windowHeight*0.97);
+  rectMode(CENTER);
+  image(kickImg, 50, windowHeight*0.3-15, 60, 30);
+  image(clapImg, 50, windowHeight*0.4-40, 60, 60);
+  image(snapImg, 50, windowHeight*0.5-30, 55, 55);
+  rectMode(CORNER);
 
 }
