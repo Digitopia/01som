@@ -80,7 +80,18 @@ p {
   font-style: normal;
   font-variant: normal;
   font-weight: 500;
-  line-height: 15.4px;
+  line-height: 1.5;
   text-align: center;
+}
+
+.info-grid3 {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  line-height: 1.5;
+}
+
+.info-grid5 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 </style>
