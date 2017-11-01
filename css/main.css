@@ -28,6 +28,19 @@ div.desc {
     box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+* html #nonFooter
+  {
+    height: 100%;
+  }
+
 .responsive {
     margin-top: 20px;
     padding: 0 6px;
@@ -80,7 +93,7 @@ p {
   font-style: normal;
   font-variant: normal;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.7;
   text-align: center;
 }
 
@@ -88,10 +101,18 @@ p {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   line-height: 1.5;
+  padding-bottom: 14em;
 }
 
 .info-grid5 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  position: relative;
+  margin-top: -11em;
+}
+
+#nonFooter {
+  position: relative;
+  min-height: 100%;
 }
 </style>
