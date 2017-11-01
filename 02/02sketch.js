@@ -1,3 +1,8 @@
+var buttons =[];
+var playButton;
+
+var bpmList = [44, 52, 60, 80, 100, 120];
+
 var mySound, myControlPhrase, myKickPhrase, myClapPhrase, mySnapPhrase, myPart;
 var myDo1Phrase, myRePhrase, myMiPhrase, mySolPhrase, myLaPhrase, myDo2Phrase
 var canvas;
@@ -23,6 +28,8 @@ var do1, re, mi, fa, sol, la, do2;
 var play = false;
 var tickCount = -1;
 var BPM = 60;
+
+var bgCol = 241;
 
 var digi, kickImg, clapImg, snapImg, bma, braga;
 
@@ -51,8 +58,14 @@ function setup() {
  	clapImg = loadImage("../images/clap2.png");
  	snapImg = loadImage("../images/snap2.png");
 
-	controlCenterX = windowWidth*0.75;
-	controlCenterY = windowHeight*0.85;
+ 	console.log("images loaded");
+
+ 	createButtons();
+
+  	positionControls();
+
+  	formatButtons();
+
 	if(windowWidth >= windowHeight) {
 		centerPoints[0] = windowWidth/3-10;
 		centerPoints[1] = windowHeight/2;
@@ -74,52 +87,22 @@ function setup() {
   	for(var i = 0; i < cycle; i++){
   		pointsB[i] = new Point(i, 1);
   	}
-  	//init Phrases for ellipse1
-  	myKickPhrase = new p5.Phrase('kick', makeKickSound, kickPattern);
-  	myControlPhrase = new p5.Phrase('tick', tickCounter, controlPattern);
-  	myClapPhrase = new p5.Phrase('clap', makeClapSound, clapPattern);
-  	mySnapPhrase = new p5.Phrase('snap', makeSnapSound, snapPattern);
 
-  	//init Phrases for ellipse2
-  	myDo1Phrase = new p5.Phrase('do1', makeDo1Sound, do1Pattern);
-  	myRePhrase = new p5.Phrase('re', makeReSound, rePattern);
-  	myMiPhrase = new p5.Phrase('mi', makeMiSound, miPattern);
-  	mySolPhrase = new p5.Phrase('sol', makeSolSound, solPattern);
-  	myLaPhrase = new p5.Phrase('la', makeLaSound, laPattern);
-  	myDo2Phrase = new p5.Phrase('do2', makeDo2Sound, do2Pattern);
+  	buttonBorders();
 
-  	//create Part and add all the Phrases for ellipse 1
-  	myPart = new p5.Part(8, 1/8);
-  	myPart.addPhrase(myKickPhrase);
-  	myPart.addPhrase(myControlPhrase);
-  	myPart.addPhrase(myClapPhrase);
-  	myPart.addPhrase(mySnapPhrase);
+  	StartAudioContext(Tone.context, "#button1");
 
-  	//create Part and add all the Phrases for ellipse 1
-  	myPart.addPhrase(myDo1Phrase);
-  	myPart.addPhrase(myRePhrase);
-  	myPart.addPhrase(myMiPhrase);
-  	myPart.addPhrase(mySolPhrase);
-  	myPart.addPhrase(myLaPhrase);
-  	myPart.addPhrase(myDo2Phrase);
+  	console.log("setup ended");
+}
 
-  	//set defaults
-  	myPart.setBPM(BPM);
-  	myPart.looping = true;
-
-  	//init tempo selectors
-  	tempoSelec[0] = new TempoSelec(44, 0);
-  	tempoSelec[1] = new TempoSelec(52, 1);
-  	tempoSelec[2] = new TempoSelec(60, 2);
-  	tempoSelec[3] = new TempoSelec(76, 3);
-  	tempoSelec[4] = new TempoSelec(96, 4);
-  	tempoSelec[5] = new TempoSelec(108, 5);
-  	tempoSelec[6] = new TempoSelec(120, 6);
+function changeBG(value) {
+	bgCol = value;
+  background(255, value, value);
 }
 
 function draw() {
 
-  	background(255,220,220);	
+  	background(255, bgCol, bgCol);	
   	fill(0, 0, 50);
   	textAlign(CENTER);
   	textSize(22);
@@ -155,22 +138,11 @@ function draw() {
   	pointsB[i].isActive(tickCount);
   }
 
-  	fill(0);
-	ellipse (controlCenterX, controlCenterY, 50, 50);
-	fill(255);
-	if(!play) {
-		triangle(controlCenterX-10, controlCenterY-15, controlCenterX-10, controlCenterY+15, controlCenterX+15, controlCenterY);
-	} else {
-		rect(controlCenterX-10, controlCenterY-15, 7, 30);
-		rect(controlCenterX+3, controlCenterY-15, 7, 30);
-	}
 
-	//display BPM values
-	for(var i = 0; i < tempoSelec.length; i++){
-  		tempoSelec[i].display();
-  	}
+  	drawControls();
+ 	displayLabel();
 
-  	displayLabel();
+ 	buttonBorders();
 
 }
 
@@ -289,43 +261,6 @@ function handleControls() {
 	}
 }
 
-function TempoSelec(value, order) {
-	this.value = value;
-	this.order = order;
-	this.x = windowWidth*(0.9);
-	this.y = windowHeight*(0.40+0.05*this.order);
-
-	this.display = function() {
-		if(this.value == BPM) {
-			stroke(0);
-			strokeWeight(2);
-			noFill();
-			rectMode(CENTER);
-			rect(this.x, this.y, 40, 40);
-			fill(0);
-		} else {
-			fill(255);
-		}
-
-		noStroke();
-		textSize(20);
-		textAlign(CENTER,CENTER);
-		text(this.value, this.x, this.y);
-	};
-
-	this.update = function() {
-		this.x = windowWidth*(0.9);
-		this.y = windowHeight*(0.40+0.05*this.order);
-	};
-
-	this.onClick = function() {
-		if(mouseX >= this.x-20 && mouseX <= this.x+20 && mouseY >= this.y-20 && mouseY <= this.y+20){
-			BPM = this.value;
-			myPart.setBPM(this.value);
-		}
-	};
-}
-
 function displayLabel() {
 
   rectMode(CENTER);
@@ -334,4 +269,14 @@ function displayLabel() {
   image(snapImg, 50, windowHeight*0.5-30, 55, 55);
   rectMode(CORNER);
 
+}
+
+function positionControls() {
+    controlCenterX = windowWidth*0.85;
+    controlCenterY = windowHeight*0.65;
+}
+
+function drawControls() {
+
+  playButton.position(controlCenterX-35, controlCenterY-55);
 }
