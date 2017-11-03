@@ -80,7 +80,7 @@ function setup() {
 
         if (Cookies.get("visited")) {
             console.log("returning visitor")
-            showHelp(true)
+            // showHelp(true) // NOTE: uncomment for testing, to force help message
         } else {
             console.log("first time visitor")
             Cookies.set("visited", true, { expires: 365, path: "/" })
