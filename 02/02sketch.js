@@ -165,19 +165,18 @@ function windowResized() {
 
   radius = windowWidth/3*0.84;
 
-  controlCenterX = windowWidth*0.75;
-  controlCenterY = windowHeight*0.85;
-
   for(var i = 0; i < cycle; i++){
   	pointsA[i].update();
   	pointsB[i].update();
   }
 
-  for(var i = 0; i < tempoSelec.length; i++){
-  		tempoSelec[i].update();
-  	}
-
   resizeCanvas(windowWidth, windowHeight);
+
+  positionControls();
+
+  formatButtons();
+
+  formatEllipse();
 
 }
 
