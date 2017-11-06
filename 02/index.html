@@ -1,51 +1,83 @@
+<!DOCTYPE html>
 <html>
+
 <head>
+
   <title>0 + 1  = Som - Ritmo e Melodia </title>
+
   <meta charset="UTF-8">
-    <link href="../css/dom.css" rel="stylesheet">
-    <link href="../css/ui.css" rel="stylesheet">
-  <script language="javascript" type="text/javascript" src="../libraries/p5.js"></script>
-  <script language="javascript" type="text/javascript" src="../libraries/StartAudioContext.js"></script>
-  <!-- uncomment lines below to include extra p5 libraries -->
-  <script language="javascript" src="../libraries/p5.dom.js"></script>
-  <script language="javascript" src="../libraries/Tone.js"></script>
-  <script language="javascript" src="../libraries/p5.sound.js"></script>
-  <script language="javascript" type="text/javascript" src="../js/buttons.js"></script>
-  <script language="javascript" type="text/javascript" src="02sketch.js"></script>
-  <script language="javascript" type="text/javascript" src="points.js"></script>
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-  <style> body {padding: 0; margin: 0;} </style>
-  
-  <!-- Google Analytics Code -->
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <!-- Libraries -->
+    <script src="../libraries/p5.js"></script>
+    <script src="../libraries/p5.dom.js"></script>
+    <script src="../libraries/Tone.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-  ga('create', 'UA-92881433-1', 'auto');
-  ga('send', 'pageview');
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/dom.css">
+    <link rel="stylesheet" type="text/css" href="../css/ui.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 
-  </script>
+    <!-- Javascript Sources -->
+    <script src="../js/buttons.js"></script>
+    <script src="index.js"></script>
+    <script src="Point.js"></script>
 
-  <link rel="shortcut icon" href="../images/favicon.ico"/>
-  
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+
+    <!-- Google Analytics Code -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-92881433-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    <!-- NOTE: Use livereload for faster local development -->
+    <script src="http://localhost:35729/livereload.js"></script>
+
 </head>
 
 <body>
   <footer>
 
-    <div class = "gallery">
-      <a href="http://digitopia.github.io/" target="blank"><img id="digi" src="../images/digitopia.png"></img></a>
+    <div class="help">
+        <i class="fa fa-question-circle help-icon" aria-hidden="true"></i>
     </div>
-    <div class = "gallery">
-      <a href="http://www.bragamediaarts.com/en/" target="blank"><img id="bma" src="../images/BMA-1M.png"></img></a>
+
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p>Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>, duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>, quatro vezes para o <span class="word white">branco</span>.
+                Clica nos botões de baixo para escolher o andamento.</p>
+            <p class="english">Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>, three times for <span class="word red">red</span> and four times for <span class="word white">white</span>. Click
+                the buttons at the bottom to choose the tempo.</p>
+        </div>
     </div>
-    <div class = "gallery">
-      <a href="https://www.cm-braga.pt/" target="blank"><img id="bma" src="../images/braga.png"></img></a>
+
+    <div class="head">
+        <h1><a href="/">0 + 1 = SOM</a></h1>
     </div>
-  </footer>
+
+    <div id="buttons"></div>
+
+    <footer>
+        <div class="gallery">
+            <a href="http://digitopia.github.io/" target="blank"><img id="digi" src="../images/digitopia.png"></img></a>
+        </div>
+        <div class="gallery">
+            <a href="http://www.bragamediaarts.com/en/" target="blank"><img id="bma" src="../images/BMA-1M.png"></img></a>
+        </div>
+        <div class="gallery">
+            <a href="https://www.cm-braga.pt/" target="blank"><img id="bma" src="../images/braga.png"></img></a>
+        </div>
+    </footer>
 </body>
 </html>
