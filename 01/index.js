@@ -31,8 +31,7 @@ function setup() {
 
     console.log("setup started")
 
-    canvas = createCanvas(window.innerWidth, window.innerHeight)
-    // canvas = createCanvas(window.innerWidth, window.innerHeight)
+    canvas = createCanvas(windowWidth,windowHeight);
     canvas.position(0, 0)
     canvas.style('z-index', '-1')
 
@@ -147,12 +146,18 @@ function draw() {
 
 function formatEllipse() {
 
-    cx = window.innerWidth / 2
-    cy = window.innerHeight * 17 / 40
-    if (window.innerWidth >= window.innerHeight) {
-        radius = window.innerHeight / 2
+    cx = windowWidth
+ / 2
+    cy = windowHeight
+ * 17 / 40
+    if (windowWidth
+ >= windowHeight
+) {
+        radius = windowHeight
+ / 2
     } else {
-        radius = window.innerWidth / 2
+        radius = windowWidth
+ / 2
     }
 
 }
@@ -170,14 +175,22 @@ function drawControls() {
 }
 
 function positionControls() {
-    controlCenterX = window.innerWidth * 0.85
-    controlCenterY = window.innerHeight * 0.65
+    controlCenterX = windowWidth
+ * 0.85
+    controlCenterY = windowHeight
+ * 0.65
 }
 
 function windowResized() {
-    if (window.innerWidth < 600) window.innerWidth = 600
-    if (window.innerHeight < 600) window.innerHeight = 600
-    resizeCanvas(window.innerWidth, window.innerHeight)
+    if (windowWidth
+ < 600) windowWidth
+ = 600
+    if (windowHeight
+ < 600) windowHeight
+ = 600
+    resizeCanvas(windowWidth
+, windowHeight
+)
 
     positionControls()
 
@@ -250,9 +263,12 @@ function handleControls() {
 function displayLabel() {
 
     rectMode(CENTER)
-    image(kickImg, 50, window.innerHeight * 0.3 - 15, 60, 30)
-    image(clapImg, 50, window.innerHeight * 0.4 - 40, 60, 60)
-    image(snapImg, 50, window.innerHeight * 0.5 - 30, 55, 55)
+    image(kickImg, 50, windowHeight
+ * 0.3 - 15, 60, 30)
+    image(clapImg, 50, windowHeight
+ * 0.4 - 40, 60, 60)
+    image(snapImg, 50, windowHeight
+ * 0.5 - 30, 55, 55)
     rectMode(CORNER)
 
 }
