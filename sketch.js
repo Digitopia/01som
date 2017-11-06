@@ -13,7 +13,7 @@ var play = false;
 var tickCount = -1;
 var BPM = 60;
 
-var digi, kickImg, clapImg, snapImg, bma, braga;
+var digi, kickImg, clapImg, snapImg, helpImg, bma, braga;
 
 var controlCenterX, controlCenterY; //these are the controls for the play button
 
@@ -27,11 +27,9 @@ function preload() {
 	kickImg = loadImage("images/kick.png");
 	clapImg = loadImage("images/clap.png");
 	snapImg = loadImage("images/snap.png");
+	helpImg = loadImage("images/snap.png");
 
-	digi = loadImage("images/digitopia.png");
-	kickImg = loadImage("images/kick.png");
-	clapImg = loadImage("images/clap.png");
-	snapImg = loadImage("images/snap.png");
+    digi = loadImage("images/digitopia.png");
 	bma = loadImage("images/BMA-1M.png");
 	braga = loadImage("images/braga.png");
 }
@@ -75,7 +73,7 @@ function setup() {
 
 function draw() {
 
-  	background(255,220,220);	
+  	background(255,220,220);
   	fill(0, 0, 50);
   	textAlign(CENTER);
   	textSize(22);
@@ -251,9 +249,10 @@ function displayLabel() {
 	ellipse(20, windowHeight*0.6, 30, 30);
 
 	rectMode(CENTER);
-	image(kickImg, 50, windowHeight*0.4-15, 60, 30);
-	image(clapImg, 50, windowHeight*0.5-40, 60, 60);
-	image(snapImg, 50, windowHeight*0.6-30, 55, 55);
+	// image(kickImg, 50, windowHeight*0.4-15, 60, 30);
+	// image(clapImg, 50, windowHeight*0.5-40, 60, 60);
+	// image(snapImg, 50, windowHeight*0.6-30, 55, 55);
+	image(kickImg, 50, windowHeight*0.7-50, 65, 55);
 	rectMode(CORNER);
 
 	textSize(16);

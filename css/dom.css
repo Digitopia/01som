@@ -8,10 +8,10 @@ a {
     color: rgb(60, 60, 60);
 }
 
-html, body {  
+html, body {
     padding:0;
     margin: 0;
-    min-width: 500px; 
+    min-width: 500px;
     min-height: 500px;
     height: 100%;
     position: relative;
@@ -51,6 +51,7 @@ button {
     padding-top: 2.5vw;
     padding-bottom: 2.5vw;
     border-radius: 50%;
+	width: 8%;
 }
 
 img {
@@ -78,12 +79,12 @@ footer {
 div.gallery {
     display: inline-block;
     margin: 5px;
-    float: left;
+    /*float: left;*/
     width: 30%;
 }
 
 div.gallery img {
-    bottom: 5;
+    bottom: 10px;
     width: auto;
     height: 4.5%;
     position: absolute;
