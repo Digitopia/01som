@@ -3,8 +3,21 @@ var playButton;
 
 var bpmList = [44, 52, 60, 80, 100, 120];
 
-var mySound, myControlPhrase, myKickPhrase, myClapPhrase, mySnapPhrase, myPart;
-var myDo1Phrase, myRePhrase, myMiPhrase, mySolPhrase, myLaPhrase, myDo2Phrase
+var audios = [
+    new Tone.Player("../sounds/kick.wav").toMaster(),
+    new Tone.Player("../sounds/clap.wav").toMaster(),
+    new Tone.Player("../sounds/snap.wav").toMaster(),
+    new Tone.Player("../sounds/do1.mp3").toMaster(),
+    new Tone.Player("../sounds/re.mp3").toMaster(),
+    new Tone.Player("../sounds/mi.mp3").toMaster(),
+    new Tone.Player("../sounds/sol.mp3").toMaster(),
+    new Tone.Player("../sounds/la.mp3").toMaster(),
+    new Tone.Player("../sounds/do2.mp3").toMaster()
+]
+
+var audio1, audio2, audio3
+var note1, note2, note3, note4, note5, note6
+
 var canvas;
 var cycle = 8;
 var centerPoints = []; //centro das elipses
@@ -43,16 +56,16 @@ function setup() {
 	canvas.position(0, 0);
   	canvas.style('z-index', '-1');
 
-  	kick = loadSound('../sounds/kick.mp3');
-	clap = loadSound('../sounds/clap.mp3');
-	snap = loadSound('../sounds/snap.mp3');
+    audio1 = document.getElementById("audio1")
+    audio2 = document.getElementById("audio2")
+    audio3 = document.getElementById("audio3")
 
-	do1 = loadSound('../sounds/do1.mp3');
-	re = loadSound('../sounds/re.mp3');
-	mi = loadSound('../sounds/mi.mp3');
-	sol = loadSound('../sounds/sol.mp3');
-	la = loadSound('../sounds/la.mp3');
-	do2 = loadSound('../sounds/do2.mp3');
+    note1 = document.getElementById("note1")
+    note2 = document.getElementById("note2")
+    note3 = document.getElementById("note3")
+    note4 = document.getElementById("note4")
+    note5 = document.getElementById("note5")
+    note6 = document.getElementById("note6")
 
   	kickImg = loadImage("../images/kick2.png");
  	clapImg = loadImage("../images/clap2.png");
@@ -77,9 +90,9 @@ function setup() {
 		centerPoints[2] = windowWidth/2;
 		centerPoints[3] = windowHeight/4 * 3;
 	}
-	
+
 	radius = windowWidth/3*0.84; //0.84 is fine-tuned so that ellipses don't overlap
-	
+
 	for(var i = 0; i < cycle; i++){
   		pointsA[i] = new Point(i, 0);
   	}
@@ -102,7 +115,7 @@ function changeBG(value) {
 
 function draw() {
 
-  	background(255, bgCol, bgCol);	
+  	background(255, bgCol, bgCol);
   	fill(0, 0, 50);
   	textAlign(CENTER);
   	textSize(22);

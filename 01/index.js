@@ -103,6 +103,8 @@ function setup() {
         setupHelp()
     })
 
+    StartAudioContext(Tone.context, "#button1");
+
 }
 
 function showHelp(state) {
