@@ -1,0 +1,178 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: rgb(255, 241, 241);
+    max-width: 1024px;
+    min-width: 400px;
+    margin: 0 auto;
+    // overflow: hidden;
+}
+
+.help {
+    font-size: 55px;
+    position: absolute;
+    left: 10px;
+    top: 2%;
+    &:hover {
+        cursor: pointer;
+        color: grey;
+    }
+}
+
+.modal {
+
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    .modal-content {
+        background: rgb(220, 240, 254);
+        z-index: 1000;
+        max-width: 50%;
+        min-width: 40%;
+        right: 0;
+        left: 0;
+        top: 30%;
+        opacity: 0.97;
+        margin: 0 auto;
+        border-radius: 30px;
+        color: black;
+        padding: 10px;
+        position: absolute;
+
+         p {
+            color: white;
+            font-size: 12 pt;
+            padding: 1vh;
+        }
+
+        &:first-of-type {
+            margin-top: 2.5vw;
+        }
+    }
+
+    .english { font-style: italic; }
+    .red { color: red; }
+    .blue { color: blue; }
+    .green { color: green; }
+    .white { color: white; }
+    .word { padding: 1 0; letter-spacing: 1px; }
+
+    .close-button {
+        font-size: 30px;
+        color: grey;
+        float: right;
+        margin-right: 10px;
+
+        &:hover {
+            color: black;
+            cursor: pointer;
+        }
+    }
+}
+
+.head {
+	font-size: 30px;
+    height: 10%;
+
+    h1 {
+        padding-top: 10px;
+    }
+
+}
+
+.main {
+
+    // border: 1px solid pink;
+    display: flex;
+
+    .labels, #canvas-placeholder, .playback {
+        // float: left;
+    }
+
+    .labels {
+        // border: 1px solid red;
+        order: 1;
+        width: 10%;
+        display: flex;
+        // vertical-align: middle;
+        text-align: center;
+        img {
+            width: 6vw;
+            height: 6vw;
+            max-width: 90px;
+            max-height: 90px;
+            min-width: 60px;
+            min-height: 60px;
+            margin: 1.2vh 0;
+        }
+
+        .imagesWrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    #canvas-placeholder {
+        order: 2;
+    }
+
+    .playback {
+        // border: 1px solid green;
+        width: 10%;
+        order: 3;
+        bottom: 0;
+        display: flex;
+        /* NOTE: Copying this CSS from global styles, so that don't conflict with other sketches */
+
+        .play {
+            position: relative;
+            font-size: 25px;
+            width: 100px;
+            height: 100px;
+            left: -4vw;
+            top: -12vh;
+            background-color: rgb(60, 60, 60);
+            border-radius: 50%;
+        }
+
+        .button-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+
+}
+
+#bpmButtons {
+    clear: both;
+    button {
+        position: relative;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 80px;
+        height: 80px;
+        font-size: 34px;
+    }
+    .active {
+        border: 2px solid grey;
+    }
+    height: 120px;
+    position: relative;
+    top: -1vh;
+}
+
+footer {
+    width: 100%;
+    margin-bottom: 5px;
+}

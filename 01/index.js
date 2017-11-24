@@ -1,66 +1,80 @@
-var buttons = []
-var playButton
 var points = []
-var bgCol = 241
-var h1
-var kickImg, clapImg, snapImg
+var bgColor = 244
 var cx, cy, radius
-var cycle = 8
+var nPoints = 8
 
-var audios = [
-    new Tone.Player("../sounds/kick.wav").toMaster(),
-    new Tone.Player("../sounds/clap.wav").toMaster(),
-    new Tone.Player("../sounds/snap.wav").toMaster()
+var buttonsConf = [
+    { bpm: 44,  bg: 250 },
+    { bpm: 52,  bg: 247 },
+    { bpm: 60,  bg: 244 },
+    { bpm: 80,  bg: 241 },
+    { bpm: 100, bg: 238 },
+    { bpm: 120, bg: 235 }
 ]
 
-var bpmList = [44, 52, 60, 80, 100, 120]
+var audiosConf = [
+    { path: "../sounds/kick.wav" },
+    { path: "../sounds/clap.wav" },
+    { path: "../sounds/snap.wav" }
+]
 
-var controlCenterX, controlCenterY
+var audios = []
 
-//var beat
-
-var play = false
-
-var audio1, audio2, audio3
-
+// TODO: @Oscar this needs a better name!
 var soundString = [0, 0, 0, 0, 0, 0, 0, 0]
 
-var released = true
+var playing = false
 
 function setup() {
 
-    console.log("setup started")
+    function initAudios() {
+        audiosConf.forEach(function(audioConf) {
+            audios.push(new Tone.Player(audioConf.path).toMaster())
+        })
+    }
 
-    canvas = createCanvas(windowWidth, windowHeight);
-    canvas.position(0, 0)
-    canvas.style('z-index', '-1')
+    initAudios()
 
-    audio1 = document.getElementById("audio1")
-    audio2 = document.getElementById("audio2")
-    audio3 = document.getElementById("audio3")
+    function initButtons() {
 
-    kickImg = loadImage("../images/kick2.png")
-    clapImg = loadImage("../images/clap2.png")
-    snapImg = loadImage("../images/snap2.png")
-    console.log("images loaded")
+        // BPM buttons
+        buttonsConf.forEach(function(buttonConf) {
+            var button = $("<button/>", {
+                text: buttonConf.bpm,
+                value: buttonConf.bpm,
+                click: function() {
+                    changeBG(buttonConf.bg);
+                    Tone.Transport.bpm.value = buttonConf.bpm;
+                    $("#bpmButtons button").removeClass("active")
+                    $(this).addClass("active")
+                }
+            })
+            $("#bpmButtons").append(button)
+        })
 
-    createButtons("buttons")
+        // Play/Pause button
+        $("#playButton").click(function() {
+            if (playing) stop(); else play()
+            playing = !playing
+        })
+    }
 
-    positionControls()
+    initButtons()
 
-    formatButtons()
+    canvas = createCanvas(canvasWidth(), canvasHeight());
+    canvas.parent("canvas-placeholder")
 
-    formatEllipse()
+    // NOTE: init circle before initing points
+    formatCircle()
 
-    for (var i = 0; i < cycle; i++) {
+    for (var i = 0; i < nPoints; i++) {
         points[i] = new Point(i)
     }
 
     Tone.Transport.bpm.value = 60
+    $(":button[value='60']").addClass("active")
     Tone.Transport.loopEnd = '1m'
     Tone.Transport.loop = true
-
-    buttonBorders()
 
     function setupHelp() {
 
@@ -103,8 +117,6 @@ function setup() {
         setupHelp()
     })
 
-    StartAudioContext(Tone.context, "#button1");
-
 }
 
 function showHelp(state) {
@@ -113,147 +125,100 @@ function showHelp(state) {
 
     if (state) {
         $(".modal").show()
+        $(".help-icon").mouseover(function(){}).mouseout(function(){})
         $(".help-icon").first().css("color", "grey")
     } else {
         $(".modal").hide()
         $(".help-icon").first().css("color", "black")
+        $(".help-icon")
+            .mouseover(function() { $(this).css("color", "grey") })
+            .mouseout(function() { $(this).css("color", "black") })
     }
 
 }
 
-function changeBG(value) {
-    bgCol = value
-    background(255, value, value)
+function changeBG(bg) {
+    bgColor = bg
+    background(255, bg, bg)
+    $("body").css("background-color", "rgb(255,"+bg+","+bg+")")
+}
+
+function canvasHeight() {
+    var extra = ( $(".head").height() + $("#bpmButtons").height() + $("footer").height() )
+    var slack = 20 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
+    var diff = windowHeight - extra - slack
+    return (diff < 300) ? 300 : diff
+}
+
+function canvasWidth() {
+    var extra = ( $(".labels").width() + $(".playback").width() )
+    var slack = 5
+    var diff = $(".main").width() - extra - slack
+    return (diff < 300) ? 300 : diff
 }
 
 function draw() {
-    background(255, bgCol, bgCol)
+    background(255, bgColor, bgColor)
+    drawCircle()
+    drawPoints()
+}
 
-    drawEllipse()
-
-    for (var i = 0; i < cycle; i++) {
-        points[i].display()
-        if (play) {
+function drawPoints() {
+    points.forEach(function(p) {
+        p.display()
+        if (playing) {
             var tickCount = Math.floor(Tone.Transport.ticks / 100)
-            points[i].isActive(tickCount)
+            p.isActive(tickCount)
         }
-    }
-
-    drawControls()
-    displayLabel()
-
-    buttonBorders()
-
+    })
 }
 
-function formatEllipse() {
-
-    cx = windowWidth / 2
-    cy = windowHeight * 17 / 40
-    if (windowWidth >= windowHeight) {
-        radius = windowHeight / 2
-    } else {
-        radius = windowWidth / 2
-    }
-
+function formatCircle() {
+    cx = canvasWidth()/2
+    cy = canvasHeight()/2
+    var scalingFactor = 1.25
+    radius = min(canvasWidth(), canvasHeight()) * 0.5 * scalingFactor
 }
 
-function drawEllipse() {
+function drawCircle() {
     stroke(127)
     strokeWeight(4)
     fill(220, 240, 255)
     ellipse(cx, cy, radius, radius)
 }
 
-function drawControls() {
-
-    playButton.position(controlCenterX - 35, controlCenterY - 55)
-}
-
-function positionControls() {
-    controlCenterX = windowWidth * 0.85
-    controlCenterY = windowHeight * 0.65
-}
-
 function windowResized() {
-    if (windowWidth < 600) windowWidth = 600
-    if (windowHeight < 600) windowHeight = 600
-    resizeCanvas(windowWidth, windowHeight)
+    resizeCanvas(canvasWidth(), canvasHeight())
+    console.log(canvasWidth(), canvasHeight())
+    formatCircle()
+    points.forEach(function(p) { p.update() })
+}
 
-    positionControls()
+function play() {
 
-    formatButtons()
-
-    formatEllipse()
-
-    for (var i = 0; i < cycle; i++) {
-        points[i].update()
+    // First schedule all events
+    for (var i = 0; i < nPoints; i++) {
+        (function() {
+            var _i = i
+            Tone.Transport.schedule(function(t) {
+                console.log("Playing 8th note number", _i)
+                idx = soundString[_i] - 1
+                if (idx >= 0 && idx <= 2) audios[idx].start(t)
+            }, i + "*8n")
+        })()
     }
 
-    displayLabel()
+    // And only then start, in order to guarantee syncronicity
+    $("#playButton").text("Stop")
+    Tone.Transport.start()
 
-    buttonBorders()
 }
 
-function mouseReleased() {
-    released = true
-    return false
+function stop() {
+    $("#playButton").text("Play")
+    Tone.Transport.stop()
 }
 
 function mousePressed() {
-
-    if (!released) {
-        return
-    }
-    released = false
-
-    handleControls()
-
-    for (var i = 0; i < cycle; i++) {
-        points[i].onClick()
-    }
-}
-
-function handleControls() {
-
-    if (!released) {
-        return
-    }
-
-    released = false
-
-    play = !play
-
-    if (play) {
-
-        for (var i = 0; i < 8; i++) {
-            (function() {
-                var _i = i
-                Tone.Transport.schedule(function(t) {
-                    console.log("Playing 8th note number", _i)
-                    idx = soundString[_i] - 1
-                    if (idx >= 0 && idx <= 2) audios[idx].start(t)
-                }, i + "*8n")
-            })()
-        }
-
-        Tone.Transport.start()
-        document.getElementById("button1").textContent = "Stop"
-
-    } else {
-
-        Tone.Transport.stop()
-        document.getElementById("button1").textContent = "Play"
-
-    }
-}
-
-function displayLabel() {
-
-    rectMode(CENTER)
-    image(kickImg, 50, windowHeight * 0.3 - 15, 60, 30)
-    image(clapImg, 50, windowHeight * 0.4 - 40, 60, 60)
-    image(snapImg, 50, windowHeight * 0.5 - 30, 55, 55)
-    rectMode(CORNER)
-
+    points.forEach(function(p) { p.onClick() })
 }

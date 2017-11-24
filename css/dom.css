@@ -45,13 +45,13 @@ button {
 }
 
 .play {
-    background-color: rgb(60, 60, 60);
+    /*background-color: rgb(60, 60, 60);
     font-size: 2vw;
     padding: 1.8vw;
     padding-top: 2.5vw;
     padding-bottom: 2.5vw;
     border-radius: 50%;
-	width: 8%;
+	width: 8%;*/
 }
 
 img {
@@ -76,16 +76,17 @@ footer {
     border: 3px solid red;
 }*/
 
-div.gallery {
+.gallery {
     display: inline-block;
     margin: 5px;
     /*float: left;*/
     width: 30%;
 }
 
-div.gallery img {
-    bottom: 10px;
-    width: auto;
-    height: 4.5%;
-    position: absolute;
+.gallery img {
+    /*bottom: 10px;*/
+    /*width: auto;*/
+    /*height: 4.5%;*/
+    width: 100px;
+    /*position: absolute;*/
 }
