@@ -117,6 +117,8 @@ function setup() {
         setupHelp()
     })
 
+    StartAudioContext(Tone.context, "#playButton");
+
 }
 
 function showHelp(state) {
