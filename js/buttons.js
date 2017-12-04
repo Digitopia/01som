@@ -1,4 +1,4 @@
-function createButtons(parent) {
+function createButtons(parent, playButton) {
 
     background(255, bgCol, bgCol);
     buttons[0] = createButton(bpmList[0]);
@@ -33,23 +33,25 @@ function createButtons(parent) {
         Tone.Transport.bpm.value = bpmList[5];
     });
 
-    playButton = createButton("Play");
-    playButton.id("button1");
-    playButton.addClass('play');
-    playButton.mousePressed(function() {
-        handleControls();
-    });
+    if (playButton === undefined) {
+        playButton = createButton("Play");
+        playButton.id("button1");
+        playButton.addClass('play');
+        playButton.mousePressed(function() {
+            handleControls();
+        });
+    }
 
     if (parent !== undefined) {
         buttons.forEach(function(button) { button.parent(parent)})
-        playButton.parent(parent)
+        if (playButton === undefined) playButton.parent(parent)
     }
 }
 
 function buttonBorders() {
     for (var i = 0; i < bpmList.length; i++) {
         if (bpmList[i] == Tone.Transport.bpm.value) {
-            buttons[i].style("border", "2px solid gray");
+            buttons[i].style("o");
         } else {
             buttons[i].style("border", "0px");
         }
@@ -61,7 +63,7 @@ function formatButtons() {
         var ratio = i / (buttons.length - 1);
         var offset = 80;
         var size = width * 0.08;
-        buttons[i].position(width * ratio + offset - (size + 2 * offset) * ratio, height / 4 * 3);
-        buttons[i].size(size, size);
+        // buttons[i].position(width * ratio + offset - (size + 2 * offset) * ratio, height / 4 * 3);
+        buttons[i].size("4vw", "4vw");
     }
 }

@@ -1,7 +1,7 @@
 function Point(iorder) {
 
     this.order = iorder
-    this.trig = (this.order / (cycle)) * 2 * PI
+    this.trig = (this.order / (nPoints)) * 2 * PI
     this.x = sin(this.trig) * radius / 2 + cx
     this.y = -(cos(this.trig)) * radius / 2 + cy
     this.color = color(255, 255, 255)
@@ -51,7 +51,7 @@ function Point(iorder) {
     }
 
     this.isActive = function(tick) {
-        if ((tick % cycle) == this.order) {
+        if ((tick % nPoints) == this.order) {
             fill(0)
             noStroke()
             tempX = sin(this.trig) * radius * 1.2 / 2 + cx

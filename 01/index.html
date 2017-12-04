@@ -48,37 +48,59 @@
 
 <body>
 
-    <div class="help">
-        <i class="fa fa-question-circle help-icon" aria-hidden="true"></i>
+    <div class="wrapper">
+
+        <div class="help">
+            <i class="fa fa-question-circle help-icon" aria-hidden="true"></i>
+        </div>
+
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p>Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>, duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>, quatro vezes para o <span class="word white">branco</span>.
+                    Clica nos botões de baixo para escolher o andamento.</p>
+                <p class="english">Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>, three times for <span class="word red">red</span> and four times for <span class="word white">white</span>. Click
+                    the buttons at the bottom to choose the tempo.</p>
+            </div>
+        </div>
+
+        <div class="head">
+            <h1><a href="/">0 + 1 = SOM</a></h1>
+        </div>
+
+        <div class="main">
+            <div class="labels">
+                <div class="imagesWrapper">
+                    <img src="../images/kick3.png") alt="kick" />
+                    <img src="../images/clap2.png") alt="clap" />
+                    <img src="../images/snap2.png") alt="snap" />
+                </div>
+            </div>
+            <div id="canvas-placeholder"></div>
+            <div class="playback">
+                <div class="button-wrapper">
+                    <button id="playButton" value="" class="play">Play</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="bpmButtons"></div>
+
+        <footer>
+            <div class="logos">
+                <div class="gallery">
+                    <a href="http://digitopia.github.io/" target="blank"><img id="digi" src="../images/digitopia.png"></img></a>
+                </div>
+                <div class="gallery">
+                    <a href="http://www.bragamediaarts.com/en/" target="blank"><img id="bma" src="../images/BMA-1M.png"></img></a>
+                </div>
+                <div class="gallery">
+                    <a href="https://www.cm-braga.pt/" target="blank"><img id="braga" src="../images/braga.png"></img></a>
+                </div>
+            </div>
+        </footer>
+
     </div>
-
-    <div class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <p>Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>, duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>, quatro vezes para o <span class="word white">branco</span>.
-                Clica nos botões de baixo para escolher o andamento.</p>
-            <p class="english">Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>, three times for <span class="word red">red</span> and four times for <span class="word white">white</span>. Click
-                the buttons at the bottom to choose the tempo.</p>
-        </div>
-    </div>
-
-    <div class="head">
-        <h1><a href="/">0 + 1 = SOM</a></h1>
-    </div>
-
-    <div id="buttons"></div>
-
-    <footer>
-        <div class="gallery">
-            <a href="http://digitopia.github.io/" target="blank"><img id="digi" src="../images/digitopia.png"></img></a>
-        </div>
-        <div class="gallery">
-            <a href="http://www.bragamediaarts.com/en/" target="blank"><img id="bma" src="../images/BMA-1M.png"></img></a>
-        </div>
-        <div class="gallery">
-            <a href="https://www.cm-braga.pt/" target="blank"><img id="bma" src="../images/braga.png"></img></a>
-        </div>
-    </footer>
 
 </body>
 
