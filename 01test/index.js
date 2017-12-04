@@ -76,36 +76,7 @@ function setup() {
     Tone.Transport.loopEnd = '1m'
     Tone.Transport.loop = true
 
-    function setupHelp() {
-
-        $(".close-button").click(function() {
-            showHelp(false)
-        })
-
-        $(".help").click(function() {
-            showHelp(true)
-        })
-
-        $(".modal").click(function() {
-            console.log("clicked modal")
-            showHelp(false)
-        })
-
-        if (Cookies.get("visited")) {
-            console.log("returning visitor")
-            // showHelp(true) // NOTE: uncomment for testing, to force help message
-        } else {
-            console.log("first time visitor")
-            Cookies.set("visited", true, { expires: 365, path: "/" })
-            showHelp(true)
-        }
-
-        // NOTE: Hide help if Escape key is pressed
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) showHelp(false)
-        })
-
-    }
+    setupHelp()
 
     // NOTE: on mobile devices click is never triggered
     $(".modal, .help").on("touchstart", function() { $(this).trigger("click") })
@@ -121,43 +92,12 @@ function setup() {
 
 }
 
-function showHelp(state) {
-
-    // NOTE: this should be binded more effectively.. but not using Angular just for this...
-
-    if (state) {
-        $(".modal").show()
-        $(".help-icon").mouseover(function(){}).mouseout(function(){})
-        $(".help-icon").first().css("color", "grey")
-    } else {
-        $(".modal").hide()
-        $(".help-icon").first().css("color", "black")
-        $(".help-icon")
-            .mouseover(function() { $(this).css("color", "grey") })
-            .mouseout(function() { $(this).css("color", "black") })
-    }
-
-}
-
 function changeBG(bg) {
     bgColor = bg
     background(255, bg, bg)
     $("body").css("background-color", "rgb(255,"+bg+","+bg+")")
 }
 
-function canvasHeight() {
-    var extra = ( $(".head").height() + $("#bpmButtons").height() + $("footer").height() )
-    var slack = 20 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
-    var diff = windowHeight - extra - slack
-    return (diff < 300) ? 300 : diff
-}
-
-function canvasWidth() {
-    var extra = ( $(".labels").width() + $(".playback").width() )
-    var slack = 5
-    var diff = $(".main").width() - extra - slack
-    return (diff < 300) ? 300 : diff
-}
 
 function draw() {
     background(255, bgColor, bgColor)
