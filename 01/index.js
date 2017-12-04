@@ -223,4 +223,5 @@ function stop() {
 
 function mousePressed() {
     points.forEach(function(p) { p.onClick() })
+    if (mouseX > 0 && mouseX < canvasWidth() && mouseY > 0 && mouseY < canvasHeight()) return false
 }
