@@ -1,62 +1,82 @@
-function Point(iorder) {
+function Point(order) {
 
-    this.order = iorder
-    this.trig = (this.order / (nPoints)) * 2 * PI
-    this.x = sin(this.trig) * radius / 2 + cx
-    this.y = -(cos(this.trig)) * radius / 2 + cy
-    this.color = color(255, 255, 255)
-    this.counter = 0
+    this.order = order
 
-    this.display = function() {
-        fill(this.color)
-        strokeWeight(2)
-        ellipse(this.x, this.y, 35, 35)
-    }
+    this.angle = (this.order / (CONF.nPoints)) * 2 * Math.PI
+    this.x = Math.sin(this.angle) * radius + cx
+    this.y = -Math.cos(this.angle) * radius + cy
 
-    this.update = function() {
-        this.x = sin(this.trig) * radius / 2 + cx
-        this.y = -(cos(this.trig)) * radius / 2 + cy
-    }
+    this.state = -1 // NOTE: this changes between -1 (for blank) and index of CONF.options (0, 1, 2)
 
-    this.setColor = function() {
-        var testValue = this.counter % 4
-        switch (testValue) {
-            case 3:
-                this.counter++
-                    this.color = color(255, 255, 255)
-                soundString[this.order] = 0
-                break
-            case 0:
-                this.counter++
-                    this.color = color(30, 30, 225)
-                soundString[this.order] = 1
-                break
-            case 1:
-                this.counter++
-                    this.color = color(30, 225, 30)
-                soundString[this.order] = 2
-                break
-            case 2:
-                this.counter++
-                    this.color = color(225, 30, 30)
-                soundString[this.order] = 3
-                break
+    this.elem = null // NOTE: this is the reference to the SVG element
+
+    this.dot = null // NOTE: this is the reference to dot SVG element
+
+    this.init = function() {
+
+        var r = CONF.points.radius
+        this.elem = paper.circle(this.x, this.y, r, r)
+
+        this.resetStyle()
+        this.elem.attr({ viewBox: '100 100 100 100' })
+        this.elem.attr({ preserveAspectRatio: 'none' })
+        this.elem.addClass("point")
+
+        this.elem.hover(function() {
+            if (touched) return
+            this.attr({ strokeWidth: CONF.points.strokeWidthHover })
+        }, function() {
+            this.attr({ strokeWidth: CONF.points.strokeWidth })
+        })
+
+        var self = this
+
+        function onclick(e, self) {
+            var step = e.metaKey ? -1 : 1
+            var tempState = self.state + step
+            if (tempState < -1) self.state = CONF.options.length - 1
+            else if (tempState > CONF.options.length - 1) self.state = -1
+            else self.state = tempState
+            // self.state = self.state < -1 ? CONF.options.length-1 : self.state
+            console.log(self.state)
+            self.color = self.state == -1 ? COLORS.white : CONF.options[self.state].color
+            self.elem.attr({fill: self.color})
         }
+
+        this.elem.click(function(e) {
+            if (touched) return; else onclick(e, self)
+        })
+
+        this.elem.touchstart(function(e) {
+            console.log(order, "touched")
+            touched = true; onclick(e, self)
+        })
+
+        var dotX = Math.sin(this.angle) * radius * 1.25 + cx
+        var dotY = -Math.cos(this.angle) * radius * 1.25 + cy
+        var dotRadius = 2
+        this.dot = paper.circle(dotX, dotY, dotRadius).attr({
+            visibility: "hidden"
+        })
+
     }
 
-    this.onClick = function() {
-        if (mouseX >= this.x - 20 && mouseX <= this.x + 20 && mouseY >= this.y - 20 && mouseY <= this.y + 20) {
-            this.setColor()
-        }
+    this.resetStyle = function() {
+        this.elem.attr({
+            fill: CONF.points.fillColor,
+            stroke: CONF.points.stroke,
+            strokeWidth: CONF.points.strokeWidth,
+        })
     }
 
-    this.isActive = function(tick) {
-        if ((tick % nPoints) == this.order) {
-            fill(0)
-            noStroke()
-            tempX = sin(this.trig) * radius * 1.2 / 2 + cx
-            tempY = -(cos(this.trig)) * radius * 1.2 / 2 + cy
-            ellipse(tempX, tempY, 5, 5)
-        }
+    this.reset = function() {
+        this.state = -1
+        this.resetStyle()
     }
+
+    this.showDot = function(show) {
+        var visibility = show ? "visible" : "hidden"
+        this.dot.attr({ visibility: visibility })
+    }
+
 }

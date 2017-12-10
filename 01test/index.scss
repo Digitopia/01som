@@ -83,6 +83,10 @@ body {
 
     h1 {
         padding-top: 10px;
+        a:hover {
+            text-decoration: underline;
+            // border-bottom: 3px solid black;
+        }
     }
 
 }
@@ -103,6 +107,7 @@ body {
         display: flex;
         // vertical-align: middle;
         text-align: center;
+        margin-left: 15px;
         img {
             width: 6vw;
             height: 6vw;
@@ -150,22 +155,42 @@ body {
             flex-direction: column;
             justify-content: flex-end;
         }
+
+        #playButton {
+            box-shadow: 0 2px 2px rgb(103, 103, 103);
+            &:hover {
+                cursor: pointer;
+                box-shadow: none;
+            }
+        }
     }
 
 }
 
 #bpmButtons {
     clear: both;
+    text-align: center;
     button {
         position: relative;
-        margin-left: 2%;
-        margin-right: 2%;
-        width: 80px;
-        height: 80px;
-        font-size: 34px;
+        text-align: center;
+        // margin-left: min(1,1.5%);
+        // margin-right: min(1,1.5%);
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 11vw;
+        max-width: 80px;
+        height: 11vw;
+        max-height: 80px;
+        // height: 70px;
+        // font-size: 100%;
+
+        &:hover {
+            cursor: pointer;
+            border: 1px solid grey;
+        }
     }
     .active {
-        border: 2px solid grey;
+        border: 2px solid grey !important;
     }
     height: 120px;
     position: relative;
@@ -176,3 +201,11 @@ footer {
     width: 100%;
     margin-bottom: 5px;
 }
+
+.point:hover {
+    cursor: pointer;
+}
+
+// svg {
+//     border: 2px solid red;
+// }
