@@ -1,0 +1,198 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: honeydew;
+  max-width: 1280px;
+  min-width: 400px;
+  margin: 0 auto; }
+
+.help {
+  font-size: 55px;
+  position: absolute;
+  left: 10px;
+  top: 2%; }
+  .help:hover {
+    cursor: pointer;
+    color: grey; }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); }
+  .modal .modal-content {
+    background: #dcf0fe;
+    z-index: 1000;
+    max-width: 50%;
+    min-width: 40%;
+    right: 0;
+    left: 0;
+    top: 30%;
+    opacity: 0.97;
+    margin: 0 auto;
+    border-radius: 30px;
+    color: black;
+    padding: 10px;
+    position: absolute; }
+    .modal .modal-content p {
+      color: white;
+      font-size: 12 pt;
+      padding: 1vh; }
+    .modal .modal-content:first-of-type {
+      margin-top: 2.5vw; }
+  .modal .english {
+    font-style: italic; }
+  .modal .red {
+    color: red; }
+  .modal .blue {
+    color: blue; }
+  .modal .green {
+    color: green; }
+  .modal .white {
+    color: white; }
+  .modal .word {
+    padding: 1 0;
+    letter-spacing: 1px; }
+  .modal .close-button {
+    font-size: 30px;
+    color: grey;
+    float: right;
+    margin-right: 10px; }
+    .modal .close-button:hover {
+      color: black;
+      cursor: pointer; }
+
+.head {
+  font-size: 30px;
+  height: 10%; }
+  .head h1 {
+    padding-top: 10px; }
+    .head h1 a:hover {
+      text-decoration: underline; }
+
+.main {
+  display: flex;
+  /* Mouse-over effects */ }
+  .main .slider {
+    -webkit-appearance: none;
+    /* Override default CSS styles */
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    /* Specified height */
+    background: #d3d3d3;
+    /* Grey background */
+    outline: none;
+    opacity: 0.6;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    -webkit-transform: rotate(90deg);
+    /* Rotate 90 degrees, making it vertical */
+    -webkit-transform-origin: top left; }
+  .main .slider:hover {
+    opacity: 1;
+    /* Fully shown on mouse-over */ }
+  .main .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 10px;
+    /* Set a specific slider handle width */
+    height: 10px;
+    /* Slider handle height */
+    background: #4CAF50;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */ }
+  .main .slider::-moz-range-thumb {
+    width: 10px;
+    /* Set a specific slider handle width */
+    height: 10px;
+    /* Slider handle height */
+    background: #4CAF50;
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */ }
+  .main .labels {
+    order: 1;
+    width: 10%;
+    display: flex;
+    text-align: center;
+    margin-left: 15px; }
+    .main .labels img {
+      width: 6vw;
+      height: 6vw;
+      max-width: 90px;
+      max-height: 90px;
+      min-width: 60px;
+      min-height: 60px;
+      margin: 1.2vh 0; }
+    .main .labels .sliderWrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+  .main #canvas-placeholder {
+    order: 2; }
+  .main .playback {
+    width: 10%;
+    order: 3;
+    bottom: 0;
+    display: flex;
+    /* NOTE: Copying this CSS from global styles, so that don't conflict with other sketches */ }
+    .main .playback .play {
+      position: relative;
+      font-size: 25px;
+      width: 100px;
+      height: 100px;
+      left: -4vw;
+      top: -12vh;
+      background-color: #3c3c3c;
+      border-radius: 50%; }
+    .main .playback .button-wrapper {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; }
+    .main .playback #playButton {
+      box-shadow: 0 2px 2px #676767; }
+      .main .playback #playButton:hover {
+        cursor: pointer;
+        box-shadow: none; }
+
+#bpmButtons {
+  clear: both;
+  text-align: center;
+  height: 120px;
+  position: relative;
+  top: -1vh; }
+  #bpmButtons button {
+    position: relative;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 11vw;
+    max-width: 80px;
+    height: 11vw;
+    max-height: 80px; }
+    #bpmButtons button:hover {
+      cursor: pointer;
+      border: 1px solid grey; }
+  #bpmButtons .active {
+    border: 2px solid grey !important; }
+
+footer {
+  width: 100%;
+  margin-bottom: 5px; }
+
+.point:hover {
+  cursor: pointer; }
+
+/*# sourceMappingURL=index.css.map */
