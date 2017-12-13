@@ -1,19 +1,3 @@
-var pointsA = []
-var pointsB = []
-var bgColor = 244
-var centerPoints = [];
-var radius
-var nPoints = 8
-
-var buttonsConf = [
-    { bpm: 44,  bg: 250 },
-    { bpm: 52,  bg: 247 },
-    { bpm: 60,  bg: 244 },
-    { bpm: 80,  bg: 241 },
-    { bpm: 100, bg: 238 },
-    { bpm: 120, bg: 235 }
-]
-
 var audiosConf = [
     { path: "../sounds/kick.mp3" },
     { path: "../sounds/clap.wav" },
@@ -28,11 +12,20 @@ var audiosConf = [
 
 var audios = []
 
-// TODO: @Oscar this needs a better name!
-var soundStringA = [0, 0, 0, 0, 0, 0, 0, 0]
-var soundStringB = [0, 0, 0, 0, 0, 0, 0, 0]
+// Global variables
+var paper
+var circle1, circle2
+var audios = {}
 
+// Helper global variables
 var playing = false
+var touched = false
+
+$(document).read(function() {
+
+
+
+})
 
 function setup() {
 
@@ -43,32 +36,6 @@ function setup() {
     }
 
     initAudios()
-
-    function initButtons() {
-
-        // BPM buttons
-        buttonsConf.forEach(function(buttonConf) {
-            var button = $("<button/>", {
-                text: buttonConf.bpm,
-                value: buttonConf.bpm,
-                click: function() {
-                    changeBG(buttonConf.bg);
-                    Tone.Transport.bpm.value = buttonConf.bpm;
-                    $("#bpmButtons button").removeClass("active")
-                    $(this).addClass("active")
-                }
-            })
-            $("#bpmButtons").append(button)
-        })
-
-        // Play/Pause button
-        $("#playButton").click(function() {
-            if (playing) stop(); else play()
-            playing = !playing
-        })
-    }
-
-    initButtons()
 
     canvas = createCanvas(canvasWidth(), canvasHeight());
     canvas.parent("canvas-placeholder")
@@ -100,37 +67,44 @@ function setup() {
 
     StartAudioContext(Tone.context, "#playButton");
 
-}
+    function initCircle() {
 
-function changeBG(bg) {
-    bgColor = bg
-    background(255, bg, bg)
-    $("body").css("background-color", "rgb(255,"+bg+","+bg+")")
-}
-
-
-function draw() {
-    background(255, bgColor, bgColor)
-    drawCircles()
-    drawPoints()
-}
-
-function drawPoints() {
-    pointsA.forEach(function(p) {
-        p.display()
-        if (playing) {
-            var tickCount = Math.floor(Tone.Transport.ticks / 100)
-            p.isActive(tickCount)
+        var circle1Params = {
+            x: Utils.vw()/2,
+            y: Utils.vw()/2,
+            n: 8,
+            r: radius,
+            shake: true,
+            options: [
+                { sample: "do1", text: "DÓ"  },
+                { sample: "re", text: "RÉ"  },
+                { sample: "mi", text: "MI"  },
+                { sample: "sol", text: "SOL" },
+                { sample: "la", text: "LÁ"  },
+                { sample: "do2", text: "Dó"
+            }
         }
-    })
 
-    pointsB.forEach(function(p) {
-        p.display()
-        if (playing) {
-            var tickCount = Math.floor(Tone.Transport.ticks / 100)
-            p.isActive(tickCount)
+        circle1 = new Circle(circle1Params)
+
+        var circle2Params = {
+            x: Utils.vw()/2 + 100,
+            y: Utils.vw()/2 + 100,
+            n: circle1Params.n,
+            r: circle1Params.r,
+            shake: true,
+            options: [
+                { sample: "do1", text: "DÓ"  },
+                { sample: "re", text: "RÉ"  },
+                { sample: "mi", text: "MI"  },
+                { sample: "sol", text: "SOL" },
+                { sample: "la", text: "LÁ"  },
+                { sample: "do2", text: "Dó"
+            }
         }
-    })
+        circle2 = new Circle(circle2Params)
+    }
+
 }
 
 function formatCircles() {
@@ -150,57 +124,16 @@ function formatCircles() {
     radius = min(canvasWidth(), canvasHeight()) * 0.5 * scalingFactor
 }
 
-function drawCircles() {
-    stroke(127)
-    strokeWeight(4)
-    fill(220, 240, 255)
-    ellipse(centerPoints[0], centerPoints[1], radius, radius)
-    fill(220,255,240)
-    ellipse(centerPoints[2], centerPoints[3], radius, radius)
-}
-
-function windowResized() {
-    resizeCanvas(canvasWidth(), canvasHeight())
-    console.log(canvasWidth(), canvasHeight())
-    formatCircles()
-    pointsA.forEach(function(p) { p.update() })
-    pointsB.forEach(function(p) { p.update() })
-}
-
-function play() {
-
-    // First schedule all events
-    for (var i = 0; i < nPoints; i++) {
-        (function() {
-            var _i = i
-            Tone.Transport.schedule(function(t) {
-                console.log("Playing 8th note number", _i)
-                idx = soundStringA[_i] - 1
-                if (idx >= 0 && idx <= 2) audios[idx].start(t)
-            }, i + "*8n")
-
-            //TODO: @Nuno, please check if there's a better way to do this
-            Tone.Transport.schedule(function(t) {
-                console.log("Playing 8th note number", _i)
-                idy = soundStringB[_i] - 1
-                if (idy >= 3 && idy <= 8) audios[idy].start(t)
-            }, i + "*8n")
-        })()
-    }
-
-    // And only then start, in order to guarantee syncronicity
-    $("#playButton").text("Stop")
-    Tone.Transport.start()
-
-}
+// function drawCircles() {
+//     stroke(127)
+//     strokeWeight(4)
+//     fill(220, 240, 255)
+//     ellipse(centerPoints[0], centerPoints[1], radius, radius)
+//     fill(220,255,240)
+//     ellipse(centerPoints[2], centerPoints[3], radius, radius)
+// }
 
 function stop() {
     $("#playButton").text("Play")
     Tone.Transport.stop()
-}
-
-function mousePressed() {
-    pointsA.forEach(function(p) { p.onClick() })
-    pointsB.forEach(function(p) { p.onClick() })
-    if (mouseX > 0 && mouseX < canvasWidth() && mouseY > 0 && mouseY < canvasHeight()) return false
 }

@@ -1,20 +1,8 @@
 // TODO:
 // - Experiment with Babel.js so that can use ES6 features, while still guaranteeing backwards compatibility
 // - Try and experiment with Vue.js to improve some variable binding?
-// - Pull stuff into circle class?
 // - Add loading screen
-
-// Configuration variables
-
-var COLORS = {
-    white: "rgb(255, 255, 255)",
-    grey: "rgb(127,127,127)",
-    black: "rgb(0,0,0)",
-    red: "rgb(225, 30, 30)",
-    green: "rgb(30, 225, 30)",
-    blue: "rgb(30, 30, 225)",
-    lightblue: "rgb(220, 240, 255)"
-}
+// - Experiment with jsdoc for classes, just because
 
 var CONF = {
     nPoints: 8,
@@ -45,12 +33,12 @@ var CONF = {
     ],
 }
 
-// Global variables
-
-var cx, cy, radius
-var points = []
-var audios = {}
+// "True" Global variables
 var paper
+var circle
+var audios = {}
+
+// "Helper" global variables
 var playing = false
 var touched = false
 // NOTE: this is a small hack to detect if we should react on mousePressed or touchStarted events
@@ -62,19 +50,19 @@ $(document).ready(function() {
 
     function initCanvas() {
 
-        paper = Snap(getCanvasWidth(), getCanvasHeight())
+        paper = Snap(Utils.vw(), Utils.vh())
 
         $("svg").appendTo("#canvas-placeholder")
 
         paper.attr({
-            viewBox: '0 0 ' + getCanvasWidth() + " " + getCanvasHeight(),
+            viewBox: '0 0 ' + Utils.vw() + " " + Utils.vh(),
             // preserveAspectRatio: "none"
         })
 
         $(window).resize(function() {
             paper.attr({
-                width: getCanvasWidth(),
-                height: getCanvasHeight()
+                width: Utils.vw(),
+                height: Utils.vh()
             })
         })
     }
@@ -86,6 +74,8 @@ $(document).ready(function() {
 
         Tone.Transport.loopEnd = '1m'
         Tone.Transport.loop = true
+
+        StartAudioContext(Tone.context, "#playButton");
     }
 
     function initButtons() {
@@ -108,7 +98,6 @@ $(document).ready(function() {
 
         //
         $("#bpmButtons button").each(function() {
-            console.log($(this))
             $(this).fitText(0.3, {
                 minFontSize: '20px',
                 maxFontSize: '40px'
@@ -126,95 +115,32 @@ $(document).ready(function() {
 
     }
 
-    function initCenterCircle() {
-        cx = getCanvasWidth()/2
-        cy = getCanvasHeight()/2
-        var scalingFactor = 0.6
-        radius = Math.min(getCanvasWidth(), getCanvasHeight()) * 0.5 * scalingFactor
-        centerCircle = paper.circle(cx, cy, radius, radius)
-        centerCircle.attr({
-            fill: COLORS.lightblue,
-            stroke: COLORS.grey,
-            strokeWidth: 4
-        })
-    }
+    function initCircle() {
 
-    function initPoints() {
-        for (var i = 0; i < CONF.nPoints; i++) {
-            points[i] = new Point(i)
-            points[i].init()
-        }
+        var scalingFactor = 0.6
+        var radius = Math.min(Utils.vw(), Utils.vh()) * 0.5 * scalingFactor
+
+        circle = new Circle({
+            x: Utils.vw()/2,
+            y: Utils.vh()/2,
+            n: 8,
+            r: radius,
+            shake: true
+        })
+
     }
 
     function initHelp() {
-
-        $(".close-button").click(function() {
-            console.log("clicked close button")
-            showHelp(false)
-        })
-
-        $(".help").click(function() {
-            console.log("help click")
-            showHelp(true)
-        })
-
-        $(".modal").click(function() {
-            showHelp(false)
-        })
-
-        if (Cookies.get("visited")) {
-            console.log("returning visitor")
-            // showHelp(true) // NOTE: uncomment for testing, to force help message
-        } else {
-            console.log("first time visitor")
-            Cookies.set("visited", true, { expires: 365, path: "/" })
-            showHelp(true)
-        }
-
-        // NOTE: Hide help if Escape key is pressed
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) showHelp(false)
-        })
-
-    }
-
-    function initShake() {
-
-        var shake = new Shake({ threshold: 15, timeout: 1000 }).start()
-
-        function shakeHandler() {
-            // alert("shake it")
-            if (playing) $("#playButton").trigger("click")
-            points.forEach(function(p){p.reset()})
-        }
-
-        window.addEventListener('shake', shakeHandler, false)
+        HELP.init()
     }
 
     initCanvas()
     initAudios()
     initButtons()
-    initCenterCircle()
-    initPoints()
+    initCircle()
     initHelp()
-    initShake()
-    StartAudioContext(Tone.context, "#playButton");
 
 })
-
-function getCanvasHeight() {
-    var extra = $(".head").height() + $("#bpmButtons").height() + $("footer").height()
-    var slack = 80 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
-    var diff = $(window).height() - extra - slack
-    return Math.max(300, diff)
-}
-
-function getCanvasWidth() {
-    var extra = $(".labels").width() + $(".playback").width()
-    var slack = 5 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
-    var diff = $(".main").width() - extra - slack
-    return Math.max(300, diff)
-}
 
 function play() {
 
@@ -223,9 +149,9 @@ function play() {
         (function() {
             var _i = i
             Tone.Transport.schedule(function(t) {
-                var p = points[_i]
+                var p = circle.points[_i]
                 var previousI = (_i == 0) ? CONF.nPoints - 1 : _i - 1
-                var previousP = points[previousI]
+                var previousP = circle.points[previousI]
 
                 // NOTE: animate when active
                 p.elem.animate({
@@ -256,22 +182,4 @@ function stop() {
     $("#playButton").text("Play")
     points.forEach(function(point) { point.showDot(false) })
     Tone.Transport.stop()
-}
-
-function showHelp(state) {
-
-    // NOTE: this should be binded more effectively.. but not using Angular just for this... but maybe Vue?
-
-    if (state) {
-        $(".modal").show()
-        $(".help-icon").mouseover(function(){}).mouseout(function(){})
-        $(".help-icon").first().css("color", "grey")
-    } else {
-        $(".modal").hide()
-        $(".help-icon").first().css("color", "black")
-        $(".help-icon")
-            .mouseover(function() { $(this).css("color", "grey") })
-            .mouseout(function() { $(this).css("color", "black") })
-    }
-
 }
