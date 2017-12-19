@@ -13,7 +13,7 @@ var buttonsConf = [
 ]
 
 var audiosConf = [
-    { path: "../sounds/kick.wav" },
+    { path: "../sounds/kick.mp3" },
     { path: "../sounds/clap.wav" },
     { path: "../sounds/snap.wav" }
 ]
