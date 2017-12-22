@@ -1,0 +1,30 @@
+/* Nuno Hespanhol's code (thanks) */
+
+*:not(.allow-select) {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+     supported by Chrome and Opera */
+}
+
+* {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+body {
+  cursor: default;
+}
