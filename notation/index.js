@@ -26,9 +26,9 @@ var CONF = {
         { bpm: 120, bg: 231 }
     ],
     paths: {
-        kick: "../sounds/kick.wav",
-        clap: "../sounds/clap.wav",
-        snap: "../sounds/snap.wav"
+        kick: "../_assets/sounds/kick.wav",
+        clap: "../_assets/sounds/clap.wav",
+        snap: "../_assets/sounds/snap.wav"
     },
     options: [
         { color: COLORS.blue,  sample: "kick" },
@@ -119,10 +119,10 @@ $(document).ready(function() {
     function initImages() {
         imgWidth = getCanvasWidth()/10
         cy = getCanvasHeight()/2 - imgWidth
-        images[0] = paper.image("4R.svg", 0, cy, imgWidth, imgWidth*2)
-        images[2] = paper.image("4R.svg", imgWidth*2.5, cy, imgWidth, imgWidth*2)
-        images[4] = paper.image("4R.svg", imgWidth*5, cy, imgWidth, imgWidth*2)
-        images[6] = paper.image("4R.svg", imgWidth*7.5, cy, imgWidth, imgWidth*2)
+        images[0] = paper.image("../_assets/svg/4R.svg", 0, cy, imgWidth, imgWidth*2)
+        images[2] = paper.image("../_assets/svg/4R.svg", imgWidth*2.5, cy, imgWidth, imgWidth*2)
+        images[4] = paper.image("../_assets/svg/4R.svg", imgWidth*5, cy, imgWidth, imgWidth*2)
+        images[6] = paper.image("../_assets/svg/4R.svg", imgWidth*7.5, cy, imgWidth, imgWidth*2)
         centerCircle.attr({
             fill: COLORS.lightblue,
             stroke: COLORS.grey,
