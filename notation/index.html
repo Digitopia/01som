@@ -76,7 +76,8 @@
         <div class="main">
             <div class="labels">
                 <div class="sliderWrapper">
-                    <input type="range" min="40" max="160" value="60" class="slider" id="bpmSlider">
+                    <input type="range" min="40" max="160" value="60" step="1" class="slider" id="bpmSlider" oninput="document.getElementById('bpmVal').innerText = parseInt(this.value);bpmVal=parseInt(this.value)";>
+                <output name="showBpmVal" id="bpmVal">60</output></h2>
                 </div>
             </div>
 

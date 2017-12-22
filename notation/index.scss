@@ -93,24 +93,25 @@ body {
 
 .main {
 
-    // border: 1px solid pink;
     display: flex;
 
     .labels, #canvas-placeholder, .playback {
-        // float: left;
+        display: inline-block;
+
     }
+
     .slider {
         -webkit-appearance: none;  /* Override default CSS styles */
-        appearance: none;
-        width: 100%;
-        height: 10px; /* Specified height */
-        background: #d3d3d3; /* Grey background */
+        width: 300px;
+        height: 30px; /* Specified height */
+        background: rgb(220, 220, 220); /* Grey background */
         outline: none;
         opacity: 0.6; /* Set transparency (for mouse-over effects on hover) */
         -webkit-transition: .2s; /* 0.2 seconds transition on hover */
         transition: opacity .2s;
-        -webkit-transform: rotate(90deg); /* Rotate 90 degrees, making it vertical */
-        -webkit-transform-origin: top left;
+        transform-origin: 75px 75px;
+        transform: rotate(-90deg);
+        position: absolute;
     }
 
     /* Mouse-over effects */
@@ -121,9 +122,9 @@ body {
     .slider::-webkit-slider-thumb {
         -webkit-appearance: none; /* Override default look */
         appearance: none;
-        width: 10px; /* Set a specific slider handle width */
-        height: 10px; /* Slider handle height */
-        background: #4CAF50; /* Green background */
+        width: 30px; /* Set a specific slider handle width */
+        height: 30px; /* Slider handle height */
+        background: rgb(10, 150, 10); /* Green background */
         cursor: pointer; /* Cursor on hover */
     }
 
@@ -135,28 +136,27 @@ body {
     }
 
     .labels {
-        // border: 1px solid red;
         order: 1;
-        width: 10%;
+        width: 35px;
         display: flex;
         // vertical-align: middle;
         text-align: center;
-        margin-left: 15px;
-        img {
-            width: 6vw;
-            height: 6vw;
-            max-width: 90px;
-            max-height: 90px;
-            min-width: 60px;
-            min-height: 60px;
-            margin: 1.2vh 0;
-        }
+        margin-right: 55px;
 
         .sliderWrapper {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 35px;
+        }
+
+
+        #bpmVal {
+            display: block;
+            font-size: 35px;
+            position: relative;
+            top: 47%;
         }
     }
 

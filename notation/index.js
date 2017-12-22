@@ -326,3 +326,9 @@ function drawNotation() {
 	  	}
 	  }
 }
+
+$('.slider').on('input', function () {
+    //document.getElementById('bpmVal').innerText = parseInt(document.getElementById('bpmSlider').value);
+    //bpmVal = parseInt(document.getElementById('bpmSlider').value);
+    console.log("yay!");
+})
