@@ -97,7 +97,7 @@ body {
     transform-origin: 75px 75px;
     transform: rotate(-90deg);
     position: absolute; }
-  .main .slider:hover {
+  .main:hover {
     opacity: 1;
     /* Fully shown on mouse-over */ }
   .main .slider::-webkit-slider-thumb {

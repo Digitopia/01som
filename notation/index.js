@@ -123,11 +123,6 @@ $(document).ready(function() {
         images[2] = paper.image("../_assets/svg/4R.svg", imgWidth*2.5, cy, imgWidth, imgWidth*2)
         images[4] = paper.image("../_assets/svg/4R.svg", imgWidth*5, cy, imgWidth, imgWidth*2)
         images[6] = paper.image("../_assets/svg/4R.svg", imgWidth*7.5, cy, imgWidth, imgWidth*2)
-        centerCircle.attr({
-            fill: COLORS.lightblue,
-            stroke: COLORS.grey,
-            strokeWidth: 4
-        })
     }
 
     function initHelp() {
@@ -327,8 +322,11 @@ function drawNotation() {
 	  }
 }
 
-$('.slider').on('input', function () {
-    //document.getElementById('bpmVal').innerText = parseInt(document.getElementById('bpmSlider').value);
-    //bpmVal = parseInt(document.getElementById('bpmSlider').value);
-    console.log("yay!");
+$(function() {
+    $('#bpmSlider').on('input', function () {
+        document.getElementById('bpmVal').innerText = parseInt(document.getElementById('bpmSlider').value);
+        bpmVal = parseInt(document.getElementById('bpmSlider').value);
+        console.log("yay!"); // not working yet!
+    })
 })
+
