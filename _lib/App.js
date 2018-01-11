@@ -33,9 +33,9 @@ var App = function(params) {
 App.defaults = {
     paths: {
         percussive: {
-            kick: "../_assets/sounds/kick.wav",
-            clap: "../_assets/sounds/clap.wav",
-            snap: "../_assets/sounds/snap.wav"
+            kick: "../_assets/sounds/kick.mp3",
+            clap: "../_assets/sounds/clap.mp3",
+            snap: "../_assets/sounds/snap.mp3"
         },
         notes: {
             kick: "../_assets/sounds/kick.mp3",
