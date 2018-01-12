@@ -1,3 +1,4 @@
+
 var Point = function(order, circle) {
 
     this.order = order
@@ -11,31 +12,47 @@ var Point = function(order, circle) {
     // Without this, and with only an hover event over the circle, whenever there was text too (Ré for instance), it wouldn't work well.
     this.group = null
 
+    this.xFunc = function() { return Math.sin(this.angle) * this.circle.r }
+    this.yFunc = function() { return -Math.cos(this.angle) * this.circle.r }
+
     this.angle = (this.order / (this.circle.n)) * 2 * Math.PI
-    this.x =  Math.sin(this.angle) * this.circle.r + this.circle.x
-    this.y = -Math.cos(this.angle) * this.circle.r + this.circle.y
+    this.x = this.xFunc()
+    this.y = this.yFunc()
     this.r = this.circle.pointRadius
 
-    this.elem = paper.circle(this.x, this.y, this.r, this.r)
+    this.elem = this.circle.svg.circle(this.x, this.y, this.r, this.r)
 
     this.resetStyle()
-    this.elem.attr({ viewBox: '1 1 1 1' })
-    this.elem.attr({ preserveAspectRatio: 'none' })
+    // this.elem.attr({ viewBox: '1 1 1 1' })
+    // this.elem.attr({ preserveAspectRatio: 'none' })
 
     this.group = this.elem
 
     if (this.circle.options[0].text !== undefined) {
-        this.text = paper.text(this.x, this.y, "")
-        this.text.attr({
-            "text-anchor": "middle",
-            "alignment-baseline": "central"
-        })
-        this.group = paper.group(this.elem, this.text)
+        this.text = this.circle.svg.text(this.x, this.y, "")
+        this.text.attr({y: this.getTextY()})
+        this.text.attr({ "text-anchor": "middle" })
+        this.group = this.circle.svg.group(this.elem, this.text)
     }
-    this.group.addClass("point")
     this.setClickEvents(this.group)
 
     this.circle = circle
+
+}
+
+Point.prototype.getTextY = function() {
+    var actualText = this.text.node.textContent
+    this.text.attr({text: "A"})
+    var textY = this.y + this.text.getBBox().height / 4
+    this.text.attr({text: actualText})
+    return textY
+}
+
+Point.prototype.resize = function() {
+    // this.x = this.xFunc()
+    // this.y = this.yFunc()
+    // this.elem.attr({ cx: this.x, cy: this.y })
+    // if (this.text) this.text.attr({ x: this.x, y: this.getTextY() })
 
 }
 

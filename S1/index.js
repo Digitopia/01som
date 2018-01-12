@@ -1,3 +1,4 @@
+
 // TODO:
 // - Find a good way of sharing the HTML between sessions
 // - Add loading screen and add listener for when sounds stop loading
@@ -5,6 +6,7 @@
 // - Experiment with Babel.js so that can use ES6 features, while still guaranteeing backwards compatibility
 // - Experiment with jsdoc for classes, just because
 
+// NOTE: Make app globally available for easier console debugging
 var app
 
 $(function() {
@@ -15,10 +17,11 @@ $(function() {
     })
 
     app.addCircle({
-        x: function() { return Utils.vw()/2 },
-        y: function() { return Utils.vh()/2 },
+        xFunc: function() { return app.width/2 },
+        yFunc: function() { return app.height/2 },
         options: Circle.defaults.options.percussive,
-        shake: true
+        shake: true,
+        binary: "binary-placeholder"
     })
 
 })

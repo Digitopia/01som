@@ -1,12 +1,16 @@
 var Circle = function(params, app) {
 
-    this._x = params.x || function() { return window.innerWidth/2 }
-    this._y = params.y || function() { return window.innerHeight/2 }
+    this.app = app
+    this.params = params
+
+    this.xFunc = params.xFunc || function() { return window.innerWidth/2 }
+    this.yFunc = params.yFunc || function() { return window.innerHeight/2 }
+    this.rFunc = params.rFunc || function() { return Math.min(app.height, app.width)/3*0.70 }
+    // this.rFunc = params.rFunc || function() { return app.height/2*0.90 }
 
     this.resize()
 
     this.n         = params.n || 8
-    this.r         = params.r || 200
     this.options   = params.options || []
     this.shake     = params.shake || false
     this.sequencer = params.sequencer !== undefined
@@ -31,9 +35,19 @@ var Circle = function(params, app) {
     this.points = []
     this.elem = null
 
-    this.app = app
+    this.x = this.xFunc()
+    this.y = this.yFunc()
+    this.r = this.rFunc()
 
-    this.params = params
+    this.svg = paper.svg({ x: this.x, y: this.y })
+    this.svg.attr({overflow: "visible"}) // NOTE: because otherwise will just show the only positive quadrant
+    this.svg.attr({
+        // viewBox: '0 0 ' + app.width + " " + app.height,
+        // preserveAspectRatio: "none"
+    })
+    this.svg.addClass("circle")
+
+    this.groups = []
 
     this.init()
 
@@ -94,12 +108,15 @@ Circle.prototype.init = function() {
 
         this.initSequencerPoints = function() {
             this.sequencer.points = []
+            this.groups.points = this.svg.group()
+            this.groups.points.addClass("point")
             for (var i = 0; i < this.sequencer.n; i++) {
                 this.sequencer.points[i] = []
                 for (var j = 0; j < this.n; j++) {
                     var p = new Point(j, this)
                     p.show(i === this.sequencer.active)
                     this.sequencer.points[i].push(p)
+                    this.groups.points.add(p.group)
                 }
             }
             this.points = this.sequencer.points[this.sequencer.active]
@@ -108,26 +125,28 @@ Circle.prototype.init = function() {
         this.initText = function() {
 
             this.sequencer.labels = []
+            this.groups.sequencer = this.svg.group()
+            this.groups.sequencer.addClass("sequencer")
 
             for (var j = 0; j < this.sequencer.n; j++) {
 
                 var labelText = this.sequencer.labelsArray[j]
                 var step = (2*this.r) / (this.sequencer.n+1)
-                var x0 = this.x - this.r + step
+                var x0 = -this.r + step
                 var x = x0 + step*j
 
-                var text = paper.text(x, this.y)
+                var text = this.svg.text()
                 text.attr({
                     text: labelText,
                     fill: COLORS.grey,
-                    "font-size": "28px",
+                    "font-size": "38px",
                     id: "text-sequence-" + j,
                     "text-anchor": "middle",
                     "alignment-baseline": "central"
                 })
 
-                var size = 40
-                var rect = paper.rect(x-size/2, this.y-size/2, size, size)
+                var size = 50
+                var rect = this.svg.rect()
                 var stroke = j === this.sequencer.active ? COLORS.grey : this.circleBackgroundColor
                 rect.attr({
                     fill: this.circleBackgroundColor,
@@ -136,8 +155,8 @@ Circle.prototype.init = function() {
                     id: "rect-sequence-" + j
                 })
 
-                var group = paper.group(rect, text)
-                group.addClass("label-group")
+                var group = this.svg.group(rect, text)
+                group.addClass("label")
 
                 group.click(function(e) {
                     var prevLabelIdx = self.sequencer.active
@@ -163,6 +182,10 @@ Circle.prototype.init = function() {
                     rect: rect,
                     group: group
                 })
+
+                this.alignSequencer()
+
+                this.groups.sequencer.add(group)
             }
 
         }
@@ -174,8 +197,11 @@ Circle.prototype.init = function() {
     }
 
     this.initPoints = function() {
+        this.groups.points = this.svg.group()
+        this.groups.points.addClass("point")
         for (var i = 0; i < this.n; i++) {
             this.points[i] = new Point(i, this)
+            this.groups.points.add(this.points[i].group)
         }
     }
 
@@ -212,7 +238,7 @@ Circle.prototype.init = function() {
     }
 
     this.initCircle = function() {
-        this.elem = paper.circle(this.x, this.y, this.r, this.r)
+        this.elem = this.svg.circle(0, 0, this.r, this.r)
         this.elem.attr({
             fill: this.circleBackgroundColor,
             stroke: COLORS.grey,
@@ -221,17 +247,19 @@ Circle.prototype.init = function() {
     }
 
     this.initDots = function() {
+        this.groups.dots = this.svg.group()
+        this.groups.dots.addClass("dots")
         for (var i = 0; i < this.n; i++) {
             var angle = (i / (this.n)) * 2 * Math.PI
-            var x =  Math.sin(angle) * this.r * 1.25 + this.x
-            var y = -Math.cos(angle) * this.r * 1.25 + this.y
+            var x =  Math.sin(angle) * this.r * 1.20
+            var y = -Math.cos(angle) * this.r * 1.20
             var dotRadius = 2
-            var dot = paper.circle(x, y, dotRadius).attr({
+            var dot = this.svg.circle(x, y, dotRadius).attr({
                 visibility: "hidden"
             })
             this.dots.push(dot)
+            this.groups.dots.add(dot)
         }
-
     }
 
     this.initCircle()
@@ -244,8 +272,41 @@ Circle.prototype.init = function() {
 }
 
 Circle.prototype.resize = function() {
-    this.x = this._x()
-    this.y = this._y()
+
+    this.x = this.xFunc()
+    this.y = this.yFunc()
+
+    var transform = new Snap.Matrix().scale(this.rFunc()/this.r)
+    var ratio = this.rFunc()/this.r
+
+    // Update nested svgs positions
+    if (this.elem) {
+        this.svg.attr({x: this.x, y: this.y})
+        this.elem.transform(transform)
+    }
+
+    // Scale points so that they are easily clickable in mobile
+    if (!this.sequencer && this.points) this.points.forEach(function(point) {
+        point.group.transform(transform)
+    })
+
+    // Do the same for sequenecer points
+    if (this.sequencer) {
+        this.sequencer.points.forEach(function(sequencerPoints) {
+            sequencerPoints.forEach(function(point) {
+                point.group.transform(transform)
+                point.elem.attr({r: point.r*1/ratio})
+            })
+        })
+    }
+
+    // Align dots too
+    if (this.dots) { this.dots.forEach(function(dot) { dot.transform(transform) })
+
+    // And the sequencer
+    if (this.sequencer) this.alignSequencer()
+
+    }
 }
 
 Circle.prototype.schedule = function() {
@@ -320,4 +381,28 @@ Circle.prototype.updateBinary = function() {
         }
     }
 
+}
+
+Circle.prototype.setPosition = function(pos) {
+    this.x = pos.x
+    this.y = pos.y
+    this.elem.attr({cx: this.x, cy: this.y })
+}
+
+
+// NOTE: this serves to redistribute the labels according to the new size of the
+// radius of the circle, while maintaining the same size for the labels and text
+Circle.prototype.alignSequencer = function() {
+
+    var self = this
+
+    this.sequencer.labels.forEach(function(label, index) {
+        var step = (2*self.rFunc()) / (self.sequencer.n+1)
+
+        var x0 = -self.rFunc() + step
+        var x = x0 + step*index
+        label.text.attr({x: x})
+        var size = 45
+        label.rect.attr({x: x-size/2, y: -size/2, width: size, height: size})
+    })
 }

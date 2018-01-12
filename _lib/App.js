@@ -8,6 +8,9 @@ var touched = false
 
 var App = function(params) {
 
+    this.width = this.width
+    this.height = this.height
+
     if (params === undefined) params = {}
 
     this.buttons = params.buttons || [
@@ -59,23 +62,34 @@ App.prototype.init = function() {
     this.initAudio()
     this.initButtons()
     this.initHelp()
+    this.resize()
 }
 
 App.prototype.initCanvas = function() {
 
-    paper = Snap(Utils.vw(), Utils.vh())
+    paper = Snap(this.width, this.height)
+    // paper = Snap()
 
     $("svg").appendTo("#canvas-placeholder")
 
+    // NOTE: with view box the svg scales automatically
     paper.attr({
-        viewBox: '0 0 ' + Utils.vw() + " " + Utils.vh(),
+        // viewBox: '0 0 ' + this.width + " " + this.height,
         // preserveAspectRatio: "none"
     })
 
-    $(window).resize(function() {
-        paper.attr({ width: Utils.vw(), height: Utils.vh() })
-        if (this.circles) this.circles.forEach(function(circle) { circle.resize() })
-    })
+    var self = this
+    $(window).resize(function() { self.resize() })
+}
+
+App.prototype.resize = function() {
+
+    this.width = Utils.vw()
+    this.height = Utils.vh()
+
+    paper.attr({ width: this.width, height: this.height })
+
+    if (this.circles) this.circles.forEach(function(circle) { circle.resize() })
 }
 
 App.prototype.initAudio = function() {
@@ -84,7 +98,7 @@ App.prototype.initAudio = function() {
     StartAudioContext(Tone.context, "#playButton");
     if (this.spatial) {
         this.panner = new Tone.Panner3D().connect(Tone.Master)
-        Tone.Listener.setPosition(Utils.vw()/2, 0, Utils.vh()/2)
+        Tone.Listener.setPosition(this.width/2, 0, this.height/2)
     }
 }
 
