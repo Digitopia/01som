@@ -4,7 +4,7 @@ var Utils = {
         var extra = $(".labels").width() + $(".playback").width()
         var slack = 5 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
         var diff = $(".main").width() - extra - slack
-        return Math.max(300, diff)
+        return Math.max(500, diff)
     },
 
     getCanvasHeight: function() {
@@ -39,6 +39,9 @@ var Utils = {
             }
         }
         return matrix
-    }
+    },
+
+    isPortrait: function() { return Utils.vh() >= Utils.vw() },
+    isLandscape: function() { return !this.isPortrait() }
 
 }

@@ -128,6 +128,10 @@ body {
 
     #canvas-placeholder {
         order: 2;
+        // width: 80%;
+        // min-width: 500px;
+        // height: 80%;
+        // min-height: 500px;
     }
 
     .playback {
@@ -206,7 +210,7 @@ footer {
     cursor: pointer;
 }
 
-.label-group:hover {
+.label:hover {
     cursor: pointer;
     // stroke: black;
     // stroke-width: 1;
@@ -219,4 +223,10 @@ footer {
     font-weight: 400;
     letter-spacing: 1px;
     position: fixed;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+svg {
+    // border: 1px solid black;
 }
