@@ -47,6 +47,8 @@ var playing = false
 var touched = false
 
 var images = []
+var labelText = []
+var valueString = [0, 0, 0, 0, 0, 0, 0, 0]
 
 $(document).ready(function() {
 
@@ -119,10 +121,14 @@ $(document).ready(function() {
     function initImages() {
         imgWidth = getCanvasWidth()/10
         cy = getCanvasHeight()/2 - imgWidth
-        images[0] = paper.image("../_assets/svg/4R.svg", 0, cy, imgWidth, imgWidth*2)
-        images[2] = paper.image("../_assets/svg/4R.svg", imgWidth*2.5, cy, imgWidth, imgWidth*2)
-        images[4] = paper.image("../_assets/svg/4R.svg", imgWidth*5, cy, imgWidth, imgWidth*2)
-        images[6] = paper.image("../_assets/svg/4R.svg", imgWidth*7.5, cy, imgWidth, imgWidth*2)
+
+        for (var i = 0; i < valueString.length; i++) {
+            images[i] = paper.image("../_assets/svg/8thR.svg", i*imgWidth, cy, imgWidth, imgWidth*2)
+            labelText[i] = paper.text(i*imgWidth + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
+            labelText[i].attr({'font-size':50})
+            labelText[i].click(function() { images[i].attr({href: "../_assets/svg/8th.svg" }) })
+        }
+        
     }
 
     function initHelp() {
