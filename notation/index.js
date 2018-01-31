@@ -82,34 +82,6 @@ $(document).ready(function() {
 
     function initButtons() {
 
-        // BPM buttons
-        CONF.buttons.forEach(function(buttonConf) {
-            var button = $("<button/>", {
-                text: buttonConf.bpm,
-                value: buttonConf.bpm,
-                click: function() {
-                    var bg = buttonConf.bg
-                    $("body").css("background-color", "rgb("+bg+",255,"+bg+")")
-                    Tone.Transport.bpm.value = buttonConf.bpm;
-                    $("#bpmButtons button").removeClass("active")
-                    $(this).addClass("active")
-                }
-            })
-            $("#bpmButtons").append(button)
-        })
-
-        //
-        $("#bpmButtons button").each(function() {
-            console.log($(this))
-            $(this).fitText(0.3, {
-                minFontSize: '20px',
-                maxFontSize: '40px'
-            })
-        })
-
-        Tone.Transport.bpm.value = 60
-        $(":button[value='60']").addClass("active")
-
         // Play/Pause button
         $("#playButton").click(function() {
             if (playing) stop(); else play()
@@ -120,15 +92,53 @@ $(document).ready(function() {
 
     function initImages() {
         imgWidth = getCanvasWidth()/10
+        cx = imgWidth/0.8
         cy = getCanvasHeight()/2 - imgWidth
 
         for (var i = 0; i < valueString.length; i++) {
-            images[i] = paper.image("../_assets/svg/8thR.svg", i*imgWidth, cy, imgWidth, imgWidth*2)
-            labelText[i] = paper.text(i*imgWidth + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
+            var _i = i
+            images[i] = paper.image("../_assets/svg/8thR.svg", i*cx, cy, imgWidth, imgWidth*2)
+            labelText[i] = paper.text(i*cx + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
             labelText[i].attr({'font-size':50})
-            labelText[i].click(function() { images[i].attr({href: "../_assets/svg/8th.svg" }) })
         }
+
+        images.forEach(function (element, index){
+            element.click(function(){
+                if(valueString[index] == 0) {
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    console.log("click")
+                    valueString[index] = 1
+                } else {
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 0
+                    console.log("click2")
+                }
+
+            labelText[index].attr({text: valueString[index].toString()})
+            });
+        });
+
+        labelText.forEach(function (element, index){
+            element.click(function(){
+                if(valueString[index] == 0) {
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    console.log("click")
+                    valueString[index] = 1
+                } else {
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 0
+                    console.log("click2")
+                }
+
+            labelText[index].attr({text: valueString[index].toString()})
+            });
+        });
+
         
+    }
+
+    function addClickerEvent(index) {
+        console.log("woo", index)
     }
 
     function initHelp() {
@@ -307,23 +317,25 @@ function showHelp(state) {
 
 function drawNotation() {
 
-		var ht = windowHeight/4+50; // height
+	var ht = windowHeight/4+50; // height
   	var iht = 100; //image height
   	rectMode(CENTER);
 
   	for(var i = 0; i < cycle/2; i++){
+        var xSpot = windowWidth/5+0.16*windowWidth*i;
+        var figWidth = windowWidth*0.04;
 		if(clapPattern[i*2] == 1) {
 	  		if(clapPattern[i*2 + 1] == 1) {
-	  			image(img28, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.12, iht);
+	  			image(img28, xSpot, ht, 3*figWidth, iht);
 	  		} else {
-	  			image(img8, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
-	  			image(img8r, windowWidth/5+0.08*windowWidth+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
+	  			image(img8, xSpot, ht, figWidth, iht);
+	  			image(img8r, xSpot+0.08*windowWidth, ht, figWidth, iht);
 	  		}
 	  	} else  if (clapPattern[i*2 + 1] == 0) {
-	  		image(img4r, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.08, iht);
+	  		image(img4r, xSpot, ht, 2*figWidth, iht);
 	  	} else {
-	  		image(img8r, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
-	  		image(img8, windowWidth/5+0.08*windowWidth+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
+	  		image(img8r, xSpot, ht, figWidth, iht);
+	  		image(img8, xSpot+0.08*windowWidth, ht, figWidth, iht);
 	  	}
 	  }
 }
