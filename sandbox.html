@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=0 width=device-width">
+        <title></title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+
+
+    <style media="screen">
+
+        html, body {
+            height: 100%;
+            /* min-height: 100%; */
+            /* max-height: 100%; */
+            min-height: 100vh;
+            margin: 0 auto;
+        }
+
+        div {
+            /* border: 1px solid black; */
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            /* border: 1px solid black; */
+        }
+
+        .help, .info, .icons, .bpms {
+            width: 10%;
+            display: inline-block;
+        }
+
+        .title, .svg {
+            width: 80%;
+        }
+
+        .help, .title, .icons, .svg {
+            float: left;
+        }
+
+        img {
+            width: 30%;
+        }
+
+        svg {
+            /* width: 100%; */
+             /* height: 500px; */
+            /* border: 1px solid black; */
+        }
+
+        .buttons, .sponsors {
+            clear: left;
+        }
+
+        .help { background: red; }
+        .title { background: green; }
+        .info { background: magenta; }
+        .icons { background: yellow; }
+        .bpms { background: purple; }
+        .buttons { background: lightblue; }
+        .sponsors { background: grey; }
+
+        .icons, .svg, .bpms {
+            /* height: 100%; */
+        }
+
+
+        /* .c1, .c2 {
+            width: 10px;
+            float: left;
+        }*/
+
+        .svg {
+            /* max-height: 200px; */
+        }
+
+        .buttons i {
+            width: 10%;
+            min-width: 80px;
+            font-size: 80px;
+        }
+
+        .main {
+            /* height: 100%; */
+            /* height: 500px; */
+            background: red;
+            /* height: 90vh; */
+        }
+
+        .bpms {
+            /* height: 100%; */
+            /* height: 100px; */
+            /* margin: 0 auto; */
+            /* padding: 50px 0; */
+        }
+
+        .bpms button {
+            /* display: block; */
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            margin: 10px 0;
+            /* margin: 0 auto; */
+        }
+
+        .main {
+            /* height: 100%; */
+            background: "yellow"
+        }
+
+        .help, .info {
+            font-size: 40px;
+        }
+
+        .title {
+            font-size: 40px;
+        }
+
+        .icons i {
+            font-size: 80px;
+            padding: 30px 0;
+        }
+
+        .bpms {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .icons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        svg {
+            background: pink;
+        }
+
+        .sponsors {
+            /* position: absolute; */
+            /* bottom: 0; */
+        }
+
+    </style>
+
+    <body>
+
+        <!-- <div class="parent">
+            <div class="c1">c1</div>
+            <div class="c2">c2</div>
+        </div> -->
+
+
+
+        <div class="container">
+
+            <div class="header">
+                <div class="help">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                </div>
+                <div class="title">0+1=SOM</div>
+                <div class="info">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="icons">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </div>
+                <div class="svg">
+                    <svg width="100%" height="100%">
+                    </svg>
+                </div>
+                <div class="bpms">
+                    <button>60</button>
+                    <button>70</button>
+                    <button>80</button>
+                    <button>90</button>
+                    <button>100</button>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <i class="fa fa-expand" aria-hidden="true"></i>
+                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                <i class="fa fa-circle" aria-hidden="true"></i>
+            </div>
+
+            <div class="sponsors">
+                <img src="https://www.underconsideration.com/brandnew/archives/casa_damusica_logo.gif" alt="">
+                <img src="https://www.underconsideration.com/brandnew/archives/casa_damusica_logo.gif" alt="">
+                <img src="https://www.underconsideration.com/brandnew/archives/casa_damusica_logo.gif" alt="">
+            </div>
+
+        </div>
+
+        <script>
+            $(".main").height($("window").height() - $(".header").height() - $(".sponsors").height())
+            var paper = Snap("svg")
+            var c = paper.circle()
+            window.onresize = function() {
+                var w = $("svg").width()
+                var h = $("svg").height()
+                c.attr({cx: w/2, cy: h/2, r: 200})
+            }
+            window.onresize()
+        </script>
+
+    </body>
+</html>

@@ -9,8 +9,15 @@ Coisas a melhorar/corrigir
 - [ ] falta adicionar possibilidade de gravar nas versões novas
 - [ ] converter sessão 4 para Tone.js
 - [ ] fica a faltar também claro, passar tudo para app Android/iOS
-
 Ideias de novas features
 - [ ] possibilidade de clicar diretamente na "matriz" de 0s e 1s e ter reflexo nos círculos
 - [ ] possibilidade de arrastar sons para a "legenda" e até gravar diretamente do mic
 - [ ] possibilidade de configurar número pontos, em vez de ser fixo sempre a 8
+
+Novas
+
+- [ ] proper resize de demais elementos de interface
+- [ ] tamanho certo em móveis e computador
+- [ ] posicionamento das matrizes binárias...
+- [ ] botão fullscreen
+- [ ] set max age para refresh da página

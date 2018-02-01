@@ -5,15 +5,14 @@ var Circle = function(params, app) {
 
     this.xFunc = params.xFunc || function() { return window.innerWidth/2 }
     this.yFunc = params.yFunc || function() { return window.innerHeight/2 }
-    // this.rFunc = params.rFunc || function() { return Math.min(app.height, app.width)/3*0.65 }
-    this.rFunc = params.rFunc || function() { if (Utils.isLandscape()) return (2/5/2)*app.width; else return (2/5/2)*app.height }
+    this.rFunc = params.rFunc || function() { return Math.min(4/5/2*app.height, 3/7/2 * app.width) }
 
     this.resize()
 
     this.n         = params.n || 8
     this.options   = params.options || []
     this.shake     = params.shake || false
-    this.sequencer = params.sequencer !== undefined
+    this.sequencer = params.sequencer || false
     this.binary    = params.binary !== undefined
     this.spatial   = params.spatial || false
 
@@ -42,6 +41,7 @@ var Circle = function(params, app) {
     this.svg = paper.svg({ x: this.x, y: this.y })
     this.svg.attr({overflow: "visible"}) // NOTE: because otherwise will just show the only positive quadrant
     this.svg.addClass("circle")
+    this.svg.addClass("noSelect")
 
     this.groups = []
 
@@ -106,6 +106,7 @@ Circle.prototype.init = function() {
             this.sequencer.points = []
             this.groups.points = this.svg.group()
             this.groups.points.addClass("point")
+            this.groups.points.addClass("noSelect")
             for (var i = 0; i < this.sequencer.n; i++) {
                 this.sequencer.points[i] = []
                 for (var j = 0; j < this.n; j++) {
@@ -135,7 +136,7 @@ Circle.prototype.init = function() {
                 text.attr({
                     text: labelText,
                     fill: COLORS.grey,
-                    "font-size": "38px",
+                    "font-size": "50px",
                     id: "text-sequence-" + j,
                     "text-anchor": "middle",
                     "alignment-baseline": "central"
@@ -224,10 +225,19 @@ Circle.prototype.init = function() {
             threshold: 15, timeout: 1000
         }).start()
 
+        var self = this
+
         var shaked = function() {
-            // alert("shaked it")
-            if (self.app.playing) $("#playButton").trigger("click")
-            self.points.forEach(function(point) { point.reset() })
+            if (self.app.playing) $("#btnPlay").trigger("click")
+            if (!self.sequencer) self.points.forEach(function(point) { point.reset() })
+            else {
+                self.sequencer.points.forEach(function(points) {
+                    points.forEach(function(point) {
+                        point.reset()
+                    })
+                })
+            }
+
         }
 
         window.addEventListener('shake', shaked, false)
@@ -247,9 +257,9 @@ Circle.prototype.init = function() {
         this.groups.dots.addClass("dots")
         for (var i = 0; i < this.n; i++) {
             var angle = (i / (this.n)) * 2 * Math.PI
-            var x =  Math.sin(angle) * this.r * 1.15
-            var y = -Math.cos(angle) * this.r * 1.15
-            var dotRadius = 2
+            var x =  Math.sin(angle) * this.r * 1.25
+            var y = -Math.cos(angle) * this.r * 1.25
+            var dotRadius = 4
             var dot = this.svg.circle(x, y, dotRadius).attr({
                 visibility: "hidden"
             })
@@ -258,12 +268,22 @@ Circle.prototype.init = function() {
         }
     }
 
+    this.initDebug = function() {
+        this.grid = {}
+        var lines = ["vline", "hline"]
+        lines.forEach(function(line) {
+            self.grid[line] = self.svg.line().attr({stroke: "rgba(0,0,0,0.3)"})
+        })
+        this.resize()
+    }
+
     this.initCircle()
     this.initDots()
     if (this.sequencer) this.initSequencer(); else this.initPoints()
     if (this.binary) this.initBinary()
     if (this.shake) this.initShake()
     if (this.spatial) this.initSpatial()
+    if (this.app.debug) this.initDebug()
 
 }
 
@@ -274,6 +294,11 @@ Circle.prototype.resize = function() {
 
     var ratio = this.rFunc()/this.r
     var transform = new Snap.Matrix().scale(ratio)
+
+    var padding = 10
+    var r = app.height - 3*padding/2/2
+    var y1 = padding + r
+    var y2 = app.height - padding - r
 
     // Update nested svgs positions
     if (this.elem) {
@@ -298,12 +323,30 @@ Circle.prototype.resize = function() {
     }
 
     // Align dots too
-    if (this.dots) { this.dots.forEach(function(dot) { dot.transform(transform) })
+    if (this.dots) { this.dots.forEach(function(dot) { dot.transform(transform) }) }
 
     // And the sequencer
     if (this.sequencer) this.alignSequencer()
 
+    if (this.app.debug && this.grid) {
+
+        var self = this
+
+        this.grid.vline.attr({
+            x1: 0,
+            x2: 0,
+            y1: -self.svg.getBBox().h/2,
+            y2:  self.svg.getBBox().h/2,
+        })
+
+        this.grid.hline.attr({
+            x1: -self.svg.getBBox().w/2,
+            x2:  self.svg.getBBox().w/2,
+            y1: 0,
+            y2: 0,
+        })
     }
+
 }
 
 Circle.prototype.schedule = function() {
@@ -315,6 +358,9 @@ Circle.prototype.schedule = function() {
         (function() {
             var _i = i
             Tone.Transport.schedule(function(t) {
+
+                var ts = performance.now()
+
                 var p = self.points[_i]
                 var previousI = (_i == 0) ? self.n - 1 : _i - 1
                 var previousP = self.points[previousI]
@@ -325,7 +371,7 @@ Circle.prototype.schedule = function() {
                     150,
                     function(){},
                     p.elem.animate({
-                        r: self.dotRadius
+                        r: self.pointRadius
                     }, 1000)
                 )
 
@@ -333,10 +379,12 @@ Circle.prototype.schedule = function() {
 
                 Utils.hide(self.dots[previousI])
                 Utils.show(self.dots[_i])
+
                 if (p.state != -1) {
                     var sample = self.options[p.state].sample
                     self.app.audios[sample].start(t)
                 }
+
             }, i + "*8n")
         })()
     }
@@ -398,7 +446,7 @@ Circle.prototype.alignSequencer = function() {
         var x0 = -self.rFunc() + step
         var x = x0 + step*index
         label.text.attr({x: x})
-        var size = 45
+        var size = 66
         label.rect.attr({x: x-size/2, y: -size/2, width: size, height: size})
     })
 }
