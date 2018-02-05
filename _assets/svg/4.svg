@@ -1,24 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.0"
-   width="14.566"
-   height="41.919998"
-   id="svg1497">
-  <defs
-     id="defs1500" />
-  <g
-     transform="matrix(-1,0,0,-1,313.2829,340.3223)"
-     id="g11029">
-    <path
-       d="M 303.13715,299.65106 C 299.74131,301.47103 297.93187,304.76561 299.04493,307.24402 C 300.23219,309.88766 304.31194,310.63374 308.15151,308.90939 C 311.99107,307.18503 314.14367,303.63999 312.95641,300.99636 C 311.76914,298.35272 307.6894,297.60664 303.84983,299.33099 C 303.60986,299.43876 303.36355,299.52973 303.13715,299.65106 z "
-       style="opacity:0.9;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.2;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1"
-       id="path11031" />
-    <path
-       d="M 299.50465,305.98445 L 299.50465,339.57202"
-       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path11033" />
+<svg width="200" height="296" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="298" width="202" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
   </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_10">
+   <g transform="matrix(7.111111534966369,0,0,7.111111534966369,0,0) " id="svg_6">
+    <path opacity="0.9" fill="#000000" fill-rule="evenodd" stroke-width="0.2" stroke-miterlimit="4" stroke-dashoffset="0" id="svg_8" d="m12.425354,40.148617c3.39584,-1.81997 5.20528,-5.11455 4.09222,-7.59296c-1.18726,-2.64364 -5.26701,-3.38972 -9.10658,-1.66537c-3.83956,1.72436 -5.99216,5.2694 -4.8049,7.91303c1.18727,2.64364 5.26701,3.38972 9.10658,1.66537c0.23997,-0.10777 0.48628,-0.19874 0.71268,-0.32007z"/>
+    <path fill="none" fill-opacity="0.75" fill-rule="evenodd" stroke="#000000" stroke-width="1.5" stroke-miterlimit="4" id="svg_7" d="m16.057854,33.815227l0,-33.58757"/>
+   </g>
+  </g>
+ </g>
 </svg>
