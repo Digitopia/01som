@@ -47,6 +47,7 @@ var playing = false
 var touched = false
 
 var images = []
+var blankImages = []
 var beams = []
 var labelText = []
 var valueString = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -100,8 +101,6 @@ $(document).ready(function() {
             var _i = i
             if(i % 2 == 0) {
                 images[i] = paper.image("../_assets/svg/4R.svg", i*cx, cy, imgWidth, imgWidth*2)
-                // TODO: The following, to Nuno's delight, was all trial and error
-                beams[i/2] = paper.image("../_assets/svg/blank.svg", i*cx+(imgWidth/2)*1.07, cy-((imgWidth/2)*0.3), imgWidth*1.31, imgWidth/1.9)
                 labelText[i] = paper.text(i*cx + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
                 labelText[i].attr({'font-size':50})
             } else {
@@ -109,56 +108,52 @@ $(document).ready(function() {
                 labelText[i] = paper.text(i*cx + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
                 labelText[i].attr({'font-size':50})
             }
-            
-            
+
+            blankImages[i] = paper.image("../_assets/svg/blank.svg", i*cx, cy, imgWidth, imgWidth*2)
         }
 
-        images.forEach(function (element, index){
+        blankImages.forEach(function (element, index){
             element.click(function(){
                 if(valueString[index] == 0) {
-                    if(index % 2 == 0 && valueString[index+1] == 0) {
+                    if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
                         images[index].node.href.baseVal = "../_assets/svg/8th.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) {
-                        images[index].node.href.baseVal = "../_assets/svg/4.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/4.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/beam.svg"
+                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
+                        images[index].node.setAttribute("width", imgWidth*2)
+                        images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
+                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
                         images[index].node.href.baseVal = "../_assets/svg/8th.svg"
                         images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) {
-                        images[index].node.href.baseVal = "../_assets/svg/4.svg"
-                        images[index-1].node.href.baseVal = "../_assets/svg/4.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/beam.svg"
+                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
+                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                        images[index-1].node.setAttribute("width", imgWidth*2)
+                        images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
                         valueString[index] = 1
                     }
-                    
-                    
+
+
                 } else { /* if point is going to 0 */
-                    if(index % 2 == 0 && valueString[index+1] == 0) {
+                    if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
                         images[index].node.href.baseVal = "../_assets/svg/4R.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) {
+                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
+                        images[index].node.setAttribute("width", imgWidth)
                         images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
                         images[index].node.href.baseVal = "../_assets/svg/blank.svg"
                         images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
                         images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                        images[index-1].node.setAttribute("width", imgWidth)
                         images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
                     }
                 }
@@ -191,8 +186,8 @@ $(document).ready(function() {
                         beams[(index-1)/2].node.href.baseVal = "../_assets/svg/beam.svg"
                         valueString[index] = 1
                     }
-                    
-                    
+
+
                 } else { /* if point is going to 0 */
                     if(index % 2 == 0 && valueString[index+1] == 0) {
                         images[index].node.href.baseVal = "../_assets/svg/4R.svg"
@@ -221,7 +216,7 @@ $(document).ready(function() {
             });
         });
 
-        
+
     }
 
     function addClickerEvent(index) {
@@ -284,7 +279,7 @@ $(document).ready(function() {
 })
 
 function getCanvasHeight() {
-    var extra = $(".head").height() + $("#bpmButtons").height() + $("footer").height()
+    var extra = $(".head").height() + $("footer").height()
     var slack = 80 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
     var diff = $(window).height() - extra - slack
     return Math.max(300, diff)

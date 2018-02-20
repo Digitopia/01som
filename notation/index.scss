@@ -143,6 +143,7 @@ body {
         text-align: center;
         margin-right: 55px;
 
+
         .sliderWrapper {
             flex-grow: 1;
             display: flex;
@@ -199,36 +200,6 @@ body {
         }
     }
 
-}
-
-#bpmButtons {
-    clear: both;
-    text-align: center;
-    button {
-        position: relative;
-        text-align: center;
-        // margin-left: min(1,1.5%);
-        // margin-right: min(1,1.5%);
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 11vw;
-        max-width: 80px;
-        height: 11vw;
-        max-height: 80px;
-        // height: 70px;
-        // font-size: 100%;
-
-        &:hover {
-            cursor: pointer;
-            border: 1px solid grey;
-        }
-    }
-    .active {
-        border: 2px solid grey !important;
-    }
-    height: 120px;
-    position: relative;
-    top: -1vh;
 }
 
 footer {
