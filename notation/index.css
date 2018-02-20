@@ -83,7 +83,7 @@ body {
   .main .slider {
     -webkit-appearance: none;
     /* Override default CSS styles */
-    width: 300px;
+    width: 350px;
     height: 30px;
     /* Specified height */
     background: gainsboro;
@@ -96,6 +96,7 @@ body {
     transition: opacity .2s;
     transform-origin: 75px 75px;
     transform: rotate(-90deg);
+    left: 1vw;
     position: absolute; }
   .main:hover {
     opacity: 1;
@@ -137,7 +138,8 @@ body {
       display: block;
       font-size: 35px;
       position: relative;
-      top: 47%; }
+      top: -250px;
+      left: 10px; }
   .main #canvas-placeholder {
     order: 2; }
   .main .playback {
@@ -152,7 +154,7 @@ body {
       width: 100px;
       height: 100px;
       left: -4vw;
-      top: -12vh;
+      top: 1vh;
       background-color: #3c3c3c;
       border-radius: 50%; }
     .main .playback .button-wrapper {

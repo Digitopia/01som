@@ -8,40 +8,17 @@ var COLORS = {
     lightblue: "rgb(220, 240, 255)"
 }
 
-var CONF = {
-    nPoints: 8,
-    points: {
-        radius: 18,
-        fillColor: COLORS.white,
-        stroke: COLORS.grey,
-        strokeWidth: 2,
-        strokeWidthHover: 3
-    },
-    buttons: [
-        { bpm: 44,  bg: 246 },
-        { bpm: 52,  bg: 243 },
-        { bpm: 60,  bg: 240 },
-        { bpm: 80,  bg: 237 },
-        { bpm: 100, bg: 234 },
-        { bpm: 120, bg: 231 }
-    ],
-    paths: {
-        kick: "../_assets/sounds/kick.wav",
-        clap: "../_assets/sounds/clap.wav",
-        snap: "../_assets/sounds/snap.wav"
-    },
-    options: [
-        { color: COLORS.blue,  sample: "kick" },
-        { color: COLORS.green, sample: "clap" },
-        { color: COLORS.red,   sample: "snap" }
-    ],
-}
+var audiosConf = [
+    { path: "../_assets/sounds/snap.wav" },
+    { path: "../_assets/sounds/clap.wav" },
+    { path: "../_assets/sounds/kick.mp3" }
+]
 
 // Global variables
 
 var cx, cy, radius
 var points = []
-var audios = {}
+var audios = []
 var paper
 var playing = false
 var touched = false
@@ -74,12 +51,14 @@ $(document).ready(function() {
     }
 
     function initAudios() {
-        for (var key in CONF.paths) {
-            audios[key] = new Tone.Player(CONF.paths[key]).toMaster()
-        }
+        audiosConf.forEach(function(audioConf) {
+            audios.push(new Tone.Player(audioConf.path).toMaster())
+        })
 
+        Tone.Transport.bpm.value = 60
         Tone.Transport.loopEnd = '1m'
         Tone.Transport.loop = true
+
     }
 
     function initButtons() {
@@ -295,29 +274,13 @@ function getCanvasWidth() {
 function play() {
 
     // First schedule all events
-    for (var i = 0; i < CONF.nPoints; i++) {
+    for (var i = 0; i < valueString.length; i++) {
         (function() {
             var _i = i
             Tone.Transport.schedule(function(t) {
-                var p = points[_i]
-                var previousI = (_i == 0) ? CONF.nPoints - 1 : _i - 1
-                var previousP = points[previousI]
-
-                // NOTE: animate when active
-                p.elem.animate({
-                    r: CONF.points.radius * 1.25},
-                    150,
-                    function(){},
-                    p.elem.animate({
-                        r: CONF.points.radius
-                    }, 1000)
-                )
-
-                p.showDot(true); previousP.showDot(false)
-                if (p.state != -1) {
-                    var sample = CONF.options[p.state].sample
-                    audios[sample].start(t)
-                }
+                console.log("Playing 8th note number", _i)
+                idx = valueString[_i] - 1
+                if (idx >= 0 && idx <= 2) audios[idx].start(t)
             }, i + "*8n")
         })()
     }
@@ -359,15 +322,6 @@ function draw() {
 		rect(controlCenterX-10, controlCenterY-15, 7, 30);
 		rect(controlCenterX+3, controlCenterY-15, 7, 30);
 	}
-
-	//display BPM values
-	for(var i = 0; i < tempoSelec.length; i++){
-  		tempoSelec[i].display();
-  	}
-
-  	for(var i = 0; i < cycle; i++){
-  		points[i].isActive(tickCount);
-  }
 
   	drawNotation();
 
@@ -426,7 +380,7 @@ $(function() {
     $('#bpmSlider').on('input', function () {
         document.getElementById('bpmVal').innerText = parseInt(document.getElementById('bpmSlider').value);
         bpmVal = parseInt(document.getElementById('bpmSlider').value);
-        console.log("yay!"); // not working yet!
+        Tone.Transport.bpm.value = parseInt(document.getElementById('bpmSlider').value);
     })
 })
 
