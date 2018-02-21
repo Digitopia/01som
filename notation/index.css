@@ -26,7 +26,7 @@ body {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); }
   .modal .modal-content {
-    background: #dcf0fe;
+    background: #c8dcfe;
     z-index: 1000;
     max-width: 50%;
     min-width: 40%;
@@ -40,7 +40,7 @@ body {
     padding: 10px;
     position: absolute; }
     .modal .modal-content p {
-      color: white;
+      color: #232323;
       font-size: 12 pt;
       padding: 1vh; }
     .modal .modal-content:first-of-type {

@@ -32,7 +32,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4);
 
     .modal-content {
-        background: rgb(220, 240, 254);
+        background: rgb(200, 220, 254);
         z-index: 1000;
         max-width: 50%;
         min-width: 40%;
@@ -47,7 +47,7 @@ body {
         position: absolute;
 
          p {
-            color: white;
+            color: rgb( 35, 35, 35);
             font-size: 12 pt;
             padding: 1vh;
         }

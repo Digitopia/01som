@@ -9,9 +9,7 @@ var COLORS = {
 }
 
 var audiosConf = [
-    { path: "../_assets/sounds/snap.wav" },
-    { path: "../_assets/sounds/clap.wav" },
-    { path: "../_assets/sounds/kick.mp3" }
+    { path: "../_assets/sounds/tick.wav" }
 ]
 
 // Global variables
@@ -92,103 +90,11 @@ $(document).ready(function() {
         }
 
         blankImages.forEach(function (element, index){
-            element.click(function(){
-                if(valueString[index] == 0) {
-                    if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
-                        images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
-                        images[index].node.setAttribute("width", imgWidth*2)
-                        images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
-                        images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                        images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
-                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
-                        images[index-1].node.setAttribute("width", imgWidth*2)
-                        images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
-                        valueString[index] = 1
-                    }
-
-
-                } else { /* if point is going to 0 */
-                    if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
-                        images[index].node.href.baseVal = "../_assets/svg/4R.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
-                        images[index].node.setAttribute("width", imgWidth)
-                        images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
-                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
-                        images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
-                        images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        images[index-1].node.setAttribute("width", imgWidth)
-                        images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        valueString[index] = 0
-                    }
-                }
-
-            labelText[index].attr({text: valueString[index].toString()})
-            });
+            assignRoles(element, index)
         });
 
         labelText.forEach(function (element, index){
-            element.click(function(){
-                if(valueString[index] == 0) {
-                    if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
-                        images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
-                        images[index].node.setAttribute("width", imgWidth*2)
-                        images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
-                        images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                        images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
-                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
-                        images[index-1].node.setAttribute("width", imgWidth*2)
-                        images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
-                        valueString[index] = 1
-                    }
-
-
-                } else { /* if point is going to 0 */
-                    if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
-                        images[index].node.href.baseVal = "../_assets/svg/4R.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
-                        images[index].node.setAttribute("width", imgWidth)
-                        images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
-                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
-                        images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
-                        valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
-                        images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        images[index-1].node.setAttribute("width", imgWidth)
-                        images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        valueString[index] = 0
-                    }
-                }
-
-            labelText[index].attr({text: valueString[index].toString()})
-            });
+            assignRoles(element, index)
         });
 
 
@@ -364,5 +270,55 @@ function animate(index) {
     for (var i = 1; i < valueString.length; i++) {
         labelText[(index+i)%8].attr("fill", "black")
     }
+}
+
+function assignRoles(element, index) {
+    element.click(function(){
+            if(valueString[index] == 0) {
+                if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
+                    images[index].node.setAttribute("width", imgWidth*2)
+                    images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
+                    images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                    images[index-1].node.setAttribute("width", imgWidth*2)
+                    images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
+                    valueString[index] = 1
+                }
+
+
+            } else { /* if point is going to 0 */
+                if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
+                    images[index].node.href.baseVal = "../_assets/svg/4R.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
+                    images[index].node.setAttribute("width", imgWidth)
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
+                    images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                    images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    images[index-1].node.setAttribute("width", imgWidth)
+                    images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    valueString[index] = 0
+                }
+            }
+
+        labelText[index].attr({text: valueString[index].toString()})
+    });
 }
 
