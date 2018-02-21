@@ -136,25 +136,11 @@ $(document).ready(function() {
 
     }
 
-    function initShake() {
-
-        var shake = new Shake({ threshold: 15, timeout: 1000 }).start()
-
-        function shakeHandler() {
-            // alert("shake it")
-            if (playing) $("#playButton").trigger("click")
-            points.forEach(function(p){p.reset()})
-        }
-
-        window.addEventListener('shake', shakeHandler, false)
-    }
-
     initCanvas()
     initAudios()
     initButtons()
     initImages()
     initHelp()
-    initShake()
     StartAudioContext(Tone.context, "#playButton");
 
 })
@@ -259,7 +245,6 @@ $(function() {
 })
 
 function animate(index) {
-    console.log("it's also playing", index)
     if(index == 0) {
         Tone.Master.volume.value = 0;
     } else {
