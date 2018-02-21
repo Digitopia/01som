@@ -144,49 +144,45 @@ $(document).ready(function() {
         labelText.forEach(function (element, index){
             element.click(function(){
                 if(valueString[index] == 0) {
-                    if(index % 2 == 0 && valueString[index+1] == 0) {
+                    if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
                         images[index].node.href.baseVal = "../_assets/svg/8th.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) {
-                        images[index].node.href.baseVal = "../_assets/svg/4.svg"
-                        images[index + 1].node.href.baseVal = "../_assets/svg/4.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/beam.svg"
+                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
+                        images[index].node.setAttribute("width", imgWidth*2)
+                        images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
+                        images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
                         images[index].node.href.baseVal = "../_assets/svg/8th.svg"
                         images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 1
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) {
-                        images[index].node.href.baseVal = "../_assets/svg/4.svg"
-                        images[index-1].node.href.baseVal = "../_assets/svg/4.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/beam.svg"
+                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
+                        images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                        images[index-1].node.setAttribute("width", imgWidth*2)
+                        images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
                         valueString[index] = 1
                     }
 
 
                 } else { /* if point is going to 0 */
-                    if(index % 2 == 0 && valueString[index+1] == 0) {
+                    if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
                         images[index].node.href.baseVal = "../_assets/svg/4R.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 0 && valueString[index+1] == 1) {
+                    } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
+                        images[index].node.setAttribute("width", imgWidth)
                         images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
                         images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        beams[index/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 0) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
                         images[index].node.href.baseVal = "../_assets/svg/blank.svg"
                         images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
-                    } else if(index % 2 == 1 && valueString[index-1] == 1) {
+                    } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
                         images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                        images[index-1].node.setAttribute("width", imgWidth)
                         images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
-                        beams[(index-1)/2].node.href.baseVal = "../_assets/svg/blank.svg"
                         valueString[index] = 0
                     }
                 }
@@ -280,6 +276,7 @@ function play() {
             Tone.Transport.schedule(function(t) {
                 console.log("Playing 8th note number", _i)
                 idx = valueString[_i] - 1
+                animate(_i)
                 if (idx >= 0 && idx <= 2) audios[idx].start(t)
             }, i + "*8n")
         })()
@@ -293,43 +290,14 @@ function play() {
 
 function draw() {
 
-  	background(190,170,170);
-  	fill(0, 0, 50);
-  	textAlign(CENTER);
-  	textSize(22);
-	text("0 + 1 = Som - Ritmo", windowWidth/2, 40);
-
-	stroke(127);
-	strokeWeight(2);
-	fill(220, 240, 255);
-	textSize(48);
-
-	textAlign(LEFT);
-	for(var i= 0; i<8; i++) {
-		text(clapPattern[i], cx + (windowWidth*0.08)*i, cy);
-	}
-
-  stroke(100);
-  strokeWeight(1);
-
-  	fill(0);
-	ellipse (controlCenterX, controlCenterY, 50, 50);
-	fill(255);
-	if(!play) {
-		triangle(controlCenterX-10, controlCenterY-15, controlCenterX-10, controlCenterY+15, controlCenterX+15, controlCenterY);
-	} else {
-		rectMode(CORNER);
-		rect(controlCenterX-10, controlCenterY-15, 7, 30);
-		rect(controlCenterX+3, controlCenterY-15, 7, 30);
-	}
-
-  	drawNotation();
-
 }
 
 function stop() {
     $("#playButton").text("Play")
     points.forEach(function(point) { point.showDot(false) })
+    for (var i = 0; i < valueString.length; i++) {
+        labelText[i].attr("fill", "black")
+    }
     Tone.Transport.stop()
 }
 
@@ -383,4 +351,18 @@ $(function() {
         Tone.Transport.bpm.value = parseInt(document.getElementById('bpmSlider').value);
     })
 })
+
+function animate(index) {
+    console.log("it's also playing", index)
+    if(index == 0) {
+        Tone.Master.volume.value = 0;
+    } else {
+        Tone.Master.volume.value = -7;
+    }
+
+    labelText[index].attr("fill", "red")
+    for (var i = 1; i < valueString.length; i++) {
+        labelText[(index+i)%8].attr("fill", "black")
+    }
+}
 
