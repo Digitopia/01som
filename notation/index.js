@@ -8,45 +8,24 @@ var COLORS = {
     lightblue: "rgb(220, 240, 255)"
 }
 
-var CONF = {
-    nPoints: 8,
-    points: {
-        radius: 18,
-        fillColor: COLORS.white,
-        stroke: COLORS.grey,
-        strokeWidth: 2,
-        strokeWidthHover: 3
-    },
-    buttons: [
-        { bpm: 44,  bg: 246 },
-        { bpm: 52,  bg: 243 },
-        { bpm: 60,  bg: 240 },
-        { bpm: 80,  bg: 237 },
-        { bpm: 100, bg: 234 },
-        { bpm: 120, bg: 231 }
-    ],
-    paths: {
-        kick: "../_assets/sounds/kick.wav",
-        clap: "../_assets/sounds/clap.wav",
-        snap: "../_assets/sounds/snap.wav"
-    },
-    options: [
-        { color: COLORS.blue,  sample: "kick" },
-        { color: COLORS.green, sample: "clap" },
-        { color: COLORS.red,   sample: "snap" }
-    ],
-}
+var audiosConf = [
+    { path: "../_assets/sounds/tick.wav" }
+]
 
 // Global variables
 
 var cx, cy, radius
 var points = []
-var audios = {}
+var audios = []
 var paper
 var playing = false
 var touched = false
 
 var images = []
+var blankImages = []
+var beams = []
+var labelText = []
+var valueString = [0, 0, 0, 0, 0, 0, 0, 0]
 
 $(document).ready(function() {
 
@@ -70,43 +49,17 @@ $(document).ready(function() {
     }
 
     function initAudios() {
-        for (var key in CONF.paths) {
-            audios[key] = new Tone.Player(CONF.paths[key]).toMaster()
-        }
-
-        Tone.Transport.loopEnd = '1m'
-        Tone.Transport.loop = true
-    }
-
-    function initButtons() {
-
-        // BPM buttons
-        CONF.buttons.forEach(function(buttonConf) {
-            var button = $("<button/>", {
-                text: buttonConf.bpm,
-                value: buttonConf.bpm,
-                click: function() {
-                    var bg = buttonConf.bg
-                    $("body").css("background-color", "rgb("+bg+",255,"+bg+")")
-                    Tone.Transport.bpm.value = buttonConf.bpm;
-                    $("#bpmButtons button").removeClass("active")
-                    $(this).addClass("active")
-                }
-            })
-            $("#bpmButtons").append(button)
-        })
-
-        //
-        $("#bpmButtons button").each(function() {
-            console.log($(this))
-            $(this).fitText(0.3, {
-                minFontSize: '20px',
-                maxFontSize: '40px'
-            })
+        audiosConf.forEach(function(audioConf) {
+            audios.push(new Tone.Player(audioConf.path).toMaster())
         })
 
         Tone.Transport.bpm.value = 60
-        $(":button[value='60']").addClass("active")
+        Tone.Transport.loopEnd = '1m'
+        Tone.Transport.loop = true
+
+    }
+
+    function initButtons() {
 
         // Play/Pause button
         $("#playButton").click(function() {
@@ -118,11 +71,37 @@ $(document).ready(function() {
 
     function initImages() {
         imgWidth = getCanvasWidth()/10
+        cx = imgWidth/0.8
         cy = getCanvasHeight()/2 - imgWidth
-        images[0] = paper.image("../_assets/svg/4R.svg", 0, cy, imgWidth, imgWidth*2)
-        images[2] = paper.image("../_assets/svg/4R.svg", imgWidth*2.5, cy, imgWidth, imgWidth*2)
-        images[4] = paper.image("../_assets/svg/4R.svg", imgWidth*5, cy, imgWidth, imgWidth*2)
-        images[6] = paper.image("../_assets/svg/4R.svg", imgWidth*7.5, cy, imgWidth, imgWidth*2)
+
+        for (var i = 0; i < valueString.length; i++) {
+            var _i = i
+            if(i % 2 == 0) {
+                images[i] = paper.image("../_assets/svg/4R.svg", i*cx, cy, imgWidth, imgWidth*2)
+                labelText[i] = paper.text(i*cx + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
+                labelText[i].attr({'font-size':50})
+            } else {
+                images[i] = paper.image("../_assets/svg/blank.svg", i*cx, cy, imgWidth, imgWidth*2)
+                labelText[i] = paper.text(i*cx + imgWidth/4, cy + imgWidth * 2 + 75, valueString[i].toString())
+                labelText[i].attr({'font-size':50})
+            }
+
+            blankImages[i] = paper.image("../_assets/svg/blank.svg", i*cx, cy, imgWidth, imgWidth*2)
+        }
+
+        blankImages.forEach(function (element, index){
+            assignRoles(element, index)
+        });
+
+        labelText.forEach(function (element, index){
+            assignRoles(element, index)
+        });
+
+
+    }
+
+    function addClickerEvent(index) {
+        console.log("woo", index)
     }
 
     function initHelp() {
@@ -157,31 +136,17 @@ $(document).ready(function() {
 
     }
 
-    function initShake() {
-
-        var shake = new Shake({ threshold: 15, timeout: 1000 }).start()
-
-        function shakeHandler() {
-            // alert("shake it")
-            if (playing) $("#playButton").trigger("click")
-            points.forEach(function(p){p.reset()})
-        }
-
-        window.addEventListener('shake', shakeHandler, false)
-    }
-
     initCanvas()
     initAudios()
     initButtons()
     initImages()
     initHelp()
-    initShake()
     StartAudioContext(Tone.context, "#playButton");
 
 })
 
 function getCanvasHeight() {
-    var extra = $(".head").height() + $("#bpmButtons").height() + $("footer").height()
+    var extra = $(".head").height() + $("footer").height()
     var slack = 80 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
     var diff = $(window).height() - extra - slack
     return Math.max(300, diff)
@@ -197,29 +162,14 @@ function getCanvasWidth() {
 function play() {
 
     // First schedule all events
-    for (var i = 0; i < CONF.nPoints; i++) {
+    for (var i = 0; i < valueString.length; i++) {
         (function() {
             var _i = i
             Tone.Transport.schedule(function(t) {
-                var p = points[_i]
-                var previousI = (_i == 0) ? CONF.nPoints - 1 : _i - 1
-                var previousP = points[previousI]
-
-                // NOTE: animate when active
-                p.elem.animate({
-                    r: CONF.points.radius * 1.25},
-                    150,
-                    function(){},
-                    p.elem.animate({
-                        r: CONF.points.radius
-                    }, 1000)
-                )
-
-                p.showDot(true); previousP.showDot(false)
-                if (p.state != -1) {
-                    var sample = CONF.options[p.state].sample
-                    audios[sample].start(t)
-                }
+                console.log("Playing 8th note number", _i)
+                idx = valueString[_i] - 1
+                animate(_i)
+                if (idx >= 0 && idx <= 2) audios[idx].start(t)
             }, i + "*8n")
         })()
     }
@@ -232,52 +182,14 @@ function play() {
 
 function draw() {
 
-  	background(190,170,170);
-  	fill(0, 0, 50);
-  	textAlign(CENTER);
-  	textSize(22);
-	text("0 + 1 = Som - Ritmo", windowWidth/2, 40);
-
-	stroke(127);
-	strokeWeight(2);
-	fill(220, 240, 255);
-	textSize(48);
-
-	textAlign(LEFT);
-	for(var i= 0; i<8; i++) {
-		text(clapPattern[i], cx + (windowWidth*0.08)*i, cy);
-	}
-
-  stroke(100);
-  strokeWeight(1);
-
-  	fill(0);
-	ellipse (controlCenterX, controlCenterY, 50, 50);
-	fill(255);
-	if(!play) {
-		triangle(controlCenterX-10, controlCenterY-15, controlCenterX-10, controlCenterY+15, controlCenterX+15, controlCenterY);
-	} else {
-		rectMode(CORNER);
-		rect(controlCenterX-10, controlCenterY-15, 7, 30);
-		rect(controlCenterX+3, controlCenterY-15, 7, 30);
-	}
-
-	//display BPM values
-	for(var i = 0; i < tempoSelec.length; i++){
-  		tempoSelec[i].display();
-  	}
-
-  	for(var i = 0; i < cycle; i++){
-  		points[i].isActive(tickCount);
-  }
-
-  	drawNotation();
-
 }
 
 function stop() {
     $("#playButton").text("Play")
     points.forEach(function(point) { point.showDot(false) })
+    for (var i = 0; i < valueString.length; i++) {
+        labelText[i].attr("fill", "black")
+    }
     Tone.Transport.stop()
 }
 
@@ -301,23 +213,25 @@ function showHelp(state) {
 
 function drawNotation() {
 
-		var ht = windowHeight/4+50; // height
+	var ht = windowHeight/4+50; // height
   	var iht = 100; //image height
   	rectMode(CENTER);
 
   	for(var i = 0; i < cycle/2; i++){
+        var xSpot = windowWidth/5+0.16*windowWidth*i;
+        var figWidth = windowWidth*0.04;
 		if(clapPattern[i*2] == 1) {
 	  		if(clapPattern[i*2 + 1] == 1) {
-	  			image(img28, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.12, iht);
+	  			image(img28, xSpot, ht, 3*figWidth, iht);
 	  		} else {
-	  			image(img8, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
-	  			image(img8r, windowWidth/5+0.08*windowWidth+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
+	  			image(img8, xSpot, ht, figWidth, iht);
+	  			image(img8r, xSpot+0.08*windowWidth, ht, figWidth, iht);
 	  		}
 	  	} else  if (clapPattern[i*2 + 1] == 0) {
-	  		image(img4r, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.08, iht);
+	  		image(img4r, xSpot, ht, 2*figWidth, iht);
 	  	} else {
-	  		image(img8r, windowWidth/5+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
-	  		image(img8, windowWidth/5+0.08*windowWidth+0.16*windowWidth*i, ht, windowWidth*0.04, iht);
+	  		image(img8r, xSpot, ht, figWidth, iht);
+	  		image(img8, xSpot+0.08*windowWidth, ht, figWidth, iht);
 	  	}
 	  }
 }
@@ -326,7 +240,70 @@ $(function() {
     $('#bpmSlider').on('input', function () {
         document.getElementById('bpmVal').innerText = parseInt(document.getElementById('bpmSlider').value);
         bpmVal = parseInt(document.getElementById('bpmSlider').value);
-        console.log("yay!"); // not working yet!
+        Tone.Transport.bpm.value = parseInt(document.getElementById('bpmSlider').value);
     })
 })
+
+function animate(index) {
+    if(index == 0) {
+        Tone.Master.volume.value = 0;
+    } else {
+        Tone.Master.volume.value = -7;
+    }
+
+    labelText[index].attr("fill", "red")
+    for (var i = 1; i < valueString.length; i++) {
+        labelText[(index+i)%8].attr("fill", "black")
+    }
+}
+
+function assignRoles(element, index) {
+    element.click(function(){
+            if(valueString[index] == 0) {
+                if(index % 2 == 0 && valueString[index+1] == 0) { // 0 0 to 1 0
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 0 && valueString[index+1] == 1) { // 0 1 to 1 0
+                    images[index].node.setAttribute("width", imgWidth*2)
+                    images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 0 to 0 1
+                    images[index].node.href.baseVal = "../_assets/svg/8th.svg"
+                    images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    valueString[index] = 1
+                } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 0 to 1 1
+                    images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                    images[index-1].node.setAttribute("width", imgWidth*2)
+                    images[index-1].node.href.baseVal = "../_assets/svg/2x8.svg"
+                    valueString[index] = 1
+                }
+
+
+            } else { /* if point is going to 0 */
+                if(index % 2 == 0 && valueString[index+1] == 0) { // 1 0 to 0 0
+                    images[index].node.href.baseVal = "../_assets/svg/4R.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 0 && valueString[index+1] == 1) { // 1 1 to 0 1
+                    images[index].node.setAttribute("width", imgWidth)
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 1 && valueString[index-1] == 0) { // 0 1 to 0 0
+                    images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                    images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
+                    valueString[index] = 0
+                } else if(index % 2 == 1 && valueString[index-1] == 1) { // 1 1 to 1 0
+                    images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    images[index-1].node.setAttribute("width", imgWidth)
+                    images[index-1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    valueString[index] = 0
+                }
+            }
+
+        labelText[index].attr({text: valueString[index].toString()})
+    });
+}
 

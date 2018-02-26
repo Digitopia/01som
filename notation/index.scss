@@ -32,7 +32,7 @@ body {
     background-color: rgba(0, 0, 0, 0.4);
 
     .modal-content {
-        background: rgb(220, 240, 254);
+        background: rgb(200, 220, 254);
         z-index: 1000;
         max-width: 50%;
         min-width: 40%;
@@ -47,7 +47,7 @@ body {
         position: absolute;
 
          p {
-            color: white;
+            color: rgb( 35, 35, 35);
             font-size: 12 pt;
             padding: 1vh;
         }
@@ -102,7 +102,7 @@ body {
 
     .slider {
         -webkit-appearance: none;  /* Override default CSS styles */
-        width: 300px;
+        width: 350px;
         height: 30px; /* Specified height */
         background: rgb(220, 220, 220); /* Grey background */
         outline: none;
@@ -111,6 +111,7 @@ body {
         transition: opacity .2s;
         transform-origin: 75px 75px;
         transform: rotate(-90deg);
+        left: 1vw;
         position: absolute;
     }
 
@@ -143,6 +144,7 @@ body {
         text-align: center;
         margin-right: 55px;
 
+
         .sliderWrapper {
             flex-grow: 1;
             display: flex;
@@ -156,7 +158,8 @@ body {
             display: block;
             font-size: 35px;
             position: relative;
-            top: 47%;
+            top: -250px;
+            left: 10px;
         }
     }
 
@@ -178,7 +181,7 @@ body {
             width: 100px;
             height: 100px;
             left: -4vw;
-            top: -12vh;
+            top: 1vh;
             background-color: rgb(60, 60, 60);
             border-radius: 50%;
         }
@@ -199,36 +202,6 @@ body {
         }
     }
 
-}
-
-#bpmButtons {
-    clear: both;
-    text-align: center;
-    button {
-        position: relative;
-        text-align: center;
-        // margin-left: min(1,1.5%);
-        // margin-right: min(1,1.5%);
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 11vw;
-        max-width: 80px;
-        height: 11vw;
-        max-height: 80px;
-        // height: 70px;
-        // font-size: 100%;
-
-        &:hover {
-            cursor: pointer;
-            border: 1px solid grey;
-        }
-    }
-    .active {
-        border: 2px solid grey !important;
-    }
-    height: 120px;
-    position: relative;
-    top: -1vh;
 }
 
 footer {
