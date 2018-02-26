@@ -1,104 +1,63 @@
+var self
+
 var Circle = function(params, app) {
 
-    this.params = params
-    this.app    = app
+    this.params = params !== undefined ? params : {}
+    this.app = app
 
-    this.xFunc = params.xFunc || function() { return window.innerWidth/2 }
-    this.yFunc = params.yFunc || function() { return window.innerHeight/2 }
-    this.rFunc = params.rFunc || function() { return Math.min(4/5/2*app.height, 3/7/2 * app.width) }
+    this.n                     = params.n || 8
+    this.options               = params.options || []
+    this.shake                 = params.shake || false
+    this.sequencer             = params.sequencer || false
+    this.binary                = params.binary !== undefined
+    this.spatial               = params.spatial || false
+    this.pointRadius           = params.pointRadius || app.pointRadius || 18
+    this.pointFillColor        = params.pointFillColor || COLORS.white
+    this.pointStroke           = params.pointStroke || COLORS.grey
+    this.pointStrokeWidth      = params.pointStrokeWidth || 1
+    this.pointStrokeWidthHover = params.pointStrokeWidthHover || 2
+    this.dotRadius             = params.dotRadius || 2
+    this.circleBackgroundColor = params.circleBackgroundColor || COLORS.lightblue
+    this.sequencerRectSize     = params.sequencerRectSize || 40
+    this.xFunc                 = params.xFunc || function() { return window.innerWidth/2 }
+    this.yFunc                 = params.yFunc || function() { return window.innerHeight/2 }
+    // this.rFunc                 = params.rFunc || function() { return Math.min(4/5/2*app.height, 3/7/2 * app.width) }
 
-    this.resize()
 
-    this.n         = params.n || 8
-    this.options   = params.options || []
-    this.shake     = params.shake || false
-    this.sequencer = params.sequencer || false
-    this.binary    = params.binary !== undefined
-    this.spatial   = params.spatial || false
+    this.rFunc = params.rFunc || Circle.defaults.rFunc
 
     if (this.binary) {
         this.binaryContainer = document.getElementById(params.binary)
         if (this.binaryContainer === null) throw new ReferenceError("Invalid div for binary")
     }
 
-    this.pointRadius           = params.pointRadius || 18
-    this.pointFillColor        = params.pointFillColor || COLORS.white
-    this.pointStroke           = params.pointStroke || COLORS.grey
-    this.pointStrokeWidth      = params.pointStrokeWidth || 1
-    this.pointStrokeWidthHover = params.pointStrokeWidthHover || 2
-    this.dotRadius             = params.dotRadius || 18
+    // NOTE: the idea is that this.r is always the same and is never changed.
+    // is it's used together with the return of rFunc() to calcualte the necessary transformation to apply
+    // see .resize() for its use.
+    this.r = this.rFunc()
+    this.x = this.xFunc()
+    this.y = this.yFunc()
 
-    this.circleBackgroundColor = params.circleBackgroundColor || COLORS.lightblue
+    this.svg = paper.svg({ x: this.x, y: this.y })
+    this.svg.attr({overflow: "visible"}) // NOTE: because otherwise will just show the only positive quadrant
 
     this.dots = []
     this.points = []
     this.elem = null
-
-    this.x = this.xFunc()
-    this.y = this.yFunc()
-    this.r = this.rFunc()
-
-    this.svg = paper.svg({ x: this.x, y: this.y })
-    this.svg.attr({overflow: "visible"}) // NOTE: because otherwise will just show the only positive quadrant
-    this.svg.addClass("circle")
-    this.svg.addClass("noSelect")
-
     this.groups = []
 
     this.init()
 
 }
 
-Circle.defaults = {
-    options: {
-        percussive: [{
-            color: COLORS.blue,
-            sample: "kick"
-        }, {
-            color: COLORS.green,
-            sample: "clap"
-        }, {
-            color: COLORS.red,
-            sample: "snap"
-        }],
-        notes: [{
-            color: COLORS.do1,
-            sample: "do1",
-            text: "DÓ"
-        }, {
-            color: COLORS.re,
-            sample: "re",
-            text: "RÉ"
-        }, {
-            color: COLORS.mi,
-            sample: "mi",
-            text: "MI"
-        }, {
-            color: COLORS.sol,
-            sample: "sol",
-            text: "SOL"
-        }, {
-            color: COLORS.la,
-            sample: "la",
-            text: "LÁ"
-        }, {
-            color: COLORS.do2,
-            sample: "do2",
-            text: "dó"
-        }]
-    }
-}
-
 Circle.prototype.init = function() {
-
-    var self = this
 
     this.initSequencer = function() {
 
         this.initParams = function() {
             this.sequencer = {}
             this.sequencer.active = this.params.sequencer.active || 0
-            this.sequencer.labelsArray = this.params.sequencer.labels || ["1", "2", "3", "4"]
+            this.sequencer.labelsArray = this.params.sequencer.labels || ["1", "2", "3"]
             this.sequencer.n = this.sequencer.labelsArray.length
         }
 
@@ -136,19 +95,17 @@ Circle.prototype.init = function() {
                 text.attr({
                     text: labelText,
                     fill: COLORS.grey,
-                    "font-size": "50px",
                     id: "text-sequence-" + j,
                     "text-anchor": "middle",
                     "alignment-baseline": "central"
                 })
 
-                var size = 50
                 var rect = this.svg.rect()
                 var stroke = j === this.sequencer.active ? COLORS.grey : this.circleBackgroundColor
                 rect.attr({
                     fill: this.circleBackgroundColor,
                     stroke: stroke,
-                    strokeWidth: 2,
+                    strokeWidth: 1,
                     id: "rect-sequence-" + j
                 })
 
@@ -244,7 +201,7 @@ Circle.prototype.init = function() {
     }
 
     this.initCircle = function() {
-        this.elem = this.svg.circle(0, 0, this.r, this.r)
+        this.elem = this.svg.circle(0, 0, this.r)
         this.elem.attr({
             fill: this.circleBackgroundColor,
             stroke: COLORS.grey,
@@ -257,10 +214,9 @@ Circle.prototype.init = function() {
         this.groups.dots.addClass("dots")
         for (var i = 0; i < this.n; i++) {
             var angle = (i / (this.n)) * 2 * Math.PI
-            var x =  Math.sin(angle) * this.r * 1.25
-            var y = -Math.cos(angle) * this.r * 1.25
-            var dotRadius = 4
-            var dot = this.svg.circle(x, y, dotRadius).attr({
+            var x =  Math.sin(angle) * (this.r + this.pointRadius) * 1.1
+            var y = -Math.cos(angle) * (this.r + this.pointRadius) * 1.1
+            var dot = this.svg.circle(x, y, this.dotRadius).attr({
                 visibility: "hidden"
             })
             this.dots.push(dot)
@@ -276,6 +232,8 @@ Circle.prototype.init = function() {
         })
         this.resize()
     }
+
+    var self = this
 
     this.initCircle()
     this.initDots()
@@ -446,7 +404,87 @@ Circle.prototype.alignSequencer = function() {
         var x0 = -self.rFunc() + step
         var x = x0 + step*index
         label.text.attr({x: x})
-        var size = 66
+        var size = self.sequencerRectSize
         label.rect.attr({x: x-size/2, y: -size/2, width: size, height: size})
     })
+}
+
+Circle.defaults = {}
+
+Circle.defaults.options = {
+    percussive: [{
+        color: COLORS.blue,
+        sample: "kick"
+    }, {
+        color: COLORS.green,
+        sample: "clap"
+    }, {
+        color: COLORS.red,
+        sample: "snap"
+    }],
+    notes: [{
+        color: COLORS.do1,
+        sample: "do1",
+        text: "DÓ"
+    }, {
+        color: COLORS.re,
+        sample: "re",
+        text: "RÉ"
+    }, {
+        color: COLORS.mi,
+        sample: "mi",
+        text: "MI"
+    }, {
+        color: COLORS.sol,
+        sample: "sol",
+        text: "SOL"
+    }, {
+        color: COLORS.la,
+        sample: "la",
+        text: "LÁ"
+    }, {
+        color: COLORS.do2,
+        sample: "do2",
+        text: "dó"
+    }]
+}
+
+// NOTE: do "perfect alignment",
+// instead of leaving double space in the middle of circles
+// leave the same as in the margins
+Circle.defaults.rFunc = function() {
+    var bigSide   = Math.max(app.height, app.width)
+    var smallSide = Math.min(app.height, app.width)
+    var r = (bigSide/2 - app.padding - app.padding/2 - app.pointRadius*2)/2
+    var l = r*2 + 2*app.pointRadius + 2*app.padding
+    if (l > smallSide) r = (smallSide - 2*app.padding - 2*app.pointRadius)/2
+    return r
+}
+
+Circle.defaults.xyFuncAux = function(offset) {
+    offset = offset || 0
+    var bigSide = Math.max(app.width, app.height)
+    var util = (bigSide/2 - app.padding - app.padding/2 - app.pointRadius*2)
+    var ret = offset + app.padding + app.pointRadius + util/2
+    return ret
+}
+
+Circle.defaults.xFunc1 = function() {
+    if (Utils.isLandscape()) return Circle.defaults.xyFuncAux()
+    else return app.width/2
+}
+
+Circle.defaults.yFunc1 = function() {
+    if (Utils.isPortrait()) return Circle.defaults.xyFuncAux()
+    else return app.height/2
+}
+
+Circle.defaults.xFunc2 = function() {
+    if (Utils.isLandscape()) return Circle.defaults.xyFuncAux(app.width/2-app.padding/2)
+    else return app.width/2
+}
+
+Circle.defaults.yFunc2 = function() {
+    if (Utils.isPortrait()) return Circle.defaults.xyFuncAux(app.height/2-app.padding/2)
+    else return app.height/2
 }

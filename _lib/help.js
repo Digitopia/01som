@@ -8,12 +8,11 @@ var HELP = {
             self.show(false)
         })
 
-        $(".help").click(function() {
+        $(".help-icon").click(function() {
             self.show(true)
         })
 
         $(".modal").click(function() {
-            console.log("clicked modal")
             self.show(false)
         })
 

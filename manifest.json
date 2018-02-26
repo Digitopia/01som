@@ -1,14 +1,21 @@
 {
-  "short_name": "0+1 SOM",
-  "name": "0+1som",
-  "icons": [
-    {
-      "src": "launcher-icon-4x.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "/holy2",
-  "display": "fullscreen",
-  "orientation": "portrait"
+    "short_name": "0+1 SOM",
+    "name": "0+1som",
+    "icons": [
+        {
+            "src": "../_assets/icons/launcher-icon-512-frame.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "../_assets/icons/launcher-icon-192-frame.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "/S1?utm_source=homescreen",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "theme_color": "#2196F3",
+    "background_color": "#FFF4F4"
 }

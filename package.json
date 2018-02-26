@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "description": "0 + 1 = SOM",
   "scripts": {
-    "sass": "sass --sourcemap=none --no-cache --watch . --style compressed",
+    "sass": "sass --sourcemap=none --no-cache --watch .",
     "pug": "pug S1 S2 S3 -w",
-    "server": "http-server -c-1 ."
+    "server": "live-server --verbose --ignore=_sass --no-browser .",
+    "start": "npm run server"
   },
   "private": true
 }
