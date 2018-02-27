@@ -1,23 +1,5 @@
 var Utils = {
 
-    getCanvasWidth: function() {
-        var extra = $(".labels").width() + $(".playback").width()
-        var slack = 5 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
-        var diff = $(".main").width() - extra - slack
-        return Math.max(500, diff)
-    },
-
-    getCanvasHeight: function() {
-        var extra = $(".head").height() + $("#bpmButtons").height() + $("footer").height()
-        var slack = 20 // NOTE: don't try to use 100% of space, since it tends to add scroll bars, which we should avoid
-        var diff = $(window).height() - extra - slack
-        return Math.max(300, diff)
-    },
-
-    // NOTE: use shorter alias to save precious keystrokes
-    vw: function() { return this.getCanvasWidth()  },
-    vh: function() { return this.getCanvasHeight() },
-
     map: function(val, in_min, in_max, out_min, out_max) {
         return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     },
@@ -41,7 +23,16 @@ var Utils = {
         return matrix
     },
 
-    isPortrait: function() { return Utils.vh() >= Utils.vw() },
-    isLandscape: function() { return !this.isPortrait() }
+    isPortrait: function() {  return $("#svg").height() >= $("#svg").width() },
+    isLandscape: function() { return !this.isPortrait() },
+
+    hideLoader: function() {
+        $("#loader").hide();
+        $("#wrapper").css("display", "flex")
+    },
+
+    getBodyFontSize: function() {
+        return parseInt($("body").css("font-size"))
+    }
 
 }

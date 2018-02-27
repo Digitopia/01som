@@ -11,7 +11,7 @@ a {
 html, body {
     padding:0;
     margin: 0;
-    min-width: 500px;
+    /* min-width: 500px; */
     min-height: 500px;
     height: 100%;
     position: relative;

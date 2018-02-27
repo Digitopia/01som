@@ -1,0 +1,69 @@
+/*================================
+=            DEFAULTS            =
+================================*/
+
+// NOTE: this is contant whatever the size of the screen
+#help i, #info i { font-size: 24px; }
+
+// NOTE: optimized for xl
+
+body { font-size: 16px; } // NOTE: this is the base unit of comparison for em
+#controls span { font-size: 0.9em; margin-top: 6px; }
+#btnPlay { font-size: 5em; }
+#title { font-size: 1.8em; }
+#title h1 { margin: 10px 0; }
+#icons img { width: 5em; height: 5em; margin: 1em 0; }
+#bpms button { font-size: 1.5em; width: 3em; height: 3em; margin: 0.5em 0; }
+#controls i { font-size: 3em; margin: 0 20px; }
+#sponsors img { width: 50%; }
+#btnPlay { font-size: 5em !important; }
+.content { width: 60%; }
+.left, .right { width: 20%; }
+.modal-content p { font-size: 1.1em; }
+text { font-size: 1.8em; }
+
+/*===================================
+=            BREAKPOINTS            =
+===================================*/
+
+// Custom, iPhone Retina
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    #breakpoint::after { content: "xs"}
+    body { font-size: 9px; }
+    // .content { width: 70%; }
+    // .left, .right, { width: 15%; }
+
+    // "Row" layout
+    // NOTE: so that bpms and icons go to a different row when there's little space
+    // #main { flex-direction: column; }
+    // .left, .right, .content { width: 100%; }
+    // #icons, #bpms { flex-direction: row; }
+    // #bpms button { margin: 0 0.2em; }
+    // #bpms { order: -1; }
+    // #icons { order: 1; }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #breakpoint::after { content: "sm"}
+    body { font-size: 11px; }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #breakpoint::after { content: "md"}
+    body { font-size: 12px; }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    #breakpoint::after { content: "lg"}
+    body { font-size: 15px; }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    #breakpoint::after { content: "xl"}
+    // NOTE: this is the "default" (see above)
+}
