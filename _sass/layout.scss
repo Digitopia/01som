@@ -19,12 +19,10 @@
 
 // NOTE: show active breakpoint at top-left corner
 #breakpoint {
-    // position: fixed;
-    // top: 10px;
-    // left: 10px;
-    &::after {
-        display: none;
-    }
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    &::after { display: none; }
 }
 
 /*================================
@@ -147,8 +145,13 @@ button {
 }
 
 #sponsors {
-    img:hover {
-        opacity: 0.6;
+    img {
+        // filter: grayscale(100%);
+        opacity: 0.4;
+        &:hover {
+            filter: none;
+            opacity: 0.6;
+        }
     }
 }
 

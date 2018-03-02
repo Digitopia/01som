@@ -40,8 +40,12 @@ i:hover, .point:hover, .label:hover, button:hover, .close-button:hover {
 /*=============================
 =            DEBUG            =
 =============================*/
-#breakpoint::after {
-  display: none; }
+#breakpoint {
+  position: fixed;
+  top: 10px;
+  left: 10px; }
+  #breakpoint::after {
+    display: none; }
 
 /*================================
 =            ELEMENTS            =
@@ -133,8 +137,11 @@ button {
     text-align: center;
     border-radius: 100%; }
 
-#sponsors img:hover {
-  opacity: 0.6; }
+#sponsors img {
+  opacity: 0.4; }
+  #sponsors img:hover {
+    filter: none;
+    opacity: 0.6; }
 
 #wrapper {
   flex: 1 0 auto;
