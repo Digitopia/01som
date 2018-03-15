@@ -1,0 +1,49 @@
+{
+    "extends": "airbnb-base",
+    "rules":{
+        "semi": "off",
+        "no-multi-spaces": "off",
+        "padded-blocks": "off",
+        "quotes": "off",
+        "space-before-function-paren": "off",
+        "indent": "off",
+        "space-infix-ops": "off",
+        "no-mixed-operators": "off",
+        "arrow-parens": "off",
+        "prefer-arrow-callback": "off",
+        "class-methods-use-this": "off",
+        "no-restricted-syntax": "off",
+        "no-plusplus": "off",
+        "prefer-const": "off",
+        "object-shorthand": "off",
+        "no-loop-func": "warn",
+        "key-spacing": "off",
+        "no-unused-vars": ["warn", { "varsIgnorePattern": "^[A-Z]+$" }],
+        "max-len": "warn",
+        "func-names": "off",
+        "no-underscore-dangle": "off",
+        "no-lonely-if": "off",
+        "import/prefer-default-export": "off",
+        "comma-dangle": "off",
+        "no-undef": "off",
+        "radix": "off"
+    },
+    "env": {
+        "browser": true,
+        "jquery": true
+    },
+    "globals": {
+        "_": false,
+        "app": false,
+        "Cookies": false,
+        "paper": false,
+        "Recorder": false,
+        "saveAs": false,
+        "screenfull": false,
+        "Shake": false,
+        "Snap": false,
+        "StartAudioContext": false,
+        "Tone": false,
+        "Vue": false
+    }
+}

@@ -1,2 +1,4 @@
 .sass-cache
 _sass/*.css
+node_modules
+.vscode

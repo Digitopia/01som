@@ -1,43 +1,31 @@
-var HELP = {
+class Help {
 
-    init: function() {
+    static init() {
 
-        var self = this
+        $(".close-button").click(() => this.show(false))
+        $(".help-icon").click(() => this.show(true))
+        $(".modal").click(() => this.show(false))
 
-        $(".close-button").click(function() {
-            self.show(false)
-        })
-
-        $(".help-icon").click(function() {
-            self.show(true)
-        })
-
-        $(".modal").click(function() {
-            self.show(false)
-        })
-
-        if (Cookies.get("visited")) {
-            console.debug("returning visitor")
-            // self.show(true) // NOTE: uncomment for testing, to force help message
-        } else {
-            console.log("first time visitor")
+        if (!Cookies.get("visited")) {
+            // console.log("first time visitor")
             Cookies.set("visited", true, { expires: 365, path: "/" })
-            self.show(true)
+            this.show()
+        } else {
+            // console.debug("returning visitor")
+            // this.show(true) // NOTE: uncomment for testing, to force help message
         }
 
-        // NOTE: Hide help if Escape key is pressed
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) self.show(false)
+        // Hide help if Escape key is pressed
+        $(document).keyup(e => {
+            if (e.keyCode === 27) this.hide()
         })
-    },
+    }
 
-    show: function(state) {
+    static setVisible(bool) {
 
-        // NOTE: this should be binded more effectively.. but not using Angular just for this...
-
-        if (state) {
+        if (bool) {
             $(".modal").show()
-            $(".help-icon").mouseover(function(){}).mouseout(function(){})
+            $(".help-icon").mouseover(function() {}).mouseout(function() {})
             $(".help-icon").first().css("color", "grey")
         } else {
             $(".modal").hide()
@@ -47,6 +35,14 @@ var HELP = {
                 .mouseout(function() { $(this).css("color", "black") })
         }
 
+    }
+
+    static show() {
+        return this.setVisible(true)
+    }
+
+    static hide() {
+        return this.setVisible(false)
     }
 
 }

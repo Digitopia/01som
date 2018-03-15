@@ -1,31 +1,67 @@
-### Coisas a melhorar/corrigir
-- [x] adicionar matriz binária à sessão 1
-- [x] posicionamento dos círculos on resize e não só
-- [x] tamanho da janela está oversized e a criar scroll, pelo menos no Chrome
-- [ ] "deprecar" a sessão 2 em favor da 3, uma vez que educativamente não está a acrescentar nada
-- [ ] melhorar instruções: melhorar o contraste e dimensões da box
-- [ ] remover possibilidade de gravar áudio sessão 4, visto que praticamente ninguém usa
-- [ ] tirar botões de bpm da sessão notation
-- [ ] falta adicionar possibilidade de gravar nas versões novas
-- [ ] converter sessão 4 para Tone.js
-- [ ] fica a faltar também claro, passar tudo para app Android/iOS
+### Melhorar/Corrigir
+- [x] adicionar matriz binária à sessão 1
+- [x] posicionamento dos círculos on resize e não só
+- [x] tamanho da janela está oversized e a criar scroll, pelo menos no Chrome
+- [x] tirar botões de bpm da sessão notation
+- [x] falta adicionar possibilidade de gravar nas versões novas
 - [ ] terminar de implementar panner3D!
+- [ ] "deprecar" a sessão 2 em favor da 3, uma vez que educativamente não está a acrescentar nada
+- [ ] melhorar instruções: melhorar o contraste e dimensões da box
+- [ ] remover possibilidade de gravar áudio sessão 4, visto que praticamente ninguém usa
+- [ ] converter sessão 4 para Tone.js
+- [ ] fica a faltar também claro, passar tudo para app Android/iOS
+- [ ] update README.md, com imagens e texto
+- [ ] adicionar subtitulo
+- [ ] fullscreen icon bug
+- [ ] css modo landscape
+- [ ] update imagens
+- [ ] mudar fonte sequencer labels
+- [ ] tamanho texto sequencer labels também não parece o correto
+- [ ] referir cenas designer
+- [ ] text size on orientation change
+- [ ] matrizes
 
-### Ideias de novas features
-- [ ] possibilidade de clicar diretamente na "matriz" de 0s e 1s e ter reflexo nos círculos
-- [ ] possibilidade de arrastar sons para a "legenda" e até gravar diretamente do mic
-- [ ] possibilidade de configurar número pontos, em vez de ser fixo sempre a 8
 
-### Novas
+### New features
 
 - [x] proper resize de demais elementos de interface
 - [x] tamanho certo em móveis e computador
-- [ ] posicionamento das matrizes binárias...
 - [x] botão fullscreen
-- [ ] set max age para refresh da página
+- [ ] posicionamento das matrizes binárias
+- [ ] set max age para refresh da página
 
-### Técnicas
+#### Possible new features
+- [ ] possibilidade de clicar diretamente na "matriz" de 0s e 1s e ter reflexo nos círculos
+- [ ] possibilidade de arrastar sons para a "legenda" e até gravar diretamente do mic
+- [ ] possibilidade de configurar número pontos, em vez de ser fixo sempre a 8
+- [ ] Twitter Player card (?)
 
-- [ ] Try and experiment with Vue.js to improve some variable binding?
-- [ ] Experiment with Babel.js so that can use ES6 features, while still guaranteeing backwards compatibility
-- [ ] Experiment with jsdoc for classes, just because
+
+### Puramente Técnicas
+
+- [x] Change to [Visual Studio Code](https://code.visualstudio.com/), to be able to make use of better intelisense
+- [x] Add [ESlint](https://eslint.org/) to project, to improve code qualitiy and consistency. Use [Airbnb style guide](https://github.com/airbnb/javascript).
+- [x] Experiment with [Vue.js](https://vuejs.org/), to build the buttons instead of using jQuery
+- [x] Refactor code to use ECMASCript 6
+    - [x] classes
+    - [x] overcome the use of `var self = this` with the use of arrow functions
+    - [x] default parameters
+    - [x] better bind logic together via getter and setters!
+    - [x] string interpolation `${var} and some test with another ${var}`
+    - [x] avoid some `var` issues, by using `let` and even `const`
+    - [x] dependências que antes globais agora locais e com scripts
+    - [x] static methods
+- [x] Just have to run one script instead of multiple
+- [x] Experiment with [JSDoc](http://usejsdoc.org/) for classes, just because
+- [ ] Add [webpack](https://webpack.js.org/)
+    - [x] also minify and bundle javascript code
+- [ ] Automated screenshots on continous integration server
+- [ ] Migrate to netlify
+- [ ] Change to SPA
+- [ ] Update readme with gif
+- [ ] Make all global dependencies local
+   - [x] webpack
+   - [x] pug
+   - [x] eslint
+   - [x] live-server
+   - [ ] sass

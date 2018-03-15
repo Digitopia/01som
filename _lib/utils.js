@@ -1,38 +1,44 @@
-var Utils = {
+class Utils {
 
-    map: function(val, in_min, in_max, out_min, out_max) {
-        return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    },
+    static setVisible(elem, bool) {
+        let visibility = bool ? "visible" : "hidden"
+        elem.attr({ visibility: visibility })
+    }
 
-    setVisibility: function(elem, bool) {
-        var visibility = bool ? "visible" : "hidden"
-        elem.attr({visibility: visibility})
-    },
+    static hide(elem) {
+        return this.setVisible(elem, false)
+    }
 
-    hide: function(elem) { return this.setVisibility(elem, false) },
-    show: function(elem) { return this.setVisibility(elem, true) },
+    static show(elem) {
+        return this.setVisible(elem, true)
+    }
 
-    zeros: function(rows, cols) {
-        var matrix = new Array(rows)
-        for (var i = 0; i < rows; i++) {
+    static zeros(rows, cols) {
+        let matrix = new Array(rows)
+        for (let i = 0; i < rows; i++) {
             matrix[i] = []
-            for (var j = 0; j < cols; j++) {
+            for (let j = 0; j < cols; j++) {
                 matrix[i][j] = 0
             }
         }
         return matrix
-    },
+    }
 
-    isPortrait: function() {  return $("#svg").height() >= $("#svg").width() },
-    isLandscape: function() { return !this.isPortrait() },
+    static isPortrait() {
+        return $("#svg").height() <= $("#svg").width()
+    }
 
-    hideLoader: function() {
-        $("#loader").hide();
+    static isLandscape() {
+        return !this.isPortrait()
+    }
+
+    static hideLoader() {
+        $("#loader").hide()
         $("#wrapper").css("display", "flex")
-    },
+    }
 
-    getBodyFontSize: function() {
-        return parseInt($("body").css("font-size"))
+    static getBodyFontSize() {
+        return parseInt($("body").css("font-size"), 10)
     }
 
 }

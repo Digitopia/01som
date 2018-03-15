@@ -1,3 +1,7 @@
+/* eslint func-names: "off" */
+/* eslint no-unused-vars: "off" */
+/* eslint no-param-reassign: "off" */
+
 Snap.plugin(function(Snap, Element, Paper, global) {
 
     Paper.prototype.hline = function(y, x1, x2) {

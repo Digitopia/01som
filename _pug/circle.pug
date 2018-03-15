@@ -2,27 +2,29 @@ doctype html
 html
     head
 
-        title 0 + 1 = Som - Ritmo
+        block title
+            title 0 + 1 = Som
 
         meta(charset='utf-8')
-        
+
         //- Don't allow user-scalable so that double click doesn't result in zoom
         //- And use device-width so that page on mobile doesn't just zoom out
         meta(name='viewport' content='user-scalable=0 width=device-width')
-        
+
         //- NOTE: Launch in fullscreen if app pinned to homescreen
         meta(name='mobile-web-app-capable', content='yes')
         meta(name='apple-mobile-web-app-capable', content='yes')
-        
+
         //- NOTE: Use a Web App Manifest, for better PWA experience
-        link(rel='manifest', href='../manifest.json')            
+        link(rel='manifest', href='../manifest.json')
 
         //- NOTE: disable Tone.js logging version to console.log
         script(type='text/javascript').
             window.TONE_SILENCE_VERSION_LOGGING = true
-            
+
         //- CSS
-        link(rel='stylesheet' type='text/css' href='index.css')
+        //- link(rel='stylesheet' type='text/css' href='index.css')
+        link(rel='stylesheet' type='text/css' href='../_js/main.css')
         link(rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Raleway')
         //- link(rel="stylesheet" type='text/css' href="https://cdn.rawgit.com/h-ibaldo/Raleway_Fixed_Numerals/master/css/rawline.css")
         link(rel='stylesheet' type='text/css' href='https://use.fontawesome.com/releases/v5.0.6/css/all.css')
@@ -31,13 +33,10 @@ html
         link(rel='shortcut icon', href='../_assets/images/favicon.ico')
 
     body#body
-        
+
         #breakpoint
-        
-        #loader
-        
         #wrapper
-        
+
             #help-modal.modal
                 .modal-content
                     span.close-button ×
@@ -45,61 +44,66 @@ html
                         | Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>,
                         | duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>,
                         | quatro vezes para o <span class="word white">branco</span>. Clica nos botões de baixo para escolher o andamento.
-            
+
                     p.english
                         | Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>,
                         | three times for <span class="word red">red</span> and four times for <span class="word white">white</span>.
                         | Click the buttons at the bottom to choose the tempo.
-            
+
             #header.row
-            
+
                 #help.left.centered
                     i.fa.fa-question-circle.help-icon
-                
+
                 #title.content.centered
                     h1: a(href='/') 0 + 1 = SOM
-                    
-                
+
+
                 #info.right.centered
                     a(href="/info")
                         i.fas.fa-info-circle
-          
+
             #main.row.grow.column
-            
+
                 #icons.left.centered
                     img(src='../_assets/images/kick3.png' alt='kick')
                     img(src='../_assets/images/clap2.png' alt='clap')
                     img(src='../_assets/images/snap2.png' alt='snap')
-            
-                #svg.content.centered 
+
+                #svg.content.centered
                     //- NOTE: Javascript builds this
-            
+
                 #bpms.right.centered
-                    //- NOTE: Javascript builds this
-                            
+                    button(
+                        v-for="button in buttons"
+                        :value="button.bpm"
+                        @click="click(button.bpm)"
+                    ) {{ button.bpm}}
+
+
             .row
-                
+
                 #controls.content.centered
-                    
+
                     .control.fullscreen
                         i#btnFullscreen.fa.fa-expand(onclick="screenfull.toggle()")
                         span#spanFullScreen FULLSCREEN
-                    
+
                     .control
                         i#btnPlay.far.fa-play-circle
                         span#spanPlay PLAY
-                    
+
                     .control
                         i#btnRecord.far.fa-dot-circle
                         span#spanRecord REC
-                        
+
             footer.footer#sponsors.centered
                 a(href='http://www.bragamediaarts.com/en/' target='blank'): img(src='../_assets/images/BMA-1M.png')
                 a(href='http://digitopia.github.io/' target='blank'): img(src='../_assets/images/digitopia.png')
                 a(href='https://www.cm-braga.pt/' target='blank'): img(src='../_assets/images/braga.png')
-                    
+
         block scripts
-            
+
             //- Libraries
             script(src='../_vendor/Tone.min.js')
             script(src='../_vendor/js.cookie.min.js')
@@ -112,16 +116,17 @@ html
             script(src='../_vendor/viewport-units-buggyfill.js')
             script(src='../_vendor/recorder.js')
             script(src='../_vendor/FileSaver.min.js')
+            script(src='https://unpkg.com/vue/dist/vue.min.js')
 
             //- Sources
-            script(src='../_lib/snap.plugins.js')
+            script(src='../_lib/SnapPlugins.js')
             script(src='../_lib/colors.js')
             script(src='../_lib/help.js')
             script(src='../_lib/utils.js')
             script(src='../_lib/Point.js')
             script(src='../_lib/Circle.js')
             script(src='../_lib/App.js')
-            script(src='index.js')
+            script(src='../_js/circle.js')
 
             //- Google Analytics
             script.
@@ -131,4 +136,3 @@ html
                 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
                 ga('create', 'UA-92881433-1', 'auto');
                 ga('send', 'pageview');
-                    
