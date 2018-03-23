@@ -3,10 +3,9 @@
   "version": "0.2.0",
   "description": "0 + 1 = SOM",
   "scripts": {
-    "pug": "pug S1 S2 S3 -w --pretty",
+    "pug": "pug S1 S2 S3 notation index.pug -w --pretty",
     "sass": "sass --sourcemap=none --no-cache --watch S1 S2 S3 _sass --style compressed",
     "server": "live-server --host=localhost --ignore=_sass,_lib .",
-    "check-sass": "sass --help",
     "dev": "concurrently \"npm run pug\" \"npm run sass\" \"npm run server\" ",
     "webpack": "webpack -w -d",
     "server2": "webpack-serve",

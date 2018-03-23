@@ -1,85 +1,131 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <link href="_css/main.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
-
-    <link rel="shortcut icon" href="_assets/images/favicon.ico" />
-
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../_assets/images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/h-ibaldo/Raleway_Fixed_Numerals/master/css/rawline.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
     <style>
-        body { background-color: rgb(247, 247, 247); }
+      body { background-color: unset !important; }
+      
     </style>
-
-    <title>0 +1 = SOM</title>
-
-</head>
-
-<body>
-
-    <a href="http://digitopia.casadamusica.com/"><h2>Digitópia - Casa da Música</h2></a>
-
-    <h4>0 + 1 = SOM</h4>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a href="S1"><img src="_assets/images/menu/1.png" width="300" height="200"></a>
-            <div class="desc">Ritmo</div>
+    <link rel="stylesheet" type="text/css" href="../_sass/index.css">
+    <link rel="stylesheet" type="text/css" href="../_sass/circle.css">
+    <title>0 + 1 = SOM</title>
+  </head>
+  <body>
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">Sessões</h4>
+              <p class="text-muted">
+                <ul class="list-unstyled">
+                  <li><a class="text-white" href="/S1">1 - Ritmo</a></li>
+                  <li><a class="text-white" href="/S2">2 - Ritmo e Melodia</a></li>
+                  <li><a class="text-white" href="/S3">3 - Sequenciador</a></li>
+                  <li><a class="text-white" href="http://digitopia.github.io/01som/S4/">4 - Canção</a></li>
+                  <li><a class="text-white" href="/notation">5 - Notação</a></li>
+                </ul>
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4" id="contact">
+              <h4 class="text-white">Contacto</h4>
+              <ul class="list-unstyled">
+                <li><a class="text-white" href="https://www.facebook.com/DigitopiaCasaDaMusica/"><i class="text-white fab fa-facebook"></i></a></li>
+                <li><a class="text-white" href="https://www.instagram.com/digitopiacasadamusica/"><i class="text-white fab fa-instagram"></i></a></li>
+                <li><a class="text-white" href="//digitopia.casadamusica.com"><i class="text-white fa fa-globe"></i></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a href="S2"><img src="_assets/images/menu/2.png" width="600" height="400"></a>
-            <div class="desc">Ritmo e Melodia</div>
+      </div>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between"><a class="navbar-brand d-flex align-items-center" href="/"><span>0 + 1 = SOM</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a href="S3"><img src="_assets/images/menu/3.png" width="600" height="400"></a>
-            <div class="desc">Sequenciador</div>
+      </div>
+    </header>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">0 + 1 = SOM</h1><br>
+          <p class="lead text-muted">0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município  de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.</p>
+          <p class="lead text-muted">Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.</p>
         </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a href="https://digitopia.github.io/01som/S4/"><img src="_assets/images/menu/4.png" width="600" height="400"></a>
-            <div class="desc">Canção</div>
+      </section>
+    </main>
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="S1">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/1.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 1</span><a href="S1">Ritmo</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="S2">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/2.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 2</span><a href="S2">Ritmo e Melodia</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="S3">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/3.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 3</span><a href="S3">Sequenciador</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="https://digitopia.github.io/01som/S4/">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/cancao.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 4</span><a href="https://digitopia.github.io/01som/S4/">Canção</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="notation">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/notation.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 5</span><a href="notation">Notação</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="/">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/6.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 6</span><a href="/">Acústica</a><span class="card-text">(disponível brevemente)</span>
+                <console class="log" disabled!></console>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-centered">
+            <div class="card mb-3 box-shadow"><a href="/">
+                <div class="item"><img class="card-img-top" src="_assets/images/menu/7.png" alt="Card image cap"></div></a>
+              <div class="card-body text-centered"><span class="card-text">Sessão 7</span><a href="/">Teoria</a><span class="card-text">(disponível brevemente)</span>
+                <console class="log" disabled!></console>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a href="notation/"><img src="_assets/images/menu/5.png" width="600" height="400"></a>
-            <div class="desc">Notação</div>
-        </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a target="_blank" href="https://digitopia.github.io/01som/metro/"><img src="_assets/images/menu/6.png" width="600" height="400"></a>
-            <div class="desc">Acústica</div>
-        </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a target="_blank" href="https://digitopia.github.io/01som/metro/"><img src="_assets/images/menu/7.png" width="600" height="400"></a>
-            <div class="desc">Teoria</div>
-        </div>
-    </div>
-
-    <div class="responsive">
-        <div class="gallery">
-            <a target="_blank" href="info"><img src="_assets/images/menu/8.png" width="600" height="400"></a>
-            <div class="desc">Mais informação</div>
-        </div>
-    </div>
-
-    <div class="clearfix"></div>
-
-</body>
-
+    <footer class="footer centered" id="sponsors" style="visibility: visible"><a href="http://digitopia.github.io/" target="blank"><img src="../_assets/images/digitopia.png"></a><a href="http://www.bragamediaarts.com/en/" target="blank"><img src="../_assets/images/BMA-1M.png"></a><a href="https://www.cm-braga.pt/" target="blank"><img src="../_assets/images/braga.png"></a></footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-92881433-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </body>
 </html>

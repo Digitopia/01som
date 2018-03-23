@@ -1,11 +1,14 @@
+let app
+
 window.addEventListener("load", function () {
+// $(window).on("load", function() {
 
     Utils.hideLoader()
 
     const em = Utils.getBodyFontSize()
     const rectSize = 2.4 * em
 
-    const app = new App({
+    app = new App({
         paths: App.defaults.paths.all(),
         spatial: false,
         debug: false,

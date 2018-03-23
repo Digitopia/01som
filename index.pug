@@ -1,0 +1,50 @@
+extends _pug/layout
+
+block append head
+    link(rel='stylesheet' type='text/css' href='../_sass/index.css')
+    link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
+
+block main
+
+    - var sessoes = [ { id: 1, name: "Ritmo", img: "_assets/images/menu/1.png", url: "S1" }, { id: 2, name: "Ritmo e Melodia", img: "_assets/images/menu/2.png", url: "S2" }, { id: 3, name: "Sequenciador", img: "_assets/images/menu/3.png", url: "S3" }, { id: 4, name: "Canção", img: "_assets/images/menu/cancao.png", url: "https://digitopia.github.io/01som/S4/" }, { id: 5, name: "Notação", img: "_assets/images/menu/notation.png", url: "notation" }, { id: 6, name: "Acústica", img: "_assets/images/menu/6.png", url: "/", disabled: true }, { id: 7, name: "Teoria", img: "_assets/images/menu/7.png", url: "/", disabled: true } ]
+
+    main(role='main')
+
+        section.jumbotron.text-center
+
+            .container
+
+                h1.jumbotron-heading 0 + 1 = SOM
+
+                br
+
+                p.lead.text-muted 0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município  de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.
+
+                p.lead.text-muted Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.
+
+    .album.py-5.bg-light
+        .container
+            .row
+                each sessao in sessoes
+                    .col-lg-4.col-sm-6.col-centered
+                        .card.mb-3.box-shadow
+                            a(href=`${sessao.url}`)
+                                .item
+                                    img.card-img-top(
+                                        src=`${sessao.img}`
+                                        alt='Card image cap'
+                                    )
+                            .card-body.text-centered
+                                span.card-text Sessão #{ sessao.id }
+                                a(href=`${sessao.url}`) #{sessao.name}
+                                if (sessao.disabled)
+                                    span.card-text (disponível brevemente)
+                                    console.log("disabled!")
+                                //- .d-flex.justify-content-between.align-items-center
+
+
+
+    footer.footer#sponsors.centered(style="visibility: visible")
+        a(href='http://digitopia.github.io/' target='blank'): img(src='../_assets/images/digitopia.png')
+        a(href='http://www.bragamediaarts.com/en/' target='blank'): img(src='../_assets/images/BMA-1M.png')
+        a(href='https://www.cm-braga.pt/' target='blank'): img(src='../_assets/images/braga.png')

@@ -433,14 +433,14 @@ Circle.defaults = {}
  * Do "perfect alignment". * Instead of leaving double space in the middle of
  * circles leave the same as in the margins.
  */
-Circle.defaults.rFunc = function () {
+Circle.defaults.rFunc = function() {
     let r = (this.app.vmax / 2 - this.app.padding - this.app.padding / 2 - this.app.pointRadius * 2) / 2
     let l = r * 2 + 2 * this.app.pointRadius + 2 * this.app.padding
     if (l > this.app.vmin) r = (this.app.vmin - 2 * this.app.padding - 2 * this.app.pointRadius) / 2
     return r
 }
 
-Circle.defaults.xYFuncAux = function (app, offset = 0) {
+Circle.defaults.xYFuncAux = function(app, offset=0) {
     const pa = app.padding
     const pr = app.pointRadius
     let util = (app.vmax / 2 - pa - pa / 2 - pr * 2)
@@ -448,28 +448,28 @@ Circle.defaults.xYFuncAux = function (app, offset = 0) {
     return ret
 }
 
-Circle.defaults.xFunc1 = function () {
+Circle.defaults.xFunc1 = function() {
     if (Utils.isLandscape()) return Circle.defaults.xYFuncAux(this.app)
-    return this.app.width / 2
+    return this.app.width/2
 }
 
-Circle.defaults.yFunc1 = function () {
+Circle.defaults.yFunc1 = function() {
     if (Utils.isPortrait()) return Circle.defaults.xYFuncAux(this.app)
-    return this.app.height / 2
+    return this.app.height/2
 }
 
-Circle.defaults.xFunc2 = function () {
+Circle.defaults.xFunc2 = function() {
     if (Utils.isLandscape()) {
-        return Circle.defaults.xYFuncAux(this.app, this.app.width / 2 - this.app.padding / 2)
+        return Circle.defaults.xYFuncAux(this.app, this.app.width/2 - this.app.padding/2)
     }
-    return this.app.width / 2
+    return this.app.width/2
 }
 
-Circle.defaults.yFunc2 = function () {
+Circle.defaults.yFunc2 = function() {
     if (Utils.isPortrait()) {
-        return Circle.defaults.xYFuncAux(this.app, this.app.height / 2 - this.app.padding / 2)
+        return Circle.defaults.xYFuncAux(this.app, this.app.height/2 - this.app.padding/2)
     }
-    return this.app.height / 2
+    return this.app.height/2
 }
 
 Circle.defaults.options = {

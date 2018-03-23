@@ -37,8 +37,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    text-align: center;
-    max-width: 1400px;
     margin: 0 auto;
     color: $default;
 }
@@ -115,6 +113,10 @@ button {
     h1 {
         margin: 0;
     }
+    .subtitle h4 {
+        margin-top: 10px;
+    }
+    flex-direction: column;
 }
 
 #controls {
@@ -159,6 +161,8 @@ button {
     flex: 1 0 auto; /* grow, shrink, basis */
     display: none;
     flex-direction: column;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 // NOTE: if launched from home screen, then already in fullscreen and no need to show button for that

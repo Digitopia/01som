@@ -4,8 +4,9 @@ a {
 }
 
 div.gallery {
-    padding: 10px:;
+    padding: 10px;
     border: 1px solid #ccc;
+    line-height: 100px;
 }
 
 div.gallery:hover {
@@ -16,6 +17,7 @@ div.gallery:hover {
 div.gallery img {
     width: 100%;
     height: auto;
+    vertical-align: middle;
 }
 
 div.desc {
@@ -103,7 +105,7 @@ p {
   position: relative;
   height: 15%;
 }
+
 #nonFooter {
   position: relative;
 }
-</style>

@@ -25,7 +25,7 @@ class Utils {
     }
 
     static isPortrait() {
-        return $("#svg").height() <= $("#svg").width()
+        return $("#svg").height() >= $("#svg").width()
     }
 
     static isLandscape() {

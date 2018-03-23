@@ -123,6 +123,9 @@ class App {
         $(".fullscreen").click(() => { screenfull.request() })
 
         this.resize()
+
+        this.bpm = this.bpm
+
     }
 
     initDebug() {
