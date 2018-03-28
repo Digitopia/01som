@@ -1,0 +1,58 @@
+extends base
+
+block body
+
+    .container#wrapper
+
+        .row#header
+
+            .content#title.centered
+
+                .subtitle
+                    h4
+                        block subtitle
+                            | Sessão 1
+                .title
+                    h2
+                        block subtitle2
+                            | Ritmo
+
+            //- #info.right
+            //-     i.fa.fa-question-circle.help-icon
+
+        .row#main.grow.column
+            block main
+
+        .row
+
+            #controls.content.centered
+
+                .control.fullscreen
+                    i#btnFullscreen.fa.fa-expand(onclick="screenfull.toggle()")
+                    span#spanFullScreen FULLSCREEN
+
+                .control
+                    i#btnPlay.far.fa-play-circle
+                    span#spanPlay PLAY
+
+                .control
+                    i#btnRecord.far.fa-dot-circle
+                    span#spanRecord REC
+
+        //- footer.footer#sponsors
+        //-     a(href='http://www.bragamediaarts.com/en/' target='blank'): img(src='../_assets/images/BMA-1M.png')
+        //-     a(href='http://digitopia.github.io/' target='blank'): img(src='../_assets/images/digitopia.png')
+        //-     a(href='https://www.cm-braga.pt/' target='blank'): img(src='../_assets/images/braga.png')
+
+    #breakpoint
+
+    #loader
+
+    #help-modal.modal
+        .modal-content
+            span.close-button ×
+            p
+                block instructions-pt
+
+            p.english
+                block instructions-en

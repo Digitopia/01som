@@ -1,0 +1,38 @@
+extends session
+
+block append head
+    link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
+
+block main
+
+    .right#icons.centered
+        img(src='../_assets/images/kick3.png' alt='kick')
+        img(src='../_assets/images/clap2.png' alt='clap')
+        img(src='../_assets/images/snap2.png' alt='snap')
+
+    .content#svg.centered
+
+    .left#bpms.centered
+        button(
+            v-for="button in buttons"
+            :value="button.bpm"
+            @click="click(button.bpm)"
+        ) {{ button.bpm}}
+
+
+//- NOTE: using a include for this, because if using block append, because it's
+//- double extending the template, it ends up appending two times.. It's
+//- apprently a bug of pug that has been fixed, but for some reason that's the
+//- behaviour we're getting.
+
+block append scripts
+
+    //- Sources
+    script(src='../_lib/SnapPlugins.js')
+    script(src='../_lib/Colors.js')
+    script(src='../_lib/Help.js')
+    script(src='../_lib/Utils.js')
+    script(src='../_lib/Point.js')
+    script(src='../_lib/Circle.js')
+    script(src='../_lib/App.js')
+    script(src='../_js/circle.js')

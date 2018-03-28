@@ -20,8 +20,9 @@
       window.TONE_SILENCE_VERSION_LOGGING = true
       
     </script>
-    <link rel="stylesheet" type="text/css" href="../_sass/circle.css"/>
-    <title>0 + 1 = SOM | Sessão 1</title>
+    <style></style>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <title>0 + 1 = SOM | Sessão 5</title>
   </head>
   <header>
     <div class="collapse bg-dark" id="navbarHeader">
@@ -61,21 +62,21 @@
       <div class="row" id="header">
         <div class="content centered" id="title">
           <div class="subtitle">
-            <h4>Sessão 1
+            <h4>Sessão 5
             </h4>
           </div>
           <div class="title">
-            <h2>Ritmo
+            <h2>Notação
             </h2>
           </div>
         </div>
       </div>
       <div class="row grow column" id="main">
-        <div class="right centered" id="icons"><img src="../_assets/images/kick3.png" alt="kick"/><img src="../_assets/images/clap2.png" alt="clap"/><img src="../_assets/images/snap2.png" alt="snap"/></div>
-        <div class="content centered" id="svg"></div>
-        <div class="left centered" id="bpms">
-          <button v-for="button in buttons" :value="button.bpm" @click="click(button.bpm)">{{ button.bpm}}</button>
+        <div id="bpm">
+          <output id="bpmVal">60</output>
+          <input class="slider" id="bpmSlider" type="range" min="40" max="160" value="60" step="1"/>
         </div>
+        <div id="svg"></div>
       </div>
       <div class="row">
         <div class="content centered" id="controls">
@@ -124,12 +125,9 @@
     ga('create', 'UA-92881433-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <script src="../_lib/SnapPlugins.js"></script>
-  <script src="../_lib/Colors.js"></script>
-  <script src="../_lib/Help.js"></script>
   <script src="../_lib/Utils.js"></script>
-  <script src="../_lib/Point.js"></script>
-  <script src="../_lib/Circle.js"></script>
-  <script src="../_lib/App.js"></script>
-  <script src="../_js/circle.js"></script>
+  <script src="../_lib/SnapPlugins.js"></script>
+  <script src="../_lib/Help.js"></script>
+  <script src="../_lib/BaseApp.js"></script>
+  <script src="index.js"></script>
 </html>

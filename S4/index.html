@@ -20,8 +20,8 @@
       window.TONE_SILENCE_VERSION_LOGGING = true
       
     </script>
-    <link rel="stylesheet" type="text/css" href="../_sass/circle.css"/>
-    <title>0 + 1 = SOM | Sessão 1</title>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+    <title>0 + 1 = SOM | Sessão 4</title>
   </head>
   <header>
     <div class="collapse bg-dark" id="navbarHeader">
@@ -61,21 +61,16 @@
       <div class="row" id="header">
         <div class="content centered" id="title">
           <div class="subtitle">
-            <h4>Sessão 1
+            <h4>Sessão 4
             </h4>
           </div>
           <div class="title">
-            <h2>Ritmo
+            <h2>Canção
             </h2>
           </div>
         </div>
       </div>
       <div class="row grow column" id="main">
-        <div class="right centered" id="icons"><img src="../_assets/images/kick3.png" alt="kick"/><img src="../_assets/images/clap2.png" alt="clap"/><img src="../_assets/images/snap2.png" alt="snap"/></div>
-        <div class="content centered" id="svg"></div>
-        <div class="left centered" id="bpms">
-          <button v-for="button in buttons" :value="button.bpm" @click="click(button.bpm)">{{ button.bpm}}</button>
-        </div>
       </div>
       <div class="row">
         <div class="content centered" id="controls">
@@ -89,15 +84,9 @@
     <div id="loader"></div>
     <div class="modal" id="help-modal">
       <div class="modal-content"><span class="close-button">×</span>
-        <p>
-          Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>,
-          duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>,
-          quatro vezes para o <span class="word white">branco</span>. Clica nos botões de baixo para escolher o andamento.
+        <p>&nbsp;
         </p>
-        <p class="english">
-          Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>,
-          three times for <span class="word red">red</span> and four times for <span class="word white">white</span>.
-          Click the buttons at the bottom to choose the tempo.
+        <p class="english">&nbsp;
         </p>
       </div>
     </div>
@@ -124,12 +113,11 @@
     ga('create', 'UA-92881433-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <script src="../_lib/SnapPlugins.js"></script>
-  <script src="../_lib/Colors.js"></script>
-  <script src="../_lib/Help.js"></script>
+  <script src="../_vendor/p5.min.js"></script>
+  <script src="../_vendor/p5.sound.min.js"></script>
   <script src="../_lib/Utils.js"></script>
-  <script src="../_lib/Point.js"></script>
-  <script src="../_lib/Circle.js"></script>
-  <script src="../_lib/App.js"></script>
-  <script src="../_js/circle.js"></script>
+  <script src="points.js"></script>
+  <script src="player.js"></script>
+  <script src="sketch.js"></script>
+  <script src="index.js"></script>
 </html>

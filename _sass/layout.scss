@@ -73,6 +73,7 @@ button {
 .row {
     flex: 1 1 auto; /* grow, shrink, basis */
     display: flex;
+    text-align: center;
 }
 
 .grow {

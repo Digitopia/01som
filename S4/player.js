@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 //this is called by myControlPhrase
 function tickCounter(time, playbackRate) {
 	tickCount++;
@@ -46,4 +48,9 @@ function playD2(time, playbackRate) {
 function playD3(time, playbackRate) {
 	d3.rate(playbackRate);
 	d3.play(time);
+}
+
+function playCustom(time, playbackRate) {
+	customFile.rate(playbackRate);
+	customFile.play(time);
 }

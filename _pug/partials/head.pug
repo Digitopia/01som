@@ -17,10 +17,24 @@ head
         link(rel="stylesheet" type='text/css' href="https://cdn.rawgit.com/h-ibaldo/Raleway_Fixed_Numerals/master/css/rawline.css")
         link(rel='stylesheet' type='text/css' href='https://use.fontawesome.com/releases/v5.0.6/css/all.css')
 
+        //- Don't allow user-scalable so that double click doesn't result in zoom
+        //- And use device-width so that page on mobile doesn't just zoom out
+        meta(name='viewport' content='user-scalable=0 width=device-width')
+
+        //- NOTE: Launch in fullscreen if app pinned to homescreen
+        meta(name='mobile-web-app-capable', content='yes')
+        meta(name='apple-mobile-web-app-capable', content='yes')
+
+        //- NOTE: Use a Web App Manifest, for better PWA experience
+        link(rel='manifest', href='../manifest.json')
+
         //- unset background color
         style.
             body { background-color: unset !important; }
 
+        //- NOTE: disable Tone.js logging version to console.log
+        script(type='text/javascript').
+            window.TONE_SILENCE_VERSION_LOGGING = true
+
     block title
         title 0 + 1 = SOM
-

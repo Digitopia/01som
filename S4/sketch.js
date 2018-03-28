@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 var mySound, myControlPhrase, g1Phrase, g2Phrase, g3Phrase, bPhrase, pPhrase, cPhrase, d1Phrase, d2Phrase, d3Phrase, customPhrase;
 var myDo1Phrase, myRePhrase, myMiPhrase, mySolPhrase, myLaPhrase, myDo2Phrase;
 var canvas;
@@ -54,21 +56,18 @@ var recX, recY;
 
 
 function preload() {
-	g1 = loadSound('../sounds/g1.wav');
-	g2 = loadSound('../sounds/g2.wav');
-	g3 = loadSound('../sounds/g3.wav');
+	g1 = loadSound('../_assets/sounds/g1.wav');
+	g2 = loadSound('../_assets/sounds/g2.wav');
+	g3 = loadSound('../_assets/sounds/g3.wav');
 
-	b = loadSound('../sounds/b.wav');
-	p = loadSound('../sounds/p.wav');
-	c = loadSound('../sounds/c.wav');
+	b = loadSound('../_assets/sounds/b.wav');
+	p = loadSound('../_assets/sounds/p.wav');
+	c = loadSound('../_assets/sounds/c.wav');
 
-	d1 = loadSound('../sounds/d1.wav');
-	d2 = loadSound('../sounds/d2.wav');
-	d3 = loadSound('../sounds/d3.wav');
+	d1 = loadSound('../_assets/sounds/d1.wav');
+	d2 = loadSound('../_assets/sounds/d2.wav');
+	d3 = loadSound('../_assets/sounds/d3.wav');
 
-	digi = loadImage("../images/digitopia.png");
-	bma = loadImage("../images/BMA-1M.png");
-	braga = loadImage("../images/braga.png");
 }
 
 function setup() {
@@ -78,11 +77,11 @@ function setup() {
 
 	mic = new p5.AudioIn();
 	mic.start();
-	
+
 	radius = windowWidth/3*0.84; //0.84 is fine-tuned so that ellipses don't overlap
 
 	labels = ['Guit1', 'Guit2', 'Guit3', 'Baixo', 'Piano', 'Cordas', 'Bat1', 'Bat2', 'Bat3', 'Custom'];
-	
+
 	for(var i = 0; i < cycle; i++){
   		pointsA[i] = new Point(i, 0, color(107, 163, 189));
   		pointsB[i] = new Point(i, 1, color(137, 193, 219));
@@ -150,12 +149,12 @@ function setup() {
 
 function draw() {
 
-  	//background(255,220,220);	
+  	//background(255,220,220);
   	background(235, 255, 255);
   	fill(0, 0, 50);
   	textAlign(CENTER);
   	textSize(22);
-	text("0 + 1 = Som - Sessão 4", windowWidth/2, 40);
+	// text("0 + 1 = Som - Sessão 4", windowWidth/2, 40);
 
 	stroke(127);
 	strokeWeight(4);
@@ -326,16 +325,10 @@ function displayControls() {
 	}
 
 
-	
+
 }
 
 function displayLabel() {
-
-	//resize image according to page width and keeping the ratio
-	var newImageHeight = ((windowWidth/7)/3.744);
-	image(digi, 10, windowHeight- newImageHeight-5, newImageHeight*3.744, newImageHeight);
-	image(bma, 60 + newImageHeight*3.744, windowHeight - newImageHeight-5, newImageHeight*2.31, newImageHeight);
-	image(braga, 110 + newImageHeight*6.054, windowHeight - newImageHeight-5, newImageHeight*1.782+5, newImageHeight+5);
 
 	textSize(16);
 	textAlign(CENTER);

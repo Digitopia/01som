@@ -1,0 +1,48 @@
+@import "../_sass/circle";
+
+html {
+    background-color: honeydew;
+}
+
+main, svg, #svg {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#main {
+    width: 1000px;
+    height: 800px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 350px;
+    height: 30px;
+    background: rgb(220, 220, 220);
+    outline: none;
+    opacity: 0.6;
+    transition: opacity .2s;
+    transform: rotate(-90deg);
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: rgb(10, 150, 10);
+    cursor: pointer;
+}
+
+.sliderWrapper {
+    width: 35px;
+}
+
+#bpmVal {
+    display: block;
+    font-size: 35px;
+}

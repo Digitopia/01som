@@ -2,7 +2,7 @@
 =            DEFAULTS            =
 ================================*/
 
-// NOTE: this is contant whatever the size of the screen
+// NOTE: this is constant whatever the size of the screen
 #help i, #info i { font-size: 24px; }
 
 // NOTE: optimized for xl
@@ -66,8 +66,4 @@ text { font-size: 1.8em; }
 @media (min-width: 1200px) {
     #breakpoint::after { content: "xl"}
     // NOTE: this is the "default" (see above)
-}
-
-#sponsors {
-    visibility: hidden;
 }

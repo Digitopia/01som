@@ -1,16 +1,21 @@
-extends ../_pug/layouts/circle
+extends ../_pug/layouts/session
+
+block append head
+    //- link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
+    style.
+
 
 block header-title
     | 0 + 1 = SOM
 
 block title
-    title 0 + 1 = SOM | Sessão 3
+    title 0 + 1 = SOM | Sessão 5
 
 block subtitle
-    | Sessão 3
+    | Sessão 5
 
 block subtitle2
-    | Sequenciador
+    | Notação
 
 block instructions-pt
     | Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>,
@@ -21,3 +26,21 @@ block instructions-en
     | Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>,
     | three times for <span class="word red">red</span> and four times for <span class="word white">white</span>.
     | Click the buttons at the bottom to choose the tempo.
+
+block append head
+    link(rel='stylesheet' type='text/css' href='index.css')
+
+block main
+
+    #bpm
+        output#bpmVal 60
+        input#bpmSlider.slider(type='range' min='40' max='160' value='60' step='1')
+
+    #svg
+
+block append scripts
+    script(src='../_lib/Utils.js')
+    script(src='../_lib/SnapPlugins.js')
+    script(src='../_lib/Help.js')
+    script(src='../_lib/BaseApp.js')
+    script(src='index.js')

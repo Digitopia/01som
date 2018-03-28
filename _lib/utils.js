@@ -33,7 +33,7 @@ class Utils {
     }
 
     static hideLoader() {
-        $("#loader").hide()
+        $("#loader").remove()
         $("#wrapper").css("display", "flex")
     }
 
