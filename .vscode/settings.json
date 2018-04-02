@@ -1,0 +1,34 @@
+{
+  "files.excludezzzzz": {
+    "**/node_modules": true,
+    ".editorconfig": true,
+    "Gamult": true,
+    "CNAME": true,
+    "LICENSE": true,
+    "manifest.json": true,
+    "package-lock.json": true,
+    "package.json": true,
+    "README.md": true,
+    "sw.js": true,
+    "Todo.md": true,
+    "webpack.config.js": true,
+    ".eslintrc.json": true,
+    ".nojekyll": true,
+    ".jsdoc.json": true,
+    ".gitignore": true,
+    ".npmrc": true,
+    "_vendor": true,
+    "**/*.css": true,
+    "**/*.html": false,
+    "info/index.html": false,
+    ".sass-cache": "explorerExcludedFiles",
+    "_sass/*.css": "explorerExcludedFiles",
+    "node_modules": "explorerExcludedFiles"
+  },
+  "explorerExcludedFiles.show": false,
+  "files.exclude": {
+    ".sass-cache": "explorerExcludedFiles",
+    "_sass/*.css": "explorerExcludedFiles",
+    "node_modules": "explorerExcludedFiles"
+  }
+}

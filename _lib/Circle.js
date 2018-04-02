@@ -175,7 +175,7 @@ class Circle {
                 this.sequencer.labels[prevLabelIdx].rect.attr({
                     stroke: this.circleBackgroundColor
                 })
-                this.sequencer.labels[currLabelIdx].rect.attr({ stroke: grey })
+                this.sequencer.labels[currLabelIdx].rect.attr({ stroke: Colors.grey })
                 this.points = this.sequencer.points[currLabelIdx]
                 for (let i = 0; i < this.sequencer.points.length; i++) {
                     this.sequencerPoints[i].forEach(p => p.show(i === currLabelIdx))
@@ -228,19 +228,17 @@ class Circle {
     }
 
     initShake() {
-
-        // NOTE: need to initiate the shake so that can listen to its event callback
         new Shake({ threshold: 15, timeout: 1000 }).start()
+        window.addEventListener('shake', this.shaked, false)
+    }
 
-        const shaked = () => {
-            if (this.app.playing) this.app.playing = false
-            if (!this.sequencer) this.points.forEach(point => point.reset())
-            else {
-                this.sequencer.points.forEach(points => points.forEach(point => point.reset()))
-            }
+    shaked() {
+        console.log("shaked")
+        if (this.app.playing) this.app.playing = false
+        if (!this.sequencer) this.points.forEach(point => point.reset())
+        else {
+            this.sequencer.points.forEach(points => points.forEach(point => point.reset()))
         }
-
-        window.addEventListener('shake', shaked, false)
     }
 
     initCircle() {
@@ -336,9 +334,7 @@ class Circle {
      * This schedules the note play events (ahead of time) whenever a user hits the play button.
      */
     schedule() {
-
         for (let i = 0; i < this.n; i++) {
-
             Tone.Transport.schedule(t => {
 
                 let p = this.points[i]

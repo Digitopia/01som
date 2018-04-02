@@ -4,7 +4,6 @@ block append head
     //- link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
     style.
 
-
 block header-title
     | 0 + 1 = SOM
 
@@ -32,15 +31,21 @@ block append head
 
 block main
 
-    #bpm
-        output#bpmVal 60
-        input#bpmSlider.slider(type='range' min='40' max='160' value='60' step='1')
+    .col-lg-1
+        #bpm
+            output#bpmVal 60
+            #bpmSlider
 
-    #svg
+    .col-lg-10
+        #svg
+
+    .col-lg-1
+        |
 
 block append scripts
     script(src='../_lib/Utils.js')
     script(src='../_lib/SnapPlugins.js')
     script(src='../_lib/Help.js')
     script(src='../_lib/BaseApp.js')
+    script(src='https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js')
     script(src='index.js')

@@ -5,6 +5,7 @@
 - [x] tirar botões de bpm da sessão notation
 - [x] falta adicionar possibilidade de gravar nas versões novas
 - [x] adicionar subtitulo
+- [x] update imagens
 - [ ] melhorar instruções: melhorar o contraste e dimensões da box
 - [ ] terminar de implementar panner3D!
 - [ ] "deprecar" a sessão 2 em favor da 3, uma vez que educativamente não está a acrescentar nada
@@ -14,12 +15,11 @@
 - [ ] update README.md, com imagens e texto
 - [ ] fullscreen icon bug
 - [ ] css modo landscape
-- [ ] update imagens
 - [ ] mudar fonte sequencer labels
 - [ ] tamanho texto sequencer labels também não parece o correto
-- [ ] referir cenas designer
 - [ ] text size on orientation change
 - [ ] matrizes
+- [ ] migrar de github pages para netlify para poder ter o repositório na conta de Digitópia
 
 ### New features
 
@@ -51,11 +51,12 @@
 - [x] Just have to run one script instead of multiple
 - [x] Experiment with [JSDoc](http://usejsdoc.org/) for classes, just because
 - [ ] Add [webpack](https://webpack.js.org/)
-    - [x] also minify and bundle javascript code
+    - [ ] also minify and bundle javascript code
 - [ ] Automated screenshots on continous integration server
+- [x] Automated testing on CI too
 - [ ] Migrate to netlify
-- [ ] Change to SPA
 - [ ] Update readme with gif
+- [ ] Change to SPA
 - [ ] Make all global dependencies local
    - [x] webpack
    - [x] pug

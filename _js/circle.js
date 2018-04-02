@@ -8,8 +8,8 @@ window.addEventListener("load", function () {
     const em = Utils.getBodyFontSize()
     const rectSize = 2.4 * em
 
-    app = new App({
-        paths: App.defaults.paths.all(),
+    app = new CircleApp({
+        paths: CircleApp.defaults.paths.all(),
         spatial: false,
         debug: false,
         pointRadius: 1.8 * em,

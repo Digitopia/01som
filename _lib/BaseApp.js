@@ -44,8 +44,6 @@ class BaseApp {
         this.playing = false
         this.recording = false
 
-        this._init()
-
     }
 
     get recording() { return this._recording }
@@ -64,6 +62,7 @@ class BaseApp {
             $("#btnPlay").removeClass("fa-stop-circle")
             $("#btnPlay").addClass("fa-play-circle")
             $("#spanPlay").text("PLAY")
+            this.stop()
             Tone.Transport.stop()
         }
     }
@@ -93,7 +92,7 @@ class BaseApp {
         this._recording = bool
     }
 
-    _init() {
+    init() {
 
         this.initCanvas()
         this.initAudio()
@@ -104,7 +103,7 @@ class BaseApp {
 
         $(".fullscreen").click(() => { screenfull.request() })
 
-        this._resize()
+        this.resize()
 
         this.bpm = this.bpm
 
@@ -131,8 +130,8 @@ class BaseApp {
 
     initCanvas() {
         this.paper = Snap()
-        $("svg").appendTo(this.container).addClass("content centered")
-        window.addEventListener("resize", () => this._resize())
+        $("svg").appendTo(this.container)
+        window.addEventListener("resize", () => this.resize())
     }
 
     initAudio() {
@@ -159,13 +158,13 @@ class BaseApp {
      * The callback for whenever the window gets resized.
      * This then propagates to the associated classes.
      */
-    _resize() {
+    resize() {
         this.width = $(this.container).width()
         this.height = $(this.container).height()
         this.vmax = Math.max(this.width, this.height)
         this.vmin = Math.min(this.width, this.height)
-        if (this.circles) this.circles.forEach(circle => circle.resize())
-        if (this.debug) this._debug()
+        if (this.debug) this.debug()
+        // this.resize()
     }
 
     /**
@@ -185,7 +184,7 @@ class BaseApp {
     /**
      * Update draw directives so that they are in proper place.
      */
-    _debug() {
+    debug() {
 
         if (!this.grid) return
 
@@ -256,43 +255,7 @@ class BaseApp {
     }
 
     /** To be overloaded when extending the class */
-    schedule() {}
+    play() {}
+    stop() {}
 
-}
-
-const basePath = "../_assets/sounds"
-
-/**
- * Hold some defaults to avoid too much boilerplate.
- */
-BaseApp.defaults = {
-    buttons: [
-        { bpm: 44,  bg: 250 },
-        { bpm: 52,  bg: 247 },
-        { bpm: 60,  bg: 244 },
-        { bpm: 80,  bg: 241 },
-        { bpm: 100, bg: 238 },
-        { bpm: 120, bg: 235 },
-    ],
-    paths: {
-        percussive: {
-            kick: `${basePath}/kick.mp3`,
-            clap: `${basePath}/clap.mp3`,
-            snap: `${basePath}/snap.mp3`,
-        },
-        notes: {
-            kick: `${basePath}/kick.mp3`,
-            clap: `${basePath}/clap.mp3`,
-            snap: `${basePath}/snap.mp3`,
-            do1:  `${basePath}/do1.mp3`,
-            re:   `${basePath}/re.mp3`,
-            mi:   `${basePath}/mi.mp3`,
-            sol:  `${basePath}/sol.mp3`,
-            la:   `${basePath}/la.mp3`,
-            do2:  `${basePath}/do2.mp3`,
-        },
-        all() {
-            return _.merge(this.percussive, this.notes)
-        },
-    },
 }

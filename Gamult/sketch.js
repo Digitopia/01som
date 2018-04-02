@@ -21,9 +21,9 @@ var freezeOff = true;
 var faderDrag = false;
 
 function preload() {
-	s1 = loadSound('../sounds/A_KSL2.wav');
-	s2 = loadSound('../sounds/A_KSL3.wav');
-	s3 = loadSound('../sounds/A_KSL5.wav');
+	s1 = loadSound('../_assets/sounds/A_KSL2.wav');
+	s2 = loadSound('../_assets/sounds/A_KSL3.wav');
+	s3 = loadSound('../_assets/sounds/A_KSL5.wav');
 }
 
 function setup() {
@@ -55,7 +55,7 @@ function draw() {
 			particleArray[i].gravity();
 			particleArray[i].draw();
 		}
-		
+
 	}
 
 	for(var i = 0; i<particleArray.length; i++) {

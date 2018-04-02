@@ -18,19 +18,22 @@ class App extends BaseApp {
         /** the same as labelText, but with integers */
         this.valueString = [0, 0, 0, 0, 0, 0, 0, 0]
 
-        /**  */
-        this.imgWidth = $("#main").width() / 10
-
+        this.imgWidth = $("#svg").width() / 10
         this.cx = this.imgWidth / 0.8
-        this.cy = $("#main").height() / 2 - this.imgWidth
+        this.cy = $("#main").height() / 2 - 200
 
         this.init()
 
     }
 
     init() {
+        super.init()
         this.initImages()
         this.initBpmSlider()
+        this.loadSounds(this.paths) // Sounds were being loaded when adding circle, since no circles in this session load here
+        this.paper.attr({
+            // viewbox: '0 0 ' + $("#svg").width() + ' ' + $("#svg").height()
+        })
     }
 
     initImages() {
@@ -59,42 +62,51 @@ class App extends BaseApp {
     }
 
     initBpmSlider() {
-        $('#bpmSlider').on('input', () => {
-            let bpm = $("#bpmSlider").val()
-            $("#bpmVal").text(bpm)
-            this.bpm = bpm
+
+        this.bpmSlider = new Nexus.Slider('#bpmSlider', {
+            'size': [40, 320],
+            'mode': 'absolute',
+            'min': 40,
+            'max': 160,
+            'step': 1,
+            'value': 60
         })
+
+        this.bpmSlider.on('change', value => {
+            $("#bpmVal").text(value)
+            this.bpm = value
+        })
+
     }
 
+    /**
+     * This is called from BaseApp when app.playing = true
+     * and before calling Tone.Transport.start()
+     */
+    schedule() {
+        for (let i = 0; i < this.valueString.length; i++) {
+            Tone.Transport.schedule(t => {
+                this.animate(i)
+                let idx = this.valueString[i] - 1
+                if (idx >= 0 && idx <= 2) this.audios["tick"].start(t)
+            }, `${i}*8n`)
+        }
+    }
+
+    /**
+     * This is called from BaseApp when app.playing = false
+     * and before calling Tone.Transport.stop()
+     */
     stop() {
+        if (!this.valueString) return
         for (var i = 0; i < this.valueString.length; i++) {
             this.labelText[i].attr("fill", "black")
         }
     }
 
-    schedule() {
-        console.log("I am scheduling in App")
-        // First schedule all events
-        // for (var i = 0; i < this.valueString.length; i++) {
-        //     (function () {
-        //         var _i = i
-        //         Tone.Transport.schedule(function (t) {
-        //             console.log("Playing 8th note number", _i)
-        //             idx = this.valueString[_i] - 1
-        //             animate(_i)
-        //             if (idx >= 0 && idx <= 2) audios[idx].start(t)
-        //         }, i + "*8n")
-        //     })()
-        // }
-    }
-
     animate(index) {
-        if (index == 0) {
-            Tone.Master.volume.value = 0
-        } else {
-            Tone.Master.volume.value = -7
-        }
-
+        if (index === 0) Tone.Master.volume.value = 0
+        else Tone.Master.volume.value = -7
         this.labelText[index].attr("fill", "red")
         for (var i = 1; i < this.valueString.length; i++) {
             this.labelText[(index + i) % 8].attr("fill", "black")
@@ -156,6 +168,11 @@ class App extends BaseApp {
 let app
 window.addEventListener("load", function () {
 
+    Utils.hideLoader()
+
+    // Hide what doesn't matter (for now) for this session
+    $("#btnfcord").parent().hide()
+
     app = new App({
         paths: {
             "tick": "../_assets/sounds/tick.wav"
@@ -163,9 +180,5 @@ window.addEventListener("load", function () {
         spatial: false,
         debug: false
     })
-
-    // Hide what doesn't matter (for now) for this session
-    $("#btnRecord").parent().hide()
-    Utils.hideLoader()
 
 })
