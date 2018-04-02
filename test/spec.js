@@ -99,7 +99,7 @@ xdescribe("Shake", () => {
 
 })
 
-describe("S3 - Sequencer", () => {
+xdescribe("S3 - Sequencer", () => {
 
     let session = "S3"
 
