@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "0 + 1 = SOM",
   "scripts": {
-    "pug": "pug S1 S2 S3 S4 S5 index.pug -w --pretty",
+    "pug": "pug S1 index.pug -w",
     "sass": "sass --sourcemap=none --no-cache --watch S1 S2 S3 S4 S5 _sass --style compressed",
     "server": "live-server --host=localhost --ignore=_sass,_lib,node_modules .",
     "dev": "concurrently \"npm run pug\" \"npm run sass\" \"npm run server\" ",

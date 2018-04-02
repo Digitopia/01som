@@ -5,14 +5,17 @@ block append head
 
 block main
 
-    .right#icons.centered
+    //- .col-lg-2#icons
+    .left#icons.centered
         img(src='../_assets/images/kick3.png' alt='kick')
         img(src='../_assets/images/clap2.png' alt='clap')
         img(src='../_assets/images/snap2.png' alt='snap')
 
+    //- .col-lg-8#svg
     .content#svg.centered
 
-    .left#bpms.centered
+    //- .col-lg-2#bpms
+    .right#bpms.centered
         button(
             v-for="button in buttons"
             :value="button.bpm"
