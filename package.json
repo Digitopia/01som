@@ -11,7 +11,7 @@
     "server2": "webpack-serve",
     "start": "npm run server",
     "jsdoc": "jsdoc -c .jsdoc.json",
-    "test": "jest test/*.js --watch",
+    "test": "jest test/*.js",
     "cloc": "expr $(cloc --json _lib | jq .SUM.code) + $(cloc --json _pug | jq .SUM.code) + $(cloc --json _sass/*.scss | jq .SUM.code)"
   },
   "engines": {
