@@ -7,7 +7,7 @@ node_js:
 language: node_js
 
 script:
-    - npm test-ci
+    - npm run test-ci
 
 cache:
   directories:
