@@ -6,7 +6,7 @@ jest.setTimeout(timeout)
 
 const allSessions = ["S1", "S2", "S3", "S4", "S5"]
 
-xdescribe("No syntatic errors", () => {
+describe("No syntatic errors", () => {
 
     const sessions = allSessions
 
@@ -34,7 +34,7 @@ xdescribe('Full page height', () => {
 
 })
 
-xdescribe("Shake", () => {
+describe("Shake", () => {
 
     const sessions = ["S1", "S2", "S3"]
 
@@ -99,7 +99,7 @@ xdescribe("Shake", () => {
 
 })
 
-xdescribe("S3 - Sequencer", () => {
+describe("S3 - Sequencer", () => {
 
     let session = "S3"
 
