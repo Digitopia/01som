@@ -7,50 +7,26 @@
     "sass": "sass --sourcemap=none --no-cache --watch S1 S2 S3 S4 S5 _sass --style compressed",
     "server": "live-server --host=localhost --ignore=_sass,_lib,node_modules .",
     "dev": "concurrently \"npm run pug\" \"npm run sass\" \"npm run server\" ",
-    "webpack": "webpack -w -d",
-    "server2": "webpack-serve",
     "start": "npm run server",
     "jsdoc": "jsdoc -c .jsdoc.json",
-    "test": "jest test/*.js",
+    "test": "jest test/*.js --watch",
+    "test-ci": "jest test/*.js",
     "cloc": "expr $(cloc --json _lib | jq .SUM.code) + $(cloc --json _pug | jq .SUM.code) + $(cloc --json _sass/*.scss | jq .SUM.code)"
   },
   "engines": {
-      "node": "8.x.x"
+      "node": ">=8.x.x"
   },
   "private": true,
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-uglify": "^1.0.2",
-    "babel-preset-env": "^1.6.1",
-    "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.5.1",
-    "css-loader": "^0.28.10",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.0.6",
     "jest": "^22.4.3",
     "jest-puppeteer": "^2.2.1",
-    "jsdoc": "^3.5.5",
     "live-server": "^1.2.0",
-    "minami": "^1.2.3",
     "pug": "^2.0.3",
     "pug-cli": "^1.0.0-alpha6",
-    "pug-loader": "^2.3.0",
-    "puppeteer": "^1.2.0",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3",
-    "tui-jsdoc-template": "^1.2.2",
-    "uglifyjs-webpack-plugin": "^1.2.2",
-    "webpack": "^3.4.1",
-    "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "^2.x.x",
-    "webpack-serve": "^0.2.0"
-  },
-  "dependencies": {
-    "npm": "^5.8.0"
+    "puppeteer": "^1.2.0"
   }
 }

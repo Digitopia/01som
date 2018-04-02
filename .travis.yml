@@ -6,6 +6,9 @@ node_js:
 
 language: node_js
 
+script:
+    - npm test-ci
+
 cache:
   directories:
     - node_modules
