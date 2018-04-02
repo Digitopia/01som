@@ -14,6 +14,9 @@
     "test": "jest test/*.js --watch",
     "cloc": "expr $(cloc --json _lib | jq .SUM.code) + $(cloc --json _pug | jq .SUM.code) + $(cloc --json _sass/*.scss | jq .SUM.code)"
   },
+  "engines": {
+      "node": "8.x.x"
+  },
   "private": true,
   "devDependencies": {
     "babel-cli": "^6.26.0",
