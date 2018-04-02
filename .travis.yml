@@ -6,7 +6,9 @@ node_js:
 
 language: node_js
 
+
 script:
+    - npm run server &
     - npm run test-ci
 
 cache:

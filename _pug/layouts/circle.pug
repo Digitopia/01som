@@ -19,12 +19,6 @@ block main
             @click="click(button.bpm)"
         ) {{ button.bpm}}
 
-
-//- NOTE: using a include for this, because if using block append, because it's
-//- double extending the template, it ends up appending two times.. It's
-//- apprently a bug of pug that has been fixed, but for some reason that's the
-//- behaviour we're getting.
-
 block append scripts
 
     //- Sources
