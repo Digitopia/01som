@@ -43,7 +43,7 @@ window.addEventListener("load", function () {
         }
     }
 
-    // app.addCircle(params)
+    app.addCircle(params)
 
     if (!s1) {
         app.addCircle({
@@ -57,7 +57,5 @@ window.addEventListener("load", function () {
             circleBackgroundColor: Colors.lightgreen,
         })
     }
-
-    $("#header").remove()
 
 })
