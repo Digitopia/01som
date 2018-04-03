@@ -26,8 +26,8 @@ describe('Full page height', () => {
         test(`${session}`, async () => {
             await page.goto(`${url}/${session}`)
             page.setViewport({ width: 1280, height: 1024 })
-            // const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
-            const viewportHeight = await page.evaluate(() => window.innerHeight)
+            const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
+            // const viewportHeight = await page.evaluate(() => window.innerHeight)
             const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
             expect(viewportHeight).toEqual(fullHeight)
         })
