@@ -18,7 +18,7 @@ describe("No syntatic errors", () => {
 
 })
 
-describe('Full page height', () => {
+xdescribe('Full page height', () => {
 
     const sessions = allSessions
 
