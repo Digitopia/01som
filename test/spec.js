@@ -23,7 +23,8 @@ describe('Full page height', () => {
     const sessions = allSessions
 
     sessions.forEach(session => {
-        test(`${session}`, async () => {
+        const testExpr = session === "S4" ? test.skip : test // TODO: S4 still not ready for testing
+        testExpr(`${session}`, async () => {
             await page.goto(`${url}/${session}`)
             page.setViewport({ width: 1280, height: 1024 })
             const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
