@@ -19,9 +19,10 @@
 
 // NOTE: show active breakpoint at top-left corner
 #breakpoint {
-    // position: fixed;
-    // top: 10px;
-    // left: 10px;
+    position: fixed;
+    top: 80px;
+    left: 10px;
+
     &::after {
         display: none;
     }
@@ -39,10 +40,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    text-align: center;
     max-width: 1400px;
     margin: 0 auto;
     color: $default;
+}
+
+// Hack to be able to override body max-width
+header {
+    position: absolute;
+    left: 0;
+    right: 0;
 }
 
 a:visited, a:hover, a {
@@ -57,13 +64,14 @@ button {
     background-color: $lightblue;
     color: white;
     border: none;
+
     &.active {
         color: lightslategrey;
     }
+
     &:hover {
         color: grey !important;
     }
-
 }
 
 /*===============================
@@ -108,29 +116,39 @@ button {
 
 #title {
     color: $default;
+
     a {
         text-decoration: none;
+
         &:hover {
             text-decoration: underline;
         }
     }
+
     h1 {
         margin: 0;
     }
+
+    .subtitle h4 {
+        margin-top: 10px;
+    }
+
+    flex-direction: column;
 }
 
 #controls {
     .control {
         display: inline-block;
         text-align: center;
+
         span {
             display: block;
         }
+
         i {
             vertical-align: middle;
         }
     }
-
 }
 
 #icons {
@@ -139,6 +157,7 @@ button {
 
 #bpms {
     flex-direction: column;
+
     button {
         display: block;
         text-align: center;
@@ -147,8 +166,14 @@ button {
 }
 
 #sponsors {
-    img:hover {
-        opacity: 0.6;
+    img {
+        // filter: grayscale(100%);
+        opacity: 0.4;
+        width: 50%;
+        &:hover {
+            filter: none;
+            opacity: 0.6;
+        }
     }
 }
 
@@ -156,9 +181,14 @@ button {
     flex: 1 0 auto; /* grow, shrink, basis */
     display: none;
     flex-direction: column;
+
+    // max-width: 1400px;
+    // margin: 0 auto;
 }
 
 // NOTE: if launched from home screen, then already in fullscreen and no need to show button for that
 @media all and (display-mode: fullscreen) {
-    .fullscreen { visibility: hidden }
+    // .fullscreen {
+    //     visibility: hidden;
+    // }
 }

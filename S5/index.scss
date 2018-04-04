@@ -1,0 +1,25 @@
+@import "../_sass/circle";
+
+html {
+    background-color: honeydew;
+}
+
+#svg {
+    height: 100%;
+}
+
+#bpm {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    #bpmVal {
+        font-size: 2em;
+    }
+}
+
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
+}

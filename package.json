@@ -1,12 +1,32 @@
 {
   "name": "01som",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "0 + 1 = SOM",
   "scripts": {
-    "sass": "sass --sourcemap=none --no-cache --watch .",
-    "pug": "pug S1 S2 S3 -w",
-    "server": "live-server --verbose --ignore=_sass --no-browser .",
-    "start": "npm run server"
+    "pug": "pug S1 S2 S3 S4 S5 index.pug -w",
+    "sass": "sass --sourcemap=none --no-cache --watch S1 S2 S3 S4 S5 _sass --style compressed",
+    "server": "live-server --host=localhost --ignore=_sass,_lib,node_modules .",
+    "dev": "concurrently \"npm run pug\" \"npm run sass\" \"npm run server\" ",
+    "start": "npm run server",
+    "jsdoc": "jsdoc -c .jsdoc.json",
+    "test": "jest test/*.js --watch",
+    "test-ci": "jest test/*.js",
+    "cloc": "expr $(cloc --json _lib | jq .SUM.code) + $(cloc --json _pug | jq .SUM.code) + $(cloc --json _sass/*.scss | jq .SUM.code)"
   },
-  "private": true
+  "engines": {
+    "node": ">=8.x.x"
+  },
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "jest": "^22.4.3",
+    "jest-puppeteer": "^2.2.1",
+    "live-server": "^1.2.0",
+    "pug": "^2.0.3",
+    "pug-cli": "^1.0.0-alpha6",
+    "puppeteer": "^1.2.0"
+  }
 }

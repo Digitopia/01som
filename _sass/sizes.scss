@@ -2,7 +2,7 @@
 =            DEFAULTS            =
 ================================*/
 
-// NOTE: this is contant whatever the size of the screen
+// NOTE: this is constant whatever the size of the screen
 #help i, #info i { font-size: 24px; }
 
 // NOTE: optimized for xl
@@ -15,7 +15,6 @@ body { font-size: 16px; } // NOTE: this is the base unit of comparison for em
 #icons img { width: 5em; height: 5em; margin: 1em 0; }
 #bpms button { font-size: 1.5em; width: 3em; height: 3em; margin: 0.5em 0; }
 #controls i { font-size: 3em; margin: 0 20px; }
-#sponsors img { width: 50%; }
 #btnPlay { font-size: 5em !important; }
 .content { width: 60%; }
 .left, .right { width: 20%; }
@@ -40,8 +39,8 @@ text { font-size: 1.8em; }
     // .left, .right, .content { width: 100%; }
     // #icons, #bpms { flex-direction: row; }
     // #bpms button { margin: 0 0.2em; }
-    // #bpms { order: -1; }
-    // #icons { order: 1; }
+    // #bpms { order: 1; }
+    // #icons { order: -1; }
 }
 
 // Small devices (landscape phones, 576px and up)

@@ -1,0 +1,103 @@
+:root {
+    --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+    padding-top: var(--jumbotron-padding-y);
+    padding-bottom: var(--jumbotron-padding-y);
+    margin-bottom: 0;
+    background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .jumbotron {
+        padding-top: calc(var(--jumbotron-padding-y) * 2);
+        padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+    }
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+footer p {
+    margin-bottom: .25rem;
+}
+
+.box-shadow {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.card-body {
+    height: 80px;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 0;
+}
+
+.grey {
+    filter: grayscale(100%);
+    opacity: 0.5;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.item {
+    overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+img:hover {
+    -moz-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.card-text {
+    font-size: 0.85em;
+}
+
+#contact i {
+    font-size: 30px;
+    color: red;
+}
+
+#contact li {
+    display: inline;
+    margin: 5px;
+}
+
+.disabled {
+    cursor: not-allowed !important;
+    img:hover {
+        cursor: not-allowed !important;
+        transform: unset !important;
+    }
+}
