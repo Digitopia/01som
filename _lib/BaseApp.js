@@ -69,10 +69,6 @@ class BaseApp {
 
     set bpm(bpm) {
         this._bpm = bpm
-        $("#bpms button").removeClass("active")
-        $(`:button[value='${bpm}']`).addClass("active")
-        // let { bg } = this.buttons.find(button => button.bpm === bpm)
-        // $("html").css("background-color", `rgb(255,${bg},${bg}`)
         Tone.Transport.bpm.value = bpm
     }
 
@@ -107,8 +103,6 @@ class BaseApp {
 
         this.resize()
 
-        // this.bpm = this.bpm
-
     }
 
     initDebug() {
@@ -132,7 +126,8 @@ class BaseApp {
 
     initCanvas() {
         this.paper = Snap()
-        $("svg").appendTo(this.container).addClass("content centered")
+        // $("svg").appendTo(this.container).addClass("content centered")
+        $("svg").appendTo(this.container)
         window.addEventListener("resize", () => this.resize())
     }
 

@@ -1,45 +1,19 @@
 extends ../_pug/layouts/session
 
 block append head
-    //- link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
-    style.
-
-block header-title
-    | 0 + 1 = SOM
-
-block title
-    title 0 + 1 = SOM | Sessão 5
-
-block subtitle
-    | Sessão 5
-
-block subtitle2
-    | Notação
-
-block instructions-pt
-    | Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>,
-    | duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>,
-    | quatro vezes para o <span class="word white">branco</span>. Clica nos botões de baixo para escolher o andamento.
-
-block instructions-en
-    | Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>,
-    | three times for <span class="word red">red</span> and four times for <span class="word white">white</span>.
-    | Click the buttons at the bottom to choose the tempo.
-
-block append head
     link(rel='stylesheet' type='text/css' href='index.css')
 
 block main
 
-    .col-lg-1
+    .col-sm-1
         #bpm
             output#bpmVal 60
             #bpmSlider
 
-    .col-lg-10
+    .col-sm-10
         #svg
 
-    .col-lg-1
+    .col-sm-1
         |
 
 block append scripts

@@ -24,6 +24,19 @@ class CircleApp extends BaseApp {
 
         this.init()
 
+        // Need to set after init
+        this.bpm = this._bpm
+
+    }
+
+    set bpm(bpm) {
+        super.bpm = bpm
+        $("#bpms button").removeClass("active")
+        $(`:button[value='${bpm}']`).addClass("active")
+        if (this.buttons) {
+            let { bg } = this.buttons.find(button => button.bpm === bpm)
+            $("html").css("background-color", `rgb(255,${bg},${bg}`)
+        }
     }
 
     init() {

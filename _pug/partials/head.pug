@@ -28,9 +28,9 @@ head
         //- NOTE: Use a Web App Manifest, for better PWA experience
         link(rel='manifest', href='../manifest.json')
 
-        //- unset background color
+        //- unset background color, since bootstrap "resets" it to white
         style.
-            html { background-color: unset !important; }
+            body { background-color: unset !important; }
 
         //- NOTE: disable Tone.js logging version to console.log
         script(type='text/javascript').

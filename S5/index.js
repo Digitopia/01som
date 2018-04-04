@@ -20,7 +20,7 @@ class App extends BaseApp {
 
         this.imgWidth = $("#svg").width() / 10
         this.cx = this.imgWidth / 0.8
-        this.cy = $("#main").height() / 2 - 200
+        this.cy = $("#main").height() / 2
 
         this.init()
 
@@ -32,8 +32,13 @@ class App extends BaseApp {
         this.initBpmSlider()
         this.loadSounds(this.paths) // Sounds were being loaded when adding circle, since no circles in this session load here
         this.paper.attr({
-            // viewbox: '0 0 ' + $("#svg").width() + ' ' + $("#svg").height()
+            viewBox: '0 0 ' + $("#svg").width() + ' ' + $("#svg").height()
         })
+    }
+
+    resize() {
+        super.resize()
+        this.paper.attr({ width: this.width, height: this.height })
     }
 
     initImages() {
@@ -170,9 +175,6 @@ window.addEventListener("load", function () {
 
     Utils.hideLoader()
 
-    // Hide what doesn't matter (for now) for this session
-    $("#btnfcord").parent().hide()
-
     app = new App({
         paths: {
             "tick": "../_assets/sounds/tick.wav"
@@ -180,5 +182,7 @@ window.addEventListener("load", function () {
         spatial: false,
         debug: false
     })
+
+    $("svg").removeClass("content")
 
 })

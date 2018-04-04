@@ -167,9 +167,11 @@ class Circle {
 
             // Click events
             /* eslint no-loop-func: "off" */
+            /* eslint no-restricted-globals: "off" */
             group.click(e => {
                 let prevLabelIdx = this.sequencer.active
                 let currLabelIdx = Number(e.target.id.split("-")[2]) // TODO: this is an hack, refactor later!
+                if (isNaN(currLabelIdx)) return
                 if (prevLabelIdx === currLabelIdx) return
                 this.sequencer.active = currLabelIdx
                 this.sequencer.labels[prevLabelIdx].rect.attr({
@@ -178,7 +180,7 @@ class Circle {
                 this.sequencer.labels[currLabelIdx].rect.attr({ stroke: Colors.grey })
                 this.points = this.sequencer.points[currLabelIdx]
                 for (let i = 0; i < this.sequencer.points.length; i++) {
-                    this.sequencerPoints[i].forEach(p => p.show(i === currLabelIdx))
+                    this.sequencer.points[i].forEach(p => Utils.setVisible(p.elem, i === currLabelIdx))
                 }
                 if (this.binary) {
                     this.binary = this.sequencer.binary[this.sequencer.active]
@@ -233,7 +235,6 @@ class Circle {
     }
 
     shaked() {
-        console.log("shaked")
         if (this.app.playing) this.app.playing = false
         if (!this.sequencer) this.points.forEach(point => point.reset())
         else {
