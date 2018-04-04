@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Digitópia Casa da Música</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=0">
+
+    <!-- Libraries -->
+    <script src="../_vendor/js.cookie.min.js"></script>
+    <script src="../_vendor/jquery-3.2.1.min.js"></script>
+    <script src="../_vendor/snap.svg-min.js"></script>
+    <script src="../_vendor/jquery.fittext.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+    <!-- Javascript Sources -->
+    <script src="../_lib/colors.js"></script>
+    <script src="../_lib/utils.js"></script>
+    <script src="index.js"></script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../images/favicon.ico" />
+
+    <!-- Google Analytics Code -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-92881433-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <div class="head">
+            <h1><a href="/">Conversões Musicais</a></h1>
+        </div>
+
+        <div class="main">
+            <div class='bpm'>
+                BPM: <input type="number" id="bpmToMs" value="60"><br>
+                ms: <input type="number" id="msToBpm" value="1000"><br>
+            </div>
+
+            <div class='midi'>
+                Freq: <input type="number" id="freqToMidi" value="440.00"><br>
+                MIDI: <input type="number" id="midiToFreq" value="69"><br>
+            </div>
+            <div class='distance'>
+                Temp: <input type="number" id="temp" value="20"><br>
+                Dist: <input type="number" id="distance" value="10"><br>
+                ms: <input type="number" id="msToDist" value="30.21"><br>
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="logos">
+                <div class="gallery">
+                    <a href="http://digitopia.github.io/" target="blank"><img id="digi" src="../_assets/images/digitopia.png"></img></a>
+                </div>
+                <div class="gallery">
+                    <a href="http://www.bragamediaarts.com/en/" target="blank"><img id="bma" src="../_assets/images/BMA-1M.png"></img></a>
+                </div>
+                <div class="gallery">
+                    <a href="https://www.cm-braga.pt/" target="blank"><img id="braga" src="../_assets/images/braga.png"></img></a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

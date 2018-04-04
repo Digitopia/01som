@@ -1,0 +1,77 @@
+* {
+  text-align: center;
+  font-family: Raleway;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(60, 60, 60);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: LightGoldenRodYellow;
+  max-width: 1280px;
+  min-width: 400px;
+  margin: 0 auto; }
+
+.head {
+  height: 10%; }
+  .head h1 {
+    font-size: 4vh;
+    padding-top: 10px; }
+    .head h1 a:hover {
+      text-decoration: underline;
+}
+
+.main {
+  font-size: 3vh;
+  min-height: 75vh;
+}
+
+.bpm {
+  padding-top: 10vh;
+  width: 100%;
+}
+
+.midi {
+  padding-top: 10vh;
+  width: 100%;
+}
+
+.distance {
+  padding-top: 10vh;
+  width: 100%;
+}
+
+
+footer {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.gallery {
+    display: inline-block;
+    margin: 5px;
+    width: 30%;
+}
+
+.gallery img {
+
+    width: 100px;
+
+}
+
+input[type=number] {
+    background-color: LightGoldenRodYellow;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 3vh;
+    border:none;
+    width: 15vh;
+}
+
+input[type=number]:focus {
+    border: 2px solid #555;
+}
