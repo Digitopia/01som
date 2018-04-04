@@ -3,23 +3,59 @@ extends ../_pug/layouts/session
 block append head
     link(rel='stylesheet' type='text/css' href='index.css')
 
+block header-title
+    | 0 + 1 = SOM
+
+block title
+    title 0 + 1 = SOM | Sessão 5
+
+block subtitle
+    | Sessão 5
+
+block subtitle2
+    | Notação
+
+block instructions-pt
+    | Clica nos círculos pequenos para escolher o som - uma vez para o <span class="word blue">azul</span>,
+    | duas vezes para o <span class="word green">verde</span>, três vezes para o <span class="word red">vermelho</span>,
+    | quatro vezes para o <span class="word white">branco</span>. Clica nos botões de baixo para escolher o andamento.
+
+block instructions-en
+    | Click the small circles to choose the sound - once for <span class="word blue">blue</span>, twice for <span class="word green">green</span>,
+    | three times for <span class="word red">red</span> and four times for <span class="word white">white</span>.
+    | Click the buttons at the bottom to choose the tempo.
+
 block main
 
-    .col-sm-1
+    //- force load of all images so that when they are needed they are already loaded
+    .hide(style="display: none")
+        img(src="../_assets/svg/4R.svg", alt="")
+        img(src="../_assets/svg/8th.svg", alt="")
+        img(src="../_assets/svg/8thR.svg", alt="")
+        img(src="../_assets/svg/2x8.svg", alt="")
+        img(src="../_assets/svg/blank.svg", alt="")
+
+    .col-1.padding-0
         #bpm
             output#bpmVal 60
             #bpmSlider
 
-    .col-sm-10
+    .col-11.padding-0
         #svg
 
-    .col-sm-1
-        |
+    //- .col-1.padding-0
+    //-     |
 
 block append scripts
+
+    //- Use fork for similar effect to what we had before
+    //- script(src='../_vendor/NexusUI.min.js')
+
+    //- Use original version
+    script(src='https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js')
+
     script(src='../_lib/Utils.js')
     script(src='../_lib/SnapPlugins.js')
     script(src='../_lib/Help.js')
     script(src='../_lib/BaseApp.js')
-    script(src='https://rawgit.com/nexus-js/ui/master/dist/NexusUI.js')
     script(src='index.js')

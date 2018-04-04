@@ -5,7 +5,7 @@ html {
 }
 
 #svg {
-    height: 800px;
+    height: 100%;
 }
 
 #bpm {
@@ -15,6 +15,11 @@ html {
     justify-content: center;
     flex-direction: column;
     #bpmVal {
-        font-size: 35px;
+        font-size: 2em;
     }
+}
+
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
 }

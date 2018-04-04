@@ -32,13 +32,13 @@ class App extends BaseApp {
         this.initBpmSlider()
         this.loadSounds(this.paths) // Sounds were being loaded when adding circle, since no circles in this session load here
         this.paper.attr({
-            viewBox: '0 0 ' + $("#svg").width() + ' ' + $("#svg").height()
+            viewBox: [0, 0, this.width, this.height].join(' ')
         })
     }
 
     resize() {
         super.resize()
-        this.paper.attr({ width: this.width, height: this.height })
+        // this.paper.attr({ width: this.width, height: this.height })
     }
 
     initImages() {
@@ -76,6 +76,9 @@ class App extends BaseApp {
             'step': 1,
             'value': 60
         })
+        this.bpmSlider.colorize("accent", "#eee")
+        this.bpmSlider.colorize("fill", "#eee")
+        this.bpmSlider.knob.setAttribute("fill", "rgb(108, 191, 111)")
 
         this.bpmSlider.on('change', value => {
             $("#bpmVal").text(value)
@@ -183,6 +186,9 @@ window.addEventListener("load", function () {
         debug: false
     })
 
-    $("svg").removeClass("content")
+    $("#btnRecord").parent().css("visibility", "hidden")
+    // $("#btnRecord").parent().remove()
+
+
 
 })

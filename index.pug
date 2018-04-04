@@ -2,7 +2,7 @@ extends _pug/layouts/base
 
 block append head
     link(rel='stylesheet' type='text/css' href='../_sass/index.css')
-    link(rel='stylesheet' type='text/css' href='../_sass/circle.css')
+    link(rel='stylesheet' type='text/css' href='../_sass/layout.css')
 
 block body
 
@@ -26,23 +26,25 @@ block body
         .container
             .row
                 each sessao in sessoes
-                    .col-lg-4.col-sm-6.col-centered
+                    .col-lg-4.col-sm-6.col-centered(class=sessao.disabled ? "disabled" : "")
                         .card.mb-3.box-shadow
                             a(href=`${sessao.url}`)
                                 .item
                                     img.card-img-top(
                                         src=`${sessao.img}`
                                         alt='Card image cap'
+                                        class=sessao.disabled ? "grey" : ""
                                     )
                             .card-body.text-centered
                                 span.card-text Sessão #{ sessao.id }
-                                a(href=`${sessao.url}`) #{sessao.name}
+                                if (!sessao.disabled)
+                                    a(href=`${sessao.url}`) #{sessao.name}
+                                else
+                                    span #{sessao.name}
+
                                 if (sessao.disabled)
-                                    span.card-text (disponível brevemente)
-                                    console.log("disabled!")
+                                    span.card-text(style="font-size: 0.8em") (disponível brevemente)
                                 //- .d-flex.justify-content-between.align-items-center
-
-
 
     footer.footer#sponsors.centered(style="visibility: visible")
         a(href='http://digitopia.github.io/' target='blank'): img(src='../_assets/images/digitopia.png')

@@ -1,60 +1,38 @@
-const url = "http://localhost:8080"
+const baseUrl = "http://localhost:8080"
 
 // const timeout = 10*1000 // 10 seconds
-const timeout = 8*60*60*1000 // 8 hours
+const timeout = 8 * 60 * 60 * 1000 // 8 hours
 jest.setTimeout(timeout)
 
-const allSessions = ["S1", "S2", "S3", "S4", "S5"]
+page.setViewport({ width: 1280, height: 1024 })
 
-describe("No syntatic errors", () => {
+const sessions = ["S1", "S2", "S3"]
+sessions.forEach(session => {
 
-    const sessions = allSessions
+    describe(session, () => {
 
-    sessions.forEach(session => {
-        test(`${session}`, async () => {
-            await page.goto(`${url}/${session}`)
+        test("check for syntax errors", async () => {
+            await page.goto(`${baseUrl}/${session}`)
         })
-    })
 
-})
+        test("bypass help", async () => {
+            await page.keyboard.press("Escape")
+        })
 
-xdescribe('Full page height', () => {
-
-    const sessions = allSessions
-
-    sessions.forEach(session => {
-        const testExpr = session === "S4" ? test.skip : test // TODO: S4 still not ready for testing
-        testExpr(`${session}`, async () => {
-            await page.goto(`${url}/${session}`)
-            page.setViewport({ width: 1280, height: 1024 })
-            const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
-            // const viewportHeight = await page.evaluate(() => window.innerHeight)
+        test("full page height", async () => {
+            const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
             const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
             expect(viewportHeight).toEqual(fullHeight)
         })
-    })
 
-})
-
-describe("Shake", () => {
-
-    const sessions = ["S1", "S2", "S3"]
-
-    sessions.forEach(session => {
-
-        test(`${session}`, async () => {
-
-            // Go to url
-            await page.goto(`${url}/${session}`)
-
-            // Bypass help message
-            await page.keyboard.press("Escape")
-
-            // Set bpm
+        test("bpm", async () => {
             await page.click("button[value='44']")
+        })
 
-            // Click arround
+        test("click some points", async () => {
+
             await page.evaluate(() => {
+
                 let evt = document.createEvent("SVGEvents")
                 evt.initEvent("click", true, true)
                 app.circles[0].groups.points[0].node.dispatchEvent(evt)
@@ -77,9 +55,15 @@ describe("Shake", () => {
             expect(states[1]).toBe(1)
             expect(states[2]).toBe(2)
 
-            // Play for 2 seconds
+        })
+
+        test("play", async () => {
             await page.click("#btnPlay")
-            await page.waitFor(2*1000)
+            await page.waitFor(2 * 1000)
+            await page.click("#btnPlay")
+        })
+
+        test("shake", async () => {
 
             // Shake it
             await page.evaluate(() => { app.circles[0].shaked() })
@@ -97,23 +81,54 @@ describe("Shake", () => {
             expect(states[2]).toBe(-1)
 
         })
+
+        test("record", async () => {
+            await page.click("#btnRecord")
+            await page.waitFor(2 * 1000)
+        })
+
     })
+
+    if (session === "S3") {
+        test("sequencer", async () => {
+            await page.evaluate(() => {
+                let evt = document.createEvent("SVGEvents")
+                evt.initEvent("click", true, true)
+                app.circles[0].groups.sequencer[1].node.dispatchEvent(evt)
+            })
+            await page.waitFor(timeout)
+        })
+    }
+})
+
+describe("S4", () => {
+
+    test("check for syntax errors", async () => {
+        await page.goto(`${baseUrl}/${session}`)
+    })
+
+    test("full page height", async () => {
+        const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
+        const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
+        expect(viewportHeight).toEqual(fullHeight)
+    })
+
+    // TODO: more to come...
 
 })
 
-xdescribe("S3 - Sequencer", () => {
+describe("S5", () => {
 
-    let session = "S3"
-
-    test("", async () => {
-        await page.goto(`${url}/${session}`)
-        await page.keyboard.press("Escape")
-        await page.evaluate(() => {
-            let evt = document.createEvent("SVGEvents")
-            evt.initEvent("click", true, true)
-            app.circles[0].groups.sequencer[1].node.dispatchEvent(evt)
-        })
-        // await page.waitFor(timeout)
+    test("check for syntax errors", async () => {
+        await page.goto(`${baseUrl}/${session}`)
     })
+
+    test("full page height", async () => {
+        const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
+        const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
+        expect(viewportHeight).toEqual(fullHeight)
+    })
+
+    // TODO: more to come...
 
 })

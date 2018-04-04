@@ -72,8 +72,6 @@ img {
     -moz-transition: all 0.3s;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-
-    /* overflow: hidden; */
 }
 
 img:hover {
@@ -89,4 +87,17 @@ img:hover {
 #contact i {
     font-size: 30px;
     color: red;
+}
+
+#contact li {
+    display: inline;
+    margin: 5px;
+}
+
+.disabled {
+    cursor: not-allowed !important;
+    img:hover {
+        cursor: not-allowed !important;
+        transform: unset !important;
+    }
 }

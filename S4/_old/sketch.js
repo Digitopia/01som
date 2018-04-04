@@ -71,7 +71,8 @@ function preload() {
 }
 
 function setup() {
-	canvas = createCanvas(windowWidth, windowHeight - $("header").height());
+    canvas = createCanvas(windowWidth, windowHeight - $("header").height());
+    canvas.parent("main")
 	controlCenterX = windowWidth*0.75;
 	controlCenterY = windowHeight*0.85;
 
