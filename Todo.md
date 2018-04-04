@@ -6,20 +6,20 @@
 - [x] falta adicionar possibilidade de gravar nas versões novas
 - [x] adicionar subtitulo
 - [x] update imagens
+- [x] update README.md, com imagens e texto
+- [x] migrar de github pages para netlify para poder ter o repositório na conta de Digitópia
 - [ ] melhorar instruções: melhorar o contraste e dimensões da box
 - [ ] terminar de implementar panner3D!
 - [ ] "deprecar" a sessão 2 em favor da 3, uma vez que educativamente não está a acrescentar nada
 - [ ] remover possibilidade de gravar áudio sessão 4, visto que praticamente ninguém usa
 - [ ] converter sessão 4 para Tone.js
 - [ ] fica a faltar também claro, passar tudo para app Android/iOS
-- [ ] update README.md, com imagens e texto
 - [ ] fullscreen icon bug
 - [ ] css modo landscape
 - [ ] mudar fonte sequencer labels
 - [ ] tamanho texto sequencer labels também não parece o correto
 - [ ] text size on orientation change
 - [ ] matrizes
-- [ ] migrar de github pages para netlify para poder ter o repositório na conta de Digitópia
 
 ### New features
 
@@ -53,11 +53,11 @@
 - [ ] Add [webpack](https://webpack.js.org/)
     - [ ] also minify and bundle javascript code
 - [ ] Automated screenshots on continous integration server
-- [x] Automated testing on CI too
-- [ ] Migrate to netlify
-- [ ] Update readme with gif
+- [x] Automated testing on CI too
+- [x] Migrate to netlify
+- [x] Update readme with gif
 - [ ] Change to SPA
-- [ ] Make all global dependencies local
+- [ ] Make all global dependencies local
    - [x] webpack
    - [x] pug
    - [x] eslint
