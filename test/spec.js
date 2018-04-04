@@ -96,13 +96,14 @@ sessions.forEach(session => {
                 evt.initEvent("click", true, true)
                 app.circles[0].groups.sequencer[1].node.dispatchEvent(evt)
             })
-            await page.waitFor(timeout)
+            // await page.waitFor(timeout)
         })
     }
 })
 
 describe("S4", () => {
 
+    const session = "S4"
     test("check for syntax errors", async () => {
         await page.goto(`${baseUrl}/${session}`)
     })
@@ -118,6 +119,8 @@ describe("S4", () => {
 })
 
 describe("S5", () => {
+
+    const session = "S5"
 
     test("check for syntax errors", async () => {
         await page.goto(`${baseUrl}/${session}`)
