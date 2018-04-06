@@ -40,16 +40,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    max-width: 1400px;
     margin: 0 auto;
     color: $default;
-}
-
-// Hack to be able to override body max-width
-header {
-    position: absolute;
-    left: 0;
-    right: 0;
 }
 
 a:visited, a:hover, a {
@@ -110,10 +102,6 @@ button {
 =            IDS            =
 ===========================*/
 
-#help-modal {
-    display: none;
-}
-
 #title {
     color: $default;
 
@@ -134,6 +122,12 @@ button {
     }
 
     flex-direction: column;
+}
+
+#help {
+    i:hover {
+        color: $default;
+    }
 }
 
 #controls {
@@ -170,6 +164,7 @@ button {
         // filter: grayscale(100%);
         opacity: 0.4;
         width: 50%;
+
         &:hover {
             filter: none;
             opacity: 0.6;
@@ -191,4 +186,28 @@ button {
     // .fullscreen {
     //     visibility: hidden;
     // }
+}
+
+header img {
+    width: 40px;
+    margin-right: 10px;
+    transition: none;
+    &:hover {
+        transform: none;
+    }
+}
+
+.modal-content {
+    opacity: 0.98;
+    border: 0;
+    border-radius: 30px;
+    .modal-header {
+        border-bottom: unset;
+    }
+    .modal-body {
+        padding: 10px 20px;
+        p { font-size: 1em; }
+        position: relative;
+        top: -10px;
+    }
 }

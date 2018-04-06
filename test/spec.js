@@ -5,6 +5,12 @@ const timeout = 8 * 60 * 60 * 1000 // 8 hours
 jest.setTimeout(timeout)
 
 page.setViewport({ width: 1280, height: 1024 })
+// page.setViewport({ width: 1280, height: 1343 })
+
+/** Utils function to stop the browser and manually inspect */
+async function wait() {
+    await page.waitFor(timeout)
+}
 
 const sessions = ["S1", "S2", "S3"]
 sessions.forEach(session => {
@@ -20,9 +26,10 @@ sessions.forEach(session => {
         })
 
         test("full page height", async () => {
-            const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
+            const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
             const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
             expect(viewportHeight).toEqual(fullHeight)
+            // wait()
         })
 
         test("bpm", async () => {
@@ -96,7 +103,7 @@ sessions.forEach(session => {
                 evt.initEvent("click", true, true)
                 app.circles[0].groups.sequencer[1].node.dispatchEvent(evt)
             })
-            // await page.waitFor(timeout)
+            // wait()
         })
     }
 })
@@ -109,7 +116,7 @@ describe("S4", () => {
     })
 
     test("full page height", async () => {
-        const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
+        const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
         const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
         expect(viewportHeight).toEqual(fullHeight)
     })
@@ -127,7 +134,7 @@ describe("S5", () => {
     })
 
     test("full page height", async () => {
-        const viewportHeight = await page.evuate(() => document.documentElement.clientHeight)
+        const viewportHeight = await page.evaluate(() => document.documentElement.clientHeight)
         const fullHeight = await page.evaluate(() => document.documentElement.scrollHeight)
         expect(viewportHeight).toEqual(fullHeight)
     })

@@ -148,7 +148,18 @@ class BaseApp {
     }
 
     initHelp() {
-        Help.init()
+        /* eslint no-unreachable: "off" */
+        // For now don't use cookie to check if is first time
+        return
+        if (!Cookies.get("visited")) {
+            // console.log("first time visitor")
+            let path = window.location.pathname.replace("/", "")
+            Cookies.set("visited", true, { expires: 365, path: path })
+            $("#help i").click()
+        } else {
+            // console.debug("returning visitor")
+            // this.show(true) // NOTE: uncomment for testing, to force help message
+        }
     }
 
     /**

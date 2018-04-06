@@ -7,6 +7,9 @@ block body
 
         .row#header
 
+            .left#info.centered
+                //- i.fa.fa-question-circle.help-icon
+
             .content#title.centered
 
                 .subtitle
@@ -18,8 +21,8 @@ block body
                         block subtitle2
                             | Ritmo
 
-            //- #info.right
-            //-     i.fa.fa-question-circle.help-icon
+            .right#help.centered
+                i.fa.fa-question-circle.help-icon(data-toggle='modal', data-target='#instructions')
 
         .row#main
             block main
@@ -42,19 +45,37 @@ block body
                     span#spanRecord REC
 
         //- footer.footer#sponsors.centered
-        //-     a(href='http://www.bragamediaarts.com/en/' target='blank'): img(src='../_assets/images/BMA-1M.png')
-        //-     a(href='http://digitopia.github.io/' target='blank'): img(src='../_assets/images/digitopia.png')
-        //-     a(href='https://www.cm-braga.pt/' target='blank'): img(src='../_assets/images/braga.png')
+        //-     a(href='http://www.bragamediaarts.com/en/' target='blank'): img(src='/_assets/images/BMA-1M.png')
+        //-     a(href='http://digitopia.github.io/' target='blank'): img(src='/_assets/images/digitopia.png')
+        //-     a(href='https://www.cm-braga.pt/' target='blank'): img(src='/_assets/images/braga.png')
 
     #breakpoint
 
     #loader
 
-    #help-modal.modal
-        .modal-content
-            span.close-button ×
-            p
-                block instructions-pt
+    //- Old modal
+    //- #help-modal.modal
+    //-     .modal-content
+    //-         span.close-button.pull-right ×
+    //-         p
+    //-             block instructions-pt
 
-            p.english
-                block instructions-en
+    //-         p.english
+    //-             block instructions-en
+
+    //- Bootstrap modal
+    #instructions.modal.fade.hide(tabindex='-1', role='dialog')
+        .modal-dialog(role='document').modal-dialog-centered
+            .modal-content
+                .modal-header
+                    //- h5.modal-title Instruções | <span class="text-italic">Instructions</span>
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+                .modal-body.text-center
+                    //- button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    //-     span(aria-hidden='true') &times;
+                    p.text-muted
+                        block instructions-pt
+                    //- p.text-muted.font-italic
+                    //-     block instructions-en
+                //- .modal-footer
