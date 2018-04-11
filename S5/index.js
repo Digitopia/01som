@@ -19,8 +19,10 @@ class App extends BaseApp {
         this.valueString = [0, 0, 0, 0, 0, 0, 0, 0]
 
         this.imgWidth = $("#svg").width() / 10
+        this.imgHeight = Math.round(this.imgWidth * 2)
+
         this.cx = this.imgWidth / 0.8
-        this.cy = $("#main").height() / 2
+        this.cy = $("#main").height() / 2 - this.imgWidth
 
         this.init()
 
@@ -38,22 +40,22 @@ class App extends BaseApp {
 
     resize() {
         super.resize()
-        // this.paper.attr({ width: this.width, height: this.height })
     }
 
     initImages() {
         for (var i = 0; i < this.valueString.length; i++) {
+            let textY = this.cy + this.imgWidth * 2 + 50
             if (i % 2 == 0) {
-                this.images[i] = this.paper.image("../_assets/svg/4R.svg", i * this.cx, this.cy, this.imgWidth, this.imgWidth * 2)
-                this.labelText[i] = this.paper.text(i * this.cx + this.imgWidth / 4, this.cy + this.imgWidth * 2 + 75, this.valueString[i].toString())
+                this.images[i] = this.paper.image("../_assets/svg/4R.svg", i * this.cx, this.cy, this.imgWidth, this.imgHeight)
+                this.labelText[i] = this.paper.text(i * this.cx + this.imgWidth / 4, textY, this.valueString[i].toString())
                 this.labelText[i].attr({ 'font-size': 50 })
             } else {
-                this.images[i] = this.paper.image("../_assets/svg/blank.svg", i * this.cx, this.cy, this.imgWidth, this.imgWidth * 2)
-                this.labelText[i] = this.paper.text(i * this.cx + this.imgWidth / 4, this.cy + this.imgWidth * 2 + 75, this.valueString[i].toString())
+                this.images[i] = this.paper.image("../_assets/svg/blank.svg", i * this.cx, this.cy, this.imgWidth, this.imgHeight)
+                this.labelText[i] = this.paper.text(i * this.cx + this.imgWidth / 4, textY, this.valueString[i].toString())
                 this.labelText[i].attr({ 'font-size': 50 })
             }
 
-            this.blankImages[i] = this.paper.image("../_assets/svg/blank.svg", i * this.cx, this.cy, this.imgWidth, this.imgWidth * 2)
+            this.blankImages[i] = this.paper.image("../_assets/svg/blank.svg", i * this.cx, this.cy, this.imgWidth, this.imgHeight)
         }
 
         this.blankImages.forEach((element, index) => {
@@ -125,44 +127,46 @@ class App extends BaseApp {
         element.click(() => {
             if (this.valueString[index] == 0) {
                 if (index % 2 == 0 && this.valueString[index + 1] == 0) { // 0 0 to 1 0
-                    this.images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                    this.images[index + 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/8th.svg")
+                    this.images[index + 1].node.setAttribute("href", "../_assets/svg/8thR.svg")
                     this.valueString[index] = 1
                 } else if (index % 2 == 0 && this.valueString[index + 1] == 1) { // 0 1 to 1 0
                     this.images[index].node.setAttribute("width", this.imgWidth * 2)
-                    this.images[index].node.href.baseVal = "../_assets/svg/2x8.svg"
-                    this.images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    this.images[index].node.setAttribute("height", this.imgHeight)
+                    this.images[index].node.setAttribute("href", "../_assets/svg/2x8.svg")
+                    this.images[index + 1].node.setAttribute("href", "../_assets/svg/blank.svg")
                     this.valueString[index] = 1
                 } else if (index % 2 == 1 && this.valueString[index - 1] == 0) { // 0 0 to 0 1
-                    this.images[index].node.href.baseVal = "../_assets/svg/8th.svg"
-                    this.images[index - 1].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/8th.svg")
+                    this.images[index - 1].node.setAttribute("href", "../_assets/svg/8thR.svg")
                     this.valueString[index] = 1
                 } else if (index % 2 == 1 && this.valueString[index - 1] == 1) { // 1 0 to 1 1
-                    this.images[index].node.href.baseVal = "../_assets/svg/blank.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/blank.svg")
                     this.images[index - 1].node.setAttribute("width", this.imgWidth * 2)
-                    this.images[index - 1].node.href.baseVal = "../_assets/svg/2x8.svg"
+                    this.images[index - 1].node.setAttribute("height", this.imgHeight)
+                    this.images[index - 1].node.setAttribute("href", "../_assets/svg/2x8.svg")
                     this.valueString[index] = 1
                 }
 
 
             } else { /* if point is going to 0 */
                 if (index % 2 == 0 && this.valueString[index + 1] == 0) { // 1 0 to 0 0
-                    this.images[index].node.href.baseVal = "../_assets/svg/4R.svg"
-                    this.images[index + 1].node.href.baseVal = "../_assets/svg/blank.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/4R.svg")
+                    this.images[index + 1].node.setAttribute("href", "../_assets/svg/blank.svg")
                     this.valueString[index] = 0
                 } else if (index % 2 == 0 && this.valueString[index + 1] == 1) { // 1 1 to 0 1
                     this.images[index].node.setAttribute("width", this.imgWidth)
-                    this.images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
-                    this.images[index + 1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/8thR.svg")
+                    this.images[index + 1].node.setAttribute("href", "../_assets/svg/8th.svg")
                     this.valueString[index] = 0
                 } else if (index % 2 == 1 && this.valueString[index - 1] == 0) { // 0 1 to 0 0
-                    this.images[index].node.href.baseVal = "../_assets/svg/blank.svg"
-                    this.images[index - 1].node.href.baseVal = "../_assets/svg/4R.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/blank.svg")
+                    this.images[index - 1].node.setAttribute("href", "../_assets/svg/4R.svg")
                     this.valueString[index] = 0
                 } else if (index % 2 == 1 && this.valueString[index - 1] == 1) { // 1 1 to 1 0
-                    this.images[index].node.href.baseVal = "../_assets/svg/8thR.svg"
+                    this.images[index].node.setAttribute("href", "../_assets/svg/8thR.svg")
                     this.images[index - 1].node.setAttribute("width", this.imgWidth)
-                    this.images[index - 1].node.href.baseVal = "../_assets/svg/8th.svg"
+                    this.images[index - 1].node.setAttribute("href", "../_assets/svg/8th.svg")
                     this.valueString[index] = 0
                 }
             }
@@ -187,8 +191,5 @@ window.addEventListener("load", function () {
     })
 
     $("#btnRecord").parent().css("visibility", "hidden")
-    // $("#btnRecord").parent().remove()
-
-
 
 })

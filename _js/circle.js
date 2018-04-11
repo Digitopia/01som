@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
         paddingFactor: 1,
     })
 
-    const url = window.location.pathname
+    const url = window.location.pathname.toUpperCase()
     const s1 = url === "/S1/"
     const s3 = url === "/S3/"
 

@@ -171,7 +171,7 @@ class BaseApp {
         this.height = $(this.container).height()
         this.vmax = Math.max(this.width, this.height)
         this.vmin = Math.min(this.width, this.height)
-        if (this.debug) this.debug()
+        if (this.debug) this.debugFn()
         // this.resize()
     }
 
@@ -192,7 +192,7 @@ class BaseApp {
     /**
      * Update draw directives so that they are in proper place.
      */
-    debug() {
+    debugFn() {
 
         if (!this.grid) return
 
