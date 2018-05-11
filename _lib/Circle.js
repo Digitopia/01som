@@ -337,29 +337,38 @@ class Circle {
      * This schedules the note play events (ahead of time) whenever a user hits the play button.
      */
     schedule() {
+
         for (let i = 0; i < this.n; i++) {
+
             Tone.Transport.schedule(t => {
 
-                let p = this.points[i]
-                let previousI = (i === 0) ? this.n - 1 : i - 1
-
-                // NOTE: animate when active
-                p.elem.animate(
-                    { r: this.pointRadius * 1.25 },
-                    150,
-                    function () { },
-                    p.elem.animate({ r: this.pointRadius }, 1000),
-                )
-
-                if (this.panner) this.app.panner.setPosition(-p.x, 0, p.y)
-
-                Utils.hide(this.dots[previousI])
-                Utils.show(this.dots[i])
+                 let p = this.points[i]
 
                 if (p.state !== -1) {
                     let { sample } = this.options[p.state]
                     this.app.audios[sample].start(t)
                 }
+
+                Tone.Draw.schedule(() => {
+
+                    let previousI = (i === 0) ? this.n - 1 : i - 1
+
+                    // NOTE: animate when active
+                    p.elem.animate(
+                        { r: this.pointRadius * 1.25 },
+                        150,
+                        function () {},
+                        p.elem.animate({
+                            r: this.pointRadius
+                        }, 1000),
+                    )
+
+                    if (this.panner) this.app.panner.setPosition(-p.x, 0, p.y)
+
+                    Utils.hide(this.dots[previousI])
+                    Utils.show(this.dots[i])
+
+                }, t)
 
             }, i * Tone.Time("8n"))
         }

@@ -96,7 +96,9 @@ class App extends BaseApp {
     schedule() {
         for (let i = 0; i < this.valueString.length; i++) {
             Tone.Transport.schedule(t => {
-                this.animate(i)
+                Tone.Draw.schedule(() => {
+                    this.animate(i)
+                }, t)
                 let idx = this.valueString[i] - 1
                 if (idx >= 0 && idx <= 2) this.audios["tick"].start(t)
             }, i * Tone.Time("8n"))
