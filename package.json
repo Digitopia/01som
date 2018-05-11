@@ -30,5 +30,8 @@
     "pug": "^2.0.3",
     "pug-cli": "^1.0.0-alpha6",
     "puppeteer": "^1.2.0"
+  },
+  "dependencies": {
+    "npm": "^6.0.0"
   }
 }
