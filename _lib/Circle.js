@@ -168,6 +168,8 @@ class Circle {
             // Click events
             /* eslint no-loop-func: "off" */
             /* eslint no-restricted-globals: "off" */
+            /* eslint no-return-assign: "off" */
+            /* eslint no-param-reassign: "off" */
             group.click(e => {
                 let prevLabelIdx = this.sequencer.active
                 let currLabelIdx = Number(e.target.id.split("-")[2]) // TODO: this is an hack, refactor later!
@@ -180,7 +182,7 @@ class Circle {
                 this.sequencer.labels[currLabelIdx].rect.attr({ stroke: Colors.grey })
                 this.points = this.sequencer.points[currLabelIdx]
                 for (let i = 0; i < this.sequencer.points.length; i++) {
-                    this.sequencer.points[i].forEach(p => Utils.setVisible(p.elem, i === currLabelIdx))
+                    this.sequencer.points[i].forEach(p => p.visible = (i === currLabelIdx))
                 }
                 if (this.binary) {
                     this.binary = this.sequencer.binary[this.sequencer.active]
