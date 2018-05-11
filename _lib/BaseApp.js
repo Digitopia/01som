@@ -14,6 +14,9 @@ class BaseApp {
         /** @type {string} container id for the svg where everything happens */
         this.container = params.svg || '#svg'
 
+        /** @type {boolean} use service worker or not */
+        this.serviceWorker = params.serviceWorker || false
+
         /* ------------------------------------------------------------------------------ *
          *     Member variables not allowed for customization through params go below     *
          * ------------------------------------------------------------------------------ */
@@ -103,6 +106,17 @@ class BaseApp {
 
         this.resize()
 
+        if (this.serviceWorker) {
+            console.log("init service worker")
+            if ('serviceWorker' in navigator) {
+                console.log("I am inside a load event listener")
+                navigator.serviceWorker.register('/sw.js').then(function (registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope)
+                }, function (err) {
+                    console.log('ServiceWorker registration failed: ', err)
+                })
+            }
+        }
     }
 
     initDebug() {

@@ -1,19 +1,5 @@
 let app
 
-// NOTE: Start experimenting with service workers to try and get offline capabilities
-function initServiceWorker() {
-    console.log("init service worker")
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      });
-    }
-}
-
 // initServiceWorker()
 
 window.addEventListener("load", function () {
@@ -30,6 +16,7 @@ window.addEventListener("load", function () {
         debug: false,
         pointRadius: 1.8 * em,
         paddingFactor: 1,
+        serviceWorker: false
     })
 
     const url = window.location.pathname.toUpperCase()
