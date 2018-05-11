@@ -99,7 +99,7 @@ class App extends BaseApp {
                 this.animate(i)
                 let idx = this.valueString[i] - 1
                 if (idx >= 0 && idx <= 2) this.audios["tick"].start(t)
-            }, `${i}*8n`)
+            }, i * Tone.Time("8n"))
         }
     }
 

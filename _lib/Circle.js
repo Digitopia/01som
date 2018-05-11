@@ -359,7 +359,7 @@ class Circle {
                     this.app.audios[sample].start(t)
                 }
 
-            }, `${i}*8n`)
+            }, i * Tone.Time("8n"))
         }
     }
 
