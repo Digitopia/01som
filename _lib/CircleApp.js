@@ -107,9 +107,9 @@ CircleApp.defaults = {
     ],
     paths: {
         percussive: {
-            kick: `${basePath}/kick.mp3`,
-            clap: `${basePath}/clap.mp3`,
-            snap: `${basePath}/snap.mp3`,
+            kick: `${basePath}/kick2.mp3`,
+            clap: `${basePath}/clap2.mp3`,
+            snap: `${basePath}/snap2.mp3`,
         },
         notes: {
             kick: `${basePath}/kick.mp3`,
