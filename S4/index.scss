@@ -7,3 +7,30 @@ html {
 #main {
     justify-content: center;
 }
+
+#labels {
+    text-align: right;
+}
+
+#labels ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    // border: 1px solid black;
+}
+
+#labels li {
+    // border: 1px solid black;
+}
+
+#sequencers div {
+    // border: 1px solid black;
+}
+
+#sequencers button {
+    background: transparent;
+    text-align: center;
+    width: 4em;
+    height: 4em;
+    margin: 10px;
+}

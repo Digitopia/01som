@@ -91,7 +91,7 @@ class CircleApp extends BaseApp {
 
 }
 
-const basePath = "../_assets/sounds"
+const basePath = "/_assets/sounds"
 
 /**
  * Hold some defaults to avoid too much boilerplate.

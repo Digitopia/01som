@@ -14,11 +14,15 @@ class Utils {
     }
 
     static zeros(rows, cols) {
+        return this.fill(row, cols, 0)
+    }
+
+    static fill(rows, cols, value) {
         let matrix = new Array(rows)
         for (let i = 0; i < rows; i++) {
             matrix[i] = []
             for (let j = 0; j < cols; j++) {
-                matrix[i][j] = 0
+                matrix[i][j] = value
             }
         }
         return matrix
