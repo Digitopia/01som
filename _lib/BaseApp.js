@@ -146,8 +146,6 @@ class BaseApp {
     }
 
     initAudio() {
-        Tone.Transport.loopEnd = '1m'
-        Tone.Transport.loop = true
         StartAudioContext(Tone.context, "#btnPlay")
         if (this.spatial) {
             this.panner = new Tone.Panner3D().connect(Tone.Master)

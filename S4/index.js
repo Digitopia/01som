@@ -90,11 +90,10 @@ class App extends BaseApp {
             this.players.add(track.name, track.sample)
         })
 
-        this.bpm = 24/4
+        // NOTE: this is the bpm of the samples
+        this.bpm = 96
 
         this.loop = new Tone.Sequence((time, measure) => {
-
-            console.log("I am doing some sequencing at measure", measure, "and time", time)
 
             // Clear all borders first
             /* eslint no-return-assign: "off" */
@@ -111,7 +110,7 @@ class App extends BaseApp {
                     this.players.get(this.labels[i]).start(time);
                 }
             }
-        }, [0, 1, 2, 3, 4, 5, 6, 7], "8n");
+        }, [0, 1, 2, 3, 4, 5, 6, 7], "2m")
 
         // Make the loop start with Tone.Transport at time 0
         this.loop.start(0)

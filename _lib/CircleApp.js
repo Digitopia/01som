@@ -40,8 +40,15 @@ class CircleApp extends BaseApp {
     }
 
     init() {
+
         super.init()
+
         this.initBpmButtons()
+
+        // Set this there, because otherwise it will mess up with Tone.Sequence of session 4.
+        Tone.Transport.loop = true
+        Tone.Transport.loopEnd = '1m'
+
     }
 
     initBpmButtons() {
