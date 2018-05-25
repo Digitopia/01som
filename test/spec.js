@@ -4,8 +4,8 @@ const baseUrl = "http://localhost:8080"
 const timeout = 8 * 60 * 60 * 1000 // 8 hours
 jest.setTimeout(timeout)
 
-page.setViewport({ width: 1280, height: 1024 })
-// page.setViewport({ width: 1280, height: 1343 })
+// page.setViewport({ width: 1280, height: 1024 })
+page.setViewport({ width: 1440, height: 803 })
 
 /** Utils function to stop the browser and manually inspect */
 async function wait() {

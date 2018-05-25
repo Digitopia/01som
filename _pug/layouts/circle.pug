@@ -6,7 +6,7 @@ block append head
 block main
 
     //- .col-lg-2#icons
-    .left#icons.centered
+    .left#icons.centered.d-flex.justify-content-around
         img(src='/_assets/images/kick3.png' alt='kick')
         img(src='/_assets/images/clap2.png' alt='clap')
         img(src='/_assets/images/snap2.png' alt='snap')
@@ -15,7 +15,7 @@ block main
     .content#svg.centered
 
     //- .col-lg-2#bpms
-    .right#bpms.centered
+    .right#bpms.centered.d-flex.justify-content-around
         button(
             v-for="button in buttons"
             :value="button.bpm"

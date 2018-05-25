@@ -3,7 +3,6 @@ let app
 // initServiceWorker()
 
 window.addEventListener("load", function () {
-// $(window).on("load", function() {
 
     Utils.hideLoader()
 
