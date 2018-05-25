@@ -1,22 +1,12 @@
-<svg width="1803" height="3121" xmlns="http://www.w3.org/2000/svg">
- <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
-
- <g>
-  <title>background</title>
-  <rect fill="none" id="canvas_background" height="3123" width="1805" y="-1" x="-1"/>
- </g>
- <g>
-  <title>Layer 1</title>
-  <metadata transform="matrix(541.8405038123055,0,0,541.8405038123055,0,0) " id="svg_9">image/svg+xml</metadata>
-
-  <metadata transform="matrix(1284.669952131866,0,0,1284.669952131866,0,0) " id="svg_20">image/svg+xml</metadata>
-
-  <!-- Page: 1/1 -->
-  <!-- Page: 1/1 -->
-  <g id="svg_22">
-   <a transform="matrix(1284.669952131866,0,0,1284.669952131866,0,0) " id="svg_18">
-    <path fill="currentColor" id="svg_19" d="m0.493038,2.146987l0.468,-1.304c-0.136,0.048 -0.276,0.088 -0.42,0.088c-0.184,0 -0.348,-0.132 -0.348,-0.316c0,-0.16 0.132,-0.288 0.292,-0.288c0.1,0 0.192,0.06 0.224,0.156c0.04,0.112 0.024,0.236 0.14,0.236c0.064,0 0.216,-0.192 0.244,-0.252c0.024,-0.048 0.092,-0.048 0.112,0l-0.492,1.68c-0.032,0.028 -0.068,0.04 -0.108,0.04c-0.04,0 -0.08,-0.012 -0.112,-0.04z"/>
-   </a>
-  </g>
- </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1"
+	 id="svg2" inkscape:version="0.48.5 r10040" sodipodi:docname="soupir.svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 200"
+	 style="enable-background:new 0 0 100 200;" xml:space="preserve">
+<sodipodi:namedview  bordercolor="#666666" borderopacity="1" fit-margin-bottom="0" fit-margin-left="0" fit-margin-right="0" fit-margin-top="0" gridtolerance="10" guidetolerance="10" id="namedview84" inkscape:current-layer="svg2" inkscape:cx="297.6765" inkscape:cy="-31.733147" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="1018" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:zoom="2" objecttolerance="10" pagecolor="#ffffff" showgrid="false">
+	</sodipodi:namedview>
+<path id="svg_19" d="M35.8,168.5l32.4-91.6C58.7,80.2,49,83,39.1,83C26.3,83,15,73.8,15,60.8c0-11.2,9.1-20.2,20.2-20.2
+	c6.9,0,13.3,4.2,15.5,11c2.8,7.9,1.7,16.6,9.7,16.6c4.4,0,14.9-13.5,16.9-17.7c1.7-3.4,6.4-3.4,7.7,0l-34,118
+	c-2.2,2-4.7,2.8-7.5,2.8C40.7,171.3,38,170.4,35.8,168.5z"/>
 </svg>
