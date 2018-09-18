@@ -6,7 +6,8 @@ block append head
 
 block body
 
-    - var sessoes = [ { id: 1, name: "Ritmo", img: "_assets/images/menu/1.png", url: "S1" }, { id: 2, name: "Ritmo e Melodia", img: "_assets/images/menu/2.png", url: "S2" }, { id: 3, name: "Sequenciador", img: "_assets/images/menu/3.png", url: "S3" }, { id: 4, name: "Canção", img: "_assets/images/menu/4.png", url: "S4" }, { id: 5, name: "Notação", img: "_assets/images/menu/5.png", url: "S5" }, { id: 6, name: "Acústica", img: "_assets/images/menu/6.png", url: "/", disabled: true }, { id: 7, name: "Teoria", img: "_assets/images/menu/7.png", url: "/", disabled: true } ]
+    //- - var sessoes = [ { id: 1, name: "Ritmo", img: "_assets/images/menu/1.png", url: "S1" }, { id: 2, name: "Ritmo e Melodia", img: "_assets/images/menu/2.png", url: "S2" }, { id: 3, name: "Sequenciador", img: "_assets/images/menu/3.png", url: "S3" }, { id: 4, name: "Canção", img: "_assets/images/menu/4.png", url: "S4" }, { id: 5, name: "Notação", img: "_assets/images/menu/5.png", url: "S5" }, { id: 6, name: "Acústica", img: "_assets/images/menu/6.png", url: "/", disabled: true }, { id: 7, name: "Teoria", img: "_assets/images/menu/7.png", url: "/", disabled: true } ]
+    - var sessoes = [ { id: 1, name: "Rhythm", img: "_assets/images/menu/1.png", url: "S1" }, { id: 2, name: "Rhythm and Melody", img: "_assets/images/menu/2.png", url: "S2" }, { id: 3, name: "Sequencer", img: "_assets/images/menu/3.png", url: "S3" }, { id: 4, name: "Song", img: "_assets/images/menu/4.png", url: "S4" }, { id: 5, name: "Notation", img: "_assets/images/menu/5.png", url: "S5" }, { id: 6, name: "Acoustics", img: "_assets/images/menu/6.png", url: "/", disabled: true }, { id: 7, name: "Theory", img: "_assets/images/menu/7.png", url: "/", disabled: true } ]
 
     main(role='main')
 
@@ -18,9 +19,17 @@ block body
 
                 br
 
-                p.lead.text-muted 0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município  de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.
+                //- p.lead.text-muted 0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município  de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.
+                //- p.lead.text-muted 0 + 1 = SOM consists in a series of workshops conducted in school context, in the primary school of the municipality of Braga (in nothern Portugal), that aim to expose the students of age 6 to 10 to the new techonologies
 
-                p.lead.text-muted Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.
+                p.lead.text-muted 0 + 1 = SOM (meaning 0 + 1 = SOUND) is a project that aims to develop musical and logical skills in young children (aged 6 to 10) using technology.
+
+                p.lead.text-muted It consists of a series of online tools and a set of four workshop sessions, in which we work close together with the children, on their classroom.
+
+                p.lead.text-muted It was created by Digitópia Casa da Música, in cooperation with Braga Media Arts, and implemented in the Braga Municipality.
+
+                //- p.lead.text-muted Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.
+                //- p.lead.text-muted The workshops result in different kind of games and software of musical creation original by the students.
 
     .album.py-5.bg-light
         .container
@@ -36,14 +45,16 @@ block body
                                         class=sessao.disabled ? "grey" : ""
                                     )
                             .card-body.text-centered
-                                span.card-text Sessão #{ sessao.id }
+                                //- span.card-text Sessão #{ sessao.id }
+                                span.card-text Session #{ sessao.id }
                                 if (!sessao.disabled)
                                     a(href=`${sessao.url}`) #{sessao.name}
                                 else
                                     span #{sessao.name}
 
                                 if (sessao.disabled)
-                                    span.card-text(style="font-size: 0.8em") (disponível brevemente)
+                                    //- span.card-text(style="font-size: 0.8em") (disponível brevemente)
+                                    span.card-text(style="font-size: 0.8em") (available soon)
                                 //- .d-flex.justify-content-between.align-items-center
 
     footer.footer#sponsors.centered(style="visibility: visible")
