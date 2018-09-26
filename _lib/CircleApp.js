@@ -52,15 +52,14 @@ class CircleApp extends BaseApp {
     }
 
     initBpmButtons() {
-
-        // Vue.mixin({
-        //     data: { buttons: this.buttons },
-        //     methods: {
-        //         click: bpm => { this.bpm = bpm },
-        //     }
-        // })
-
-        vue.buttons = this.buttons
+        /* eslint no-unused-vars: "off" */
+        const vue = new Vue({
+            el: "#bpms",
+            data: { buttons: this.buttons },
+            methods: {
+                click: bpm => { this.bpm = bpm },
+            },
+        })
 
     }
 

@@ -19,37 +19,43 @@ block body
 
                 br
 
-                p.lead.text-muted {{ $t("intro.p1") }}
-                p.lead.text-muted {{ $t("intro.p2") }}
-
                 //- p.lead.text-muted 0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município  de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.
                 //- p.lead.text-muted 0 + 1 = SOM consists in a series of workshops conducted in school context, in the primary school of the municipality of Braga (in nothern Portugal), that aim to expose the students of age 6 to 10 to the new techonologies
-                //- p.lead.text-muted 0 + 1 = SOM (meaning 0 + 1 = SOUND) is a project that aims to develop musical and logical skills in young children (aged 6 to 10) using technology.
-                //- p.lead.text-muted It consists of a series of online tools and a set of four workshop sessions, in which we work close together with the children, on their classroom.
-                //- p.lead.text-muted It was created by Digitópia Casa da Música, in cooperation with Braga Media Arts, and implemented in the Braga Municipality.
+
+                p.lead.text-muted 0 + 1 = SOM (meaning 0 + 1 = SOUND) is a project that aims to develop musical and logical skills in young children (aged 6 to 10) using technology.
+
+                p.lead.text-muted It consists of a series of online tools and a set of four workshop sessions, in which we work close together with the children, on their classroom.
+
+                p.lead.text-muted It was created by Digitópia Casa da Música, in cooperation with Braga Media Arts, and implemented in the Braga Municipality.
+
                 //- p.lead.text-muted Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.
                 //- p.lead.text-muted The workshops result in different kind of games and software of musical creation original by the students.
 
     .album.py-5.bg-light
         .container
             .row
-                .col-lg-4.col-sm-6.col-centered(
-                    v-for="(session, idx) in sessions"
-                    v-bind:class="{ disabled: session.disabled }"
-                )
-                    .card.mb-3.box-shadow
-                        a(:href="session.url")
-                            .item
-                                img.card-img-top(
-                                    :src="session.img"
-                                    alt='Card image cap'
-                                    v-bind:class="{ grey: session.disabled }"
-                                )
-                        .card-body.text-centered
-                            span.card-text {{ $t("session") }} {{ session.id }}
-                            a(:href="session.url" v-if="session.disabled") {{ $t("sessionNames")[idx] }}
-                            span(v-if="!session.disabled") {{$t("sessionNames")[idx]}}
-                            span.card-text(style="font-size: 0.8em" v-if="session.disabled") {{ $t("soon") }}
+                each sessao in sessoes
+                    .col-lg-4.col-sm-6.col-centered(class=sessao.disabled ? "disabled" : "")
+                        .card.mb-3.box-shadow
+                            a(href=`${sessao.url}`)
+                                .item
+                                    img.card-img-top(
+                                        src=`${sessao.img}`
+                                        alt='Card image cap'
+                                        class=sessao.disabled ? "grey" : ""
+                                    )
+                            .card-body.text-centered
+                                //- span.card-text Sessão #{ sessao.id }
+                                span.card-text Session #{ sessao.id }
+                                if (!sessao.disabled)
+                                    a(href=`${sessao.url}`) #{sessao.name}
+                                else
+                                    span #{sessao.name}
+
+                                if (sessao.disabled)
+                                    //- span.card-text(style="font-size: 0.8em") (disponível brevemente)
+                                    span.card-text(style="font-size: 0.8em") (available soon)
+                                //- .d-flex.justify-content-between.align-items-center
 
     footer.footer#sponsors.centered(style="visibility: visible")
         a(href='http://digitopia.github.io/' target='blank'): img(src='/_assets/images/digitopia.png')

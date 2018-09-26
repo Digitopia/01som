@@ -1,5 +1,7 @@
 let app
 
+// initServiceWorker()
+
 window.addEventListener("load", function () {
 
     Utils.hideLoader()
