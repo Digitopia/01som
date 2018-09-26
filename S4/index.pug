@@ -4,39 +4,35 @@ block header-title
     | 0 + 1 = SOM
 
 block title
-    //- title 0 + 1 = SOM | Sessão 4
-    title 0 + 1 = SOM | Session 4
+    title 0 + 1 = SOM | {{ $(t("sessionNames")[3]) }}
 
 block subtitle
-    //- | Sessão 4
-    | Session 4
+    | {{ $t("session") }} 4
 
 block subtitle2
-    //- | Canção
-    | Song
+    | {{ $t("sessionNames")[3] }}
 
-block instructions-pt
-    //- | Clica números para decidir se o instrumento toca
-    | Click the numbers to decide which instrument to play
+block instructions
+    | {{ $t("help.session4") }}
 
 block append head
     link(rel='stylesheet' type='text/css' href='index.css')
 
 block main
 
-    #labels.col-1.d-flex
+    #labels.col-2.d-flex
         ul.d-flex.justify-content-around.flex-column
-            li(v-for="label in labels")
-                | {{label}}
+            li(v-for="(_, idx) in labels")
+                | {{ $t("tracks")[idx] }}
 
-    #sequencers.col-10.d-flex.flex-column.justify-content-around
+    #sequencers.col-8.d-flex.flex-column.justify-content-around
         div(v-for="(track, tid) in tracks" :id="`track-${tid}`").d-flex.justify-content-around
             button(
                 v-for="(_, mid) in measures"
                 :id="`btn-${tid}-${mid}`"
             ) 0
 
-    .col-1
+    .col-2
 
 block append scripts
     script(src='/_lib/Utils.js')

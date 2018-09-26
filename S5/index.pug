@@ -7,23 +7,16 @@ block header-title
     | 0 + 1 = SOM
 
 block title
-    //- title 0 + 1 = SOM | Sessão 5
-    title 0 + 1 = SOM | Session 5
+    title 0 + 1 = SOM | {{ $(t("sessionNames")[4]) }}
 
 block subtitle
-    //- | Sessão 5
-    | Session 5
+    | {{ $t("session") }} 5
 
 block subtitle2
-    //- | Notação
-    | Notation
+    | {{ $t("sessionNames")[4] }}
 
-block instructions-pt
-    //- | Clica nas figuras ou nos números para mudar o ritmo. Tenta tocá-lo e, se precisares de ajuda, usa o botão "Play". Ajusta a velocidade no controlador à esquerda.
-    | Click the images or the numbers to change the rhythm. Try to play it and, if you need help, press the "Play" button.
-
-//- block instructions-en
-//-     | Click the musical figures or the numbers to change the rhythm. Try to play it and, if you need help, use the "Play" button. Adjust the tempo on the slider to the left.
+block instructions
+    | {{ $t("help.session5") }}
 
 block main
 
