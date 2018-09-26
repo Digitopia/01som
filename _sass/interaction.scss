@@ -19,3 +19,9 @@ i, .point, .label, button, .close-button {
   outline: none !important; /* NOTE: this removes outline from bpm buttons */
   -webkit-tap-highlight-color: transparent; /* NOTE: this removes outline from play/pause button */
 }
+
+.lang:focus, .lang:focus {
+  outline: none !important; /* NOTE: this removes outline from bpm buttons */
+  -webkit-tap-highlight-color: transparent !important; /* NOTE: this removes outline from play/pause button */
+  outline-color: transparent !important;
+}

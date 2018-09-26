@@ -53,29 +53,13 @@ block body
 
     #loader
 
-    //- Old modal
-    //- #help-modal.modal
-    //-     .modal-content
-    //-         span.close-button.pull-right ×
-    //-         p
-    //-             block instructions-pt
-
-    //-         p.english
-    //-             block instructions-en
-
     //- Bootstrap modal
     #instructions.modal.fade.hide(tabindex='-1', role='dialog')
         .modal-dialog(role='document').modal-dialog-centered
             .modal-content
                 .modal-header
-                    //- h5.modal-title Instruções | <span class="text-italic">Instructions</span>
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') &times;
                 .modal-body.text-center
-                    //- button.close(type='button', data-dismiss='modal', aria-label='Close')
-                    //-     span(aria-hidden='true') &times;
                     p.text-muted
-                        block instructions-pt
-                    //- p.text-muted.font-italic
-                    //-     block instructions-en
-                //- .modal-footer
+                        block instructions
