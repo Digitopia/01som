@@ -3,19 +3,29 @@ header
         .container
             .row
                 .col-sm-8.col-md-7.py-4
-                    h4.text-white {{ $t("sessions") }}
+                    //- h4.text-white Sessões
+                    h4.text-white Sessions
                     p.text-muted
+                        //- ul.list-unstyled
+                        //-     li: a.text-white(href="/S1") 1 - Ritmo
+                        //-     li: a.text-white(href="/S2") 2 - Ritmo e Melodia
+                        //-     li: a.text-white(href="/S3") 3 - Sequenciador
+                        //-     li: a.text-white(href="/S4") 4 - Canção
+                        //-     li: a.text-white(href="/S5") 5 - Notação
+                        //-     li(class="not-allowed"): a.text-white 6 - Acústica <small>(brevemente)</small>
+                        //-     li(class="not-allowed"): a.text-white 7 - Teoria <small>(brevemente)</small>
                         ul.list-unstyled
-                            li: a.text-white(href="/S1") 1 - {{ $t("sessionNames")[0] }}
-                            li: a.text-white(href="/S2") 2 - {{ $t("sessionNames")[1] }}
-                            li: a.text-white(href="/S3") 3 - {{ $t("sessionNames")[2] }}
-                            li: a.text-white(href="/S4") 4 - {{ $t("sessionNames")[3] }}
-                            li: a.text-white(href="/S5") 5 - {{ $t("sessionNames")[4] }}
-                            li(class="not-allowed"): a.text-white 6 - {{ $t("sessionNames")[5] }} <small>{{ $t("soon") }}</small>
-                            li(class="not-allowed"): a.text-white 7 - {{ $t("sessionNames")[6] }} <small>{{ $t("soon") }}</small>
+                            li: a.text-white(href="/S1") 1 - Rhythm
+                            li: a.text-white(href="/S2") 2 - Rhythm and Melody
+                            li: a.text-white(href="/S3") 3 - Sequencer
+                            li: a.text-white(href="/S4") 4 - Song
+                            li: a.text-white(href="/S5") 5 - Notation
+                            li(class="not-allowed"): a.text-white 6 - Acoustics <small>(soon)</small>
+                            li(class="not-allowed"): a.text-white 7 - Theory <small>(soon)</small>
 
                 .col-sm-4.offset-md-1.py-4#contact
-                    h4.text-white {{ $t("contact") }}
+                    //- h4.text-white Contacto
+                    h4.text-white Contact
                     ul.list-unstyled
                         li: a.text-white(href='https://www.facebook.com/DigitopiaCasaDaMusica/') <i class="text-white fab fa-facebook"></i>
                         li: a.text-white(href='https://www.instagram.com/digitopiacasadamusica/') <i class="text-white fab fa-instagram"></i>
@@ -23,14 +33,11 @@ header
                         //- li: a.text-white(href='#') <i class="text-white fa fa-envelope"></i>
 
     .navbar.navbar-dark.bg-dark.box-shadow
-        .container.d-flex
-            a.navbar-brand(href='/').mr-auto
+        .container.d-flex.justify-content-between
+            a.navbar-brand.d-flex.align-items-center(href='/')
                 span
-                    img(src="/_assets/icons/launcher-icon-512.png" alt="")
+                    img(src="/_assets/icons/launcher-icon-512.png", alt="")
                     block header-title
                         | 0 + 1 = SOM
-            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarHeader' aria-controls='navbarHeader' aria-expanded='false' aria-label='Toggle navigation')
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarHeader', aria-controls='navbarHeader', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
-            div.p-3
-                button.btn.btn-small.btn-secondary.lang(@click="changeLocale('pt')" v-bind:class="{ active: i18n.locale == 'pt' }") PT
-                button.btn.btn-small.btn-secondary.lang(@click="changeLocale('en')" v-bind:class="{ active: i18n.locale == 'en' }") EN

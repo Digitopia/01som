@@ -142,11 +142,7 @@ class BaseApp {
         this.paper = Snap()
         // $("svg").appendTo(this.container).addClass("content centered")
         $("svg").appendTo(this.container)
-        window.addEventListener("resize", () => {
-            // console.log("resizing")
-            // alert("resized")
-            this.resize()
-        })
+        window.addEventListener("resize", () => this.resize())
     }
 
     initAudio() {
