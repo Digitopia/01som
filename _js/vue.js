@@ -121,7 +121,7 @@ window.addEventListener("load", () => {
                 Cookies.set("locale", loc, { expires: 365 })
             },
             click: function(bpm) { app.bpm = bpm } // NOTE: this is a small hack.. shouldn't be using app here..
-        },
+        }
     })
 
 })
