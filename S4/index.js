@@ -35,30 +35,39 @@ class App extends BaseApp {
 
     initGrid() {
 
-        /* eslint no-unused-vars: "off" */
-        const vue = new Vue({
-            el: "#main",
-            data: {
-                labels: this.labels,
-                tracks: this.tracks,
-                measures: this.measures
-            }
-        })
+        vue.labels = this.labels
+        vue.tracks = this.tracks
+        vue.measures = this.measures
 
         // Granted we could use vue for way more than just creating the DOM
         // elements, but for now let's just leave it like this.
         /* eslint no-param-reassign: "off" */
-        this.buttons = document.querySelectorAll("#sequencers button")
-        this.buttons.forEach(button => {
-            let row = button.id.split("-")[1]
-            let col = button.id.split("-")[2]
-            this.formatButton(button, row, col, false)
-            button.addEventListener('click', () => {
-                let val = this.matrix[row][col]
-                this.matrix[row][col] = !val
-                this.formatButton(button, row, col, !val)
+        // this.buttons = document.querySelectorAll("#sequencers button")
+        // this.buttons.forEach(button => {
+        //     let row = button.id.split("-")[1]
+        //     let col = button.id.split("-")[2]
+        //     this.formatButton(button, row, col, false)
+        //     button.addEventListener('click', () => {
+        //         let val = this.matrix[row][col]
+        //         this.matrix[row][col] = !val
+        //         this.formatButton(button, row, col, !val)
+        //     })
+        // })
+
+        // @FIX: this is the most weird bug.. need to wait for vue to render the elements it seems? don't really make sense though, since it was working like that before
+        setTimeout(() => {
+            this.buttons = document.querySelectorAll("#sequencers button")
+            this.buttons.forEach(button => {
+                let row = button.id.split("-")[1]
+                let col = button.id.split("-")[2]
+                this.formatButton(button, row, col, false)
+                button.addEventListener('click', () => {
+                    let val = this.matrix[row][col]
+                    this.matrix[row][col] = !val
+                    this.formatButton(button, row, col, !val)
+                })
             })
-        })
+        }, 1)
 
     }
 
@@ -107,6 +116,7 @@ class App extends BaseApp {
 
             for (let i = 0; i < this.tracks.length; i++) {
                 if (this.matrix[i][measure]) {
+                    console.log("playing", i, measure)
                     this.players.get(this.labels[i]).start(time);
                 }
             }
@@ -155,47 +165,47 @@ window.addEventListener("load", function () {
         custom: false,
         tracks: [
             {
-                name: "Guit 1",
+                name: "guit1",
                 color: "rgb(107, 163, 189)",
                 sample: `${basePath}/guit1.wav`
             },
             {
-                name: "Guit 2",
+                name: "guit2",
                 color: "rgb(137, 193, 219)",
                 sample: `${basePath}/guit2.wav`
             },
             {
-                name: "Guit 3",
+                name: "guit3",
                 color: "rgb(167, 223, 249)",
                 sample: `${basePath}/guit3.wav`
             },
             {
-                name: "Baixo",
+                name: "bass",
                 color: "rgb(227, 132, 148)",
                 sample: `${basePath}/baixo.wav`
             },
             {
-                name: "Piano",
+                name: "piano",
                 color: "rgb(223, 218, 162)",
                 sample: `${basePath}/piano.wav`
             },
             {
-                name: "Cordas",
+                name: "strings",
                 color: "rgb(106, 100, 139)",
                 sample: `${basePath}/cordas.wav`
             },
             {
-                name: "Bat 1",
+                name: "drums1",
                 color: "rgb(84, 129, 99)",
                 sample: `${basePath}/bat1.wav`
             },
             {
-                name: "Bat 2",
+                name: "drums2",
                 color: "rgb(114, 159, 129)",
                 sample: `${basePath}/bat2.wav`
             },
             {
-                name: "Bat 3",
+                name: "drums3",
                 color: "rgb(134, 189, 159)",
                 sample: `${basePath}/bat3.wav`
             },
