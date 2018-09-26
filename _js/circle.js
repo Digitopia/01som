@@ -58,4 +58,7 @@ window.addEventListener("load", function () {
         })
     }
 
+    // TODO: yet another hacky fix for a weird bug...
+    window.setTimeout(function() { app.resize() }, 10)
+
 })
