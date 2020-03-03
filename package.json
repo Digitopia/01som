@@ -19,19 +19,19 @@
   },
   "private": true,
   "devDependencies": {
-    "concurrently": "^4.1.1",
-    "eslint": "^6.0.1",
+    "concurrently": "^4.1.2",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.0",
-    "http-server": "^0.11.1",
-    "jest": "^24.8.0",
-    "jest-puppeteer": "^4.3.0",
+    "eslint-plugin-import": "^2.20.1",
+    "http-server": "^0.12.1",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.4.0",
     "live-server": "^1.2.1",
     "pug": "^2.0.4",
     "pug-cli": "^1.0.0-alpha6",
-    "puppeteer": "^1.18.1"
+    "puppeteer": "^1.20.0"
   },
   "dependencies": {
-    "npm": "^6.10.1"
+    "npm": "^6.14.1"
   }
 }
