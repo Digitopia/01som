@@ -9,10 +9,12 @@ header
                             li: a.text-white(href="/S1") 1 - {{ $t("sessionNames")[0] }}
                             li: a.text-white(href="/S2") 2 - {{ $t("sessionNames")[1] }}
                             li: a.text-white(href="/S3") 3 - {{ $t("sessionNames")[2] }}
-                            li: a.text-white(href="/S4") 4 - {{ $t("sessionNames")[3] }}
-                            li: a.text-white(href="/S5") 5 - {{ $t("sessionNames")[4] }}
-                            li(class="not-allowed"): a.text-white 6 - {{ $t("sessionNames")[5] }} <small>{{ $t("soon") }}</small>
-                            li(class="not-allowed"): a.text-white 7 - {{ $t("sessionNames")[6] }} <small>{{ $t("soon") }}</small>
+                            li: a.text-white(href="/S5") 4 - {{ $t("sessionNames")[3] }}
+                            li(class="not-allowed"): a.text-white 5 - {{ $t("sessionNames")[4] }} <small>{{ $t("soon") }}</small>
+                            li: a.text-white(href="/arvore") 6 - {{ $t("sessionNames")[5] }}
+                            li: a.text-white(href="/atividades") {{ $t("sessionNames")[6] }}
+                            li: a.text-white(href="/manual") {{ $t("sessionNames")[7] }}
+                            li(class="not-allowed"): a.text-white {{ $t("sessionNames")[8] }} <small>{{ $t("soon") }}</small>
 
                 .col-sm-4.offset-md-1.py-4#contact
                     h4.text-white {{ $t("contact") }}

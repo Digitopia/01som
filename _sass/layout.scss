@@ -32,8 +32,12 @@
 =            ELEMENTS            =
 ================================*/
 
+ @font-face {
+    font-family: 'Akkurat';
+    src: url('/_assets/fonts/Akkurat.ttf') format("truetype");
+ }
 * {
-    font-family: Raleway;
+   font-family: Akkurat;
 }
 
 body {

@@ -5,28 +5,42 @@ window.addEventListener("load", () => {
 
     const messages = {
         pt: {
-            session: "Sessão",
-            sessions: "Sessões",
+            session: "Jogo",
+            sessions: "Jogos e Recursos",
             sessionNames: [
                 "Ritmo",
-                "Ritmo e Melodia",
+                "Melodia",
                 "Sequenciador",
-                "Canção",
                 "Notação",
-                "Acústica",
-                "Teoria"
+                "Canção",
+                "Árvore",
+                "Atividades",
+                "Manual",
+                "Sobre"
+            ],
+            sheet: "Ficha",
+            worksheetNames: [
+                "Robô",
+                "Ciclo",
+                "Ritmo",
+                "Melodia",
+                "Canção"
             ],
             contact: "Contacto",
             intro: {
-                p1: "0 + 1 = SOM consiste num ciclo de workshops realizados em contexto escolar, nas escolas primárias do Município de Braga, que visa expor alunos do primeiro ciclo às novas tecnologias aplicadas à arte.",
-                p2: "Os workshops resultarão em vários jogos e softwares de criação musical originais criados e pensados pelos alunos.",
+                p1: "O 0 + 1 = SOM é um projeto educativo que consiste num ciclo de oficinas realizadas em contexto escolar, dirigido aos alunos do 1º CEB do concelho de Braga, com o objetivo de os sensibilizar para as novas tecnologias aplicadas à arte.",
+                p2: "Nestas oficinas os alunos utilizam jogos musicais online e gratuitos, por nós desenvolvidos, que podem encontrar nas ligações abaixo.",
+            },
+            students: {
+                p1: "Este é o espaço onde podem ver e descarregar os cinco desafios que desenhámos para vocês.",
+                p2: "Os mesmos desafios também fazem parte do manual, um recurso importante para os pais e os professores.",
             },
             session1: "Ritmo",
-            session2: "Ritmo e Melodia",
+            session2: "Melodia",
             session3: "Sequenciador",
-            session4: "Canção",
-            session5: "Notação",
-            session6: "Acústica",
+            session4: "Notação",
+            session5: "Canção",
+            session6: "Árvore",
             session7: "Teoria",
             soon: "(disponível brevemente)",
             help: {
@@ -47,27 +61,41 @@ window.addEventListener("load", () => {
             ]
         },
         en: {
-            session: "Session",
-            sessions: "Sessions",
+            session: "Game",
+            sessions: "Games and Resources",
+            sheet: "Ficha",
             sessionNames: [
                 "Rhythm",
-                "Rhythm and Melody",
+                "Melody",
                 "Sequencer",
-                "Song",
                 "Notation",
-                "Acoustics",
-                "Theory"
+                "Song",
+                "Tree",
+                "Activities",
+                "Manual",
+                "About"
+            ],
+            worksheetNames: [
+                "Robot",
+                "Cycle",
+                "Rhythm",
+                "Melody",
+                "Song"
             ],
             contact: "Contact",
             intro: {
-                p1: "0 + 1 = SOM consists in a series of workshops conducted in school context, in the primary school of the municipality of Braga (in nothern Portugal), that aim to expose the students of age 6 to 10 to the new techonologies applied to art.",
-                p2: "The workshops result in different kind of games and software of musical creation original by the students.",
+                p1: "0 + 1 = SOM is an educational program consisting on a workshop cycle, in a school context. The sessions take place in Braga's elementary schools, with the aim of exploring the relationship between technology and art.",
+                p2: "These workshops use free and online musical games developed by us, that you can find in the links below.",
+            },
+            students: {
+                p1: "Here you can find the five worksheets we produced for different activities related to 0 + 1 = SOM.",
+                p2: "These are also included in the manual, for parents and teachers.",
             },
             session1: "Rhythm",
-            session2: "Rhythm and Melody",
+            session2: "Melody",
             session3: "Sequencer",
-            session4: "Song",
-            session5: "Notation",
+            session4: "Notation",
+            session5: "Song",
             session6: "Acoustics",
             session7: "Theory",
             soon: "(available soon)",
@@ -107,10 +135,19 @@ window.addEventListener("load", () => {
                 { id: 1, img: "_assets/images/menu/1.png", url: "S1" },
                 { id: 2, img: "_assets/images/menu/2.png", url: "S2" },
                 { id: 3, img: "_assets/images/menu/3.png", url: "S3" },
-                { id: 4, img: "_assets/images/menu/4.png", url: "S4" },
-                { id: 5, img: "_assets/images/menu/5.png", url: "S5" },
-                { id: 6, img: "_assets/images/menu/6.png", url: "/", disabled: true },
-                { id: 7, img: "_assets/images/menu/7.png", url: "/", disabled: true }
+                { id: 4, img: "_assets/images/menu/4.png", url: "S5" }, //TODO: change link to S4
+                { id: 5, img: "_assets/images/menu/5.png", url: "/", disabled: true },
+                { id: 6, img: "_assets/images/menu/6.png", url: "arvore" },
+                { id: 7, img: "_assets/images/menu/7.png", url: "atividades"},
+                { id: 8, img: "_assets/images/menu/8.png", url: "manual"},
+                { id: 9, img: "_assets/images/menu/9.png", url: "sobre", disabled: true}
+            ],
+            worksheets: [
+                { id: 1, img: "../_assets/images/fichas/1.png", url: "01_Robo.pdf" },
+                { id: 2, img: "../_assets/images/fichas/2.png", url: "02_Ciclo.pdf" },
+                { id: 3, img: "../_assets/images/fichas/3.png", url: "03_Ritmo.pdf" },
+                { id: 4, img: "../_assets/images/fichas/4.png", url: "04_Melodia.pdf" }, //TODO: change link to S4
+                { id: 5, img: "../_assets/images/fichas/5.png", url: "05_Cancao.pdf" },
             ],
             buttons: "",
             tracks: ""
