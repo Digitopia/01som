@@ -16,15 +16,22 @@ block body
                 br
 
                 p.lead.text-muted {{ "O manual 0 + 1 = SOM é uma ferramenta destinada a pais e professores, que contém todas as Fichas do Aluno, bem como uma descrição mais detalhada de cada uma das atividades propostas, com sugestões, objetivos, materiais necessários e outros - as Fichas dos Professores. No final, podemos encontrar a ligação de cada uma das atividades com as aprendizagens essenciais do 1º CEB." }}
-                p.lead.text-muted {{ "Para aceder ao manual clique na imagem abaixo" }}
-                p.lead.text-muted {{ " - " }}
+                p.lead.text-muted
+                    | Aceda ao manual abaixo ou descarregue diretamente através do seguinte ícone &nbsp;
+                    a(href="01som-manual.pdf" download)
+                        i.fa.fa-file-pdf
+                    | .
+                //- p.lead.text-muted {{ " - " }}
 
-                <a href = '01som-manual.pdf'>
-                    <img src=../_assets/images/menu/8.png alt="Manual 0 + 1 = SOM" class="img-responsive center-block" />
-                </a>
+        section.bg-light
+            .container.p-5
+                iframe.text-center(src="01som-manual.pdf", frameborder="0" width="100%" height="800px")
+
+                //- <a href="01som-manual.pdf">
+                //-     <img src="../_assets/images/menu/8.png" alt="Manual 0 + 1 = SOM" class="img-responsive center-block" />
+                //- </a>
 
     footer.footer#sponsors.centered(style="visibility: visible")
         a(href='http://digitopia.casadamusica.com/' target='blank'): img(src='/_assets/images/CDM2020.png')
         a(href='http://www.bragamediaarts.com/pt/circuito/' target='blank'): img(src='/_assets/images/circuito.png')
         a(href='http://www.bragamediaarts.com/pt/' target='blank'): img(src='/_assets/images/unesco.png')
-

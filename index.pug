@@ -32,6 +32,9 @@ block body
 
     .album.py-5.bg-light
         .container
+
+            .h2.text-center.pb-5 Jogos
+
             .row
                 .col-lg-4.col-sm-6.col-centered(
                     v-for="(session, idx) in sessions"
@@ -51,7 +54,31 @@ block body
                             span(v-if="!session.disabled") {{$t("sessionNames")[idx]}}
                             span.card-text(style="font-size: 0.8em" v-if="session.disabled") {{ $t("soon") }}
 
-    footer.footer#sponsors.centered(style="visibility: visible")
+    .album.py-5.bg-white
+
+        .h2.text-center.pb-5 Materiais
+
+        .container
+            .row
+                .col-lg-4.col-sm-6.col-centered(
+                    v-for="(session, idx) in extras"
+                    v-bind:class="{ disabled: session.disabled }"
+                )
+                    .card.mb-3.box-shadow
+                        a(:href="session.url")
+                            .item
+                                img.card-img-top(
+                                    :src="session.img"
+                                    alt='Card image cap'
+                                    v-bind:class="{ grey: session.disabled }"
+                                )
+                        .card-body.text-centered
+                            span(v-if="session.id < 7").card-text {{ $t("session") }} {{ session.id }}
+                            a(:href="session.url" v-if="session.disabled") {{ $t("sessionNames")[idx+6] }}
+                            span(v-if="!session.disabled") {{$t("sessionNames")[idx+6]}}
+                            span.card-text(style="font-size: 0.8em" v-if="session.disabled") {{ $t("soon") }}
+
+    footer.bg-light.footer#sponsors.centered(style="visibility: visible")
         a(href='http://digitopia.casadamusica.com/' target='blank'): img(src='/_assets/images/CDM2020.png')
         a(href='http://www.bragamediaarts.com/pt/circuito/' target='blank'): img(src='/_assets/images/circuito.png')
         a(href='http://www.bragamediaarts.com/pt/' target='blank'): img(src='/_assets/images/unesco.png')
