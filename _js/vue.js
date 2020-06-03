@@ -138,6 +138,8 @@ window.addEventListener("load", () => {
                 { id: 4, img: "_assets/images/menu/4.png", url: "S5" }, //TODO: change link to S4
                 { id: 5, img: "_assets/images/menu/5.png", url: "/", disabled: true },
                 { id: 6, img: "_assets/images/menu/6.png", url: "arvore" },
+            ],
+            extras: [
                 { id: 7, img: "_assets/images/menu/7.png", url: "atividades"},
                 { id: 8, img: "_assets/images/menu/8.png", url: "manual"},
                 { id: 9, img: "_assets/images/menu/9.png", url: "sobre", disabled: true}

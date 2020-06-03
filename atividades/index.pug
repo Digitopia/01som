@@ -33,7 +33,7 @@ block body
                                     alt='Card image cap'
                                     v-bind:class="{ grey: sheet.disabled }"
                                 )
-                        .card-body.text-centered
+                        .card-body.text-centered.bg-light
                             span.card-text {{ $t("sheet") }} {{ sheet.id }}
                             a(:href="sheet.url" v-if="sheet.disabled") {{ $t("worksheetNames")[idx] }}
                             span(v-if="!sheet.disabled") {{$t("worksheetNames")[idx]}}
@@ -43,4 +43,3 @@ block body
         a(href='http://digitopia.casadamusica.com/' target='blank'): img(src='/_assets/images/CDM2020.png')
         a(href='http://www.bragamediaarts.com/pt/circuito/' target='blank'): img(src='/_assets/images/circuito.png')
         a(href='http://www.bragamediaarts.com/pt/' target='blank'): img(src='/_assets/images/unesco.png')
-
