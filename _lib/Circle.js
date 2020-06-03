@@ -511,9 +511,6 @@ Circle.defaults.options = {
         color: Colors.la,
         sample: "la",
         text: "LÁ",
-    }, {
-        color: Colors.do2,
-        sample: "do2",
-        text: "dó",
+        
     }],
 }

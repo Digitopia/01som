@@ -41,7 +41,6 @@ block body
                                 )
                         .card-body.text-centered.bg-light
                             a(:href="sheet.url" v-if="sheet.disabled") {{ $t("teacherNames")[idx] }}
-                            span.card-text {{ $t("teacherPhrases")[idx] }}
                             span(v-if="!sheet.disabled") {{$t("teacherNames")[idx]}}
                             span.card-text(style="font-size: 0.8em" v-if="sheet.disabled") {{ $t("soon") }}
 
