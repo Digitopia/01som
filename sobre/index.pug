@@ -1,0 +1,47 @@
+extends ../_pug/layouts/base
+
+block append head
+    link(rel='stylesheet' type='text/css' href='../_sass/index.css')
+    link(rel='stylesheet' type='text/css' href='../_sass/layout.css')
+block body
+
+    main(role='main')
+
+        section.jumbotron.text-center
+
+            .container
+
+                h1.jumbotron-heading Sobre | Info
+
+                br
+
+                p.lead.text-muted {{ $t("aboutInfo.p1") }}
+                p.lead.text-muted {{ $t("aboutInfo.p2") }}
+                p.lead.text-muted {{ $t("aboutInfo.p3") }}
+                p.lead.text-muted {{ $t("aboutInfo.p4") }}
+
+    .album.py-5.bg-light
+        .container
+            .row
+                .col-lg-4.col-sm-6.col-centered(
+                    v-for="(sheet, idx) in teachers" 
+                    v-bind:class="{ disabled: sheet.disabled }"
+                )
+                    .card.mb-3.box-shadow
+                        a(:href="sheet.url")
+                            .item
+                                img.card-img-top(
+                                    :src="sheet.img"
+                                    alt='Card image cap'
+                                    v-bind:class="{ grey: sheet.disabled }"
+                                )
+                        .card-body.text-centered.bg-light
+                            a(:href="sheet.url" v-if="sheet.disabled") {{ $t("teacherNames")[idx] }}
+                            span.card-text {{ $t("teacherPhrases")[idx] }}
+                            span(v-if="!sheet.disabled") {{$t("teacherNames")[idx]}}
+                            span.card-text(style="font-size: 0.8em" v-if="sheet.disabled") {{ $t("soon") }}
+
+    footer.footer#sponsors.centered(style="visibility: visible")
+        a(href='http://digitopia.casadamusica.com/' target='blank'): img(src='/_assets/images/CDM2020.png')
+        a(href='http://www.bragamediaarts.com/pt/circuito/' target='blank'): img(src='/_assets/images/circuito.png')
+        a(href='http://www.bragamediaarts.com/pt/' target='blank'): img(src='/_assets/images/unesco.png')
